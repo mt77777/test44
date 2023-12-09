@@ -1,0 +1,4222 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <!-meta name="viewport" content="width=device-width*2,initial-scale=1.0"->
+  <title>注射の場所</title>
+</head>
+
+<body onload="" style="white-space: nowrap" >
+ <!- style="white-space: nowrap" は折り返し表示を禁止する　20231117 ->
+   <!-----------------------------------------------------
+<body onload="" style="white-space: nowrap" >
+   <body onload="showDialog()">
+   <body onload="startSpeechRecognition_2()">
+   ------------------------------------------------------>
+
+   <!-----------------------------------------------------
+    <p id="output_d" style="font-size:10pt;"  >c</p>
+   ------------------------------------------------------>
+
+
+
+
+   <!-----------------------------------------------------
+<p>音声認識もできるテキストエディター<br><span style="color: red;"><b>ご使用する場合は自己責任でご使用ください。このページを使用することによって何か問題が発生してもこのページの作者及び管理人は一切責任を負いません。</b></span><br>
+秘密にすべきことは入力しないでください。Chromeやedgeの音声認識機能を利用しているので音声認識は外部サーバーで実行されます。</p>
+
+  <button id="custom-button" onclick="openFileInput()">読込</button>
+<button id='saveas'  onclick="bangumihyou_hozon()"   >保存</button>
+　<input type="file" id="file-input" style="display: none;" onchange="handleFileSelect(event)">
+
+  <button onclick="undo()">←戻る</button>
+  <button onclick="redo()">進む→</button>
+  <button style="background-color:yellow;" onclick="zenbun_sakujyo()">(ﾉToT)ﾉ ┫:･'.::･リセット</button>
+
+　<button onclick="searchGoogle()">
+    <span>全文を</span>
+<b>
+    <span style="color: blue;">G</span>
+    <span style="color: red;">o</span>
+    <span style="color: orange;">o</span>
+    <span style="color: blue;">g</span>
+    <span style="color: green;">l</span>
+    <span style="color: red;">e</span>
+</b>a
+    <span>で検索</span>
+  </button>
+  <button onclick="searchBing()">
+    <span>全文を</span>
+<b>    <span style="color: mediumblue;">B</span>
+    <span style="color: dodgerblue;">i</span>
+    <span style="color: lightskyblue;">n</span>
+    <span style="color: limegreen;">g</span>
+</b>    <span>で検索</span>
+  </button>
+
+　<button onclick="textBox_copy()">全文をコピー</button>
+
+<br>
+  <button style="background-color:pink;" onclick="startSpeechRecognition_2()">音声認識開始</button>
+  <button style="background-color:mediumorchid;" onclick="stopSpeechRecognition();startSpeechRecognition_2();">催促</button>
+  <button onclick="startSpeechRecognition_1()">音声認識開始(単回)</button>
+  <button style="background-color:lightblue;" onclick="stopSpeechRecognition()">音声認識停止</button>
+<br>
+  <textarea id="output_0" rows="1" cols="60" style="font-size:10pt;" ></textarea><br>
+
+　<button onclick="AllremoveBlanks()">全文の空欄削除</button>
+  <button onclick="zentai_zenkaku2hankaku()">全文の全角英数を半角に</button>
+  <button onclick="zentai_hankaku2zenkaku()">全文の半角英数を全角に</button>
+  <button onclick="Allremove_Hitosii_Jyuufuku()">全文から「等しい」と「重複」を削除</button>
+<br>
+動作モード
+<button onclick="YYY_onsei_deta_sakusei()">小枠選択部のYYY音声データ作成</button>
+（ IDNo.<input type="number" id="YYY_yobidasi" style=" width:50px;  ">
+を<button onclick="YYY_yakuhinnmei_yobidasi()">呼び出し</button>
+<button onclick="YYY_yakuhinnmei_yobidasi_tugi()">次</button> ）
+<button onclick="onsei_ninsiki()">エディター</button>
+<button onclick="YYY_yakuhin_basyo_kensaku()">YYY薬品場所検索</button>
+<br>
+
+<div style="  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  height:306px;">
+
+<div style="  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  height:306px;">
+
+  <button onclick="writeToTextArea('、')">、</button>
+  <button onclick="writeToTextArea('。')">。</button>
+  <button onclick="writeToTextArea('０')">０</button>
+  <button onclick="writeToTextArea('１')">１</button>
+  <button onclick="writeToTextArea('２')">２</button>
+  <button onclick="writeToTextArea('３')">３</button>
+  <button onclick="writeToTextArea('４')">４</button>
+  <button onclick="writeToTextArea('５')">５</button>
+  <button onclick="writeToTextArea('６')">６</button>
+  <button onclick="writeToTextArea('７')">７</button>
+  <button onclick="writeToTextArea('８')">８</button>
+  <button onclick="writeToTextArea('９')">９</button>
+
+
+  <button onclick="writeToTextArea('（')">（　</button>
+  <button onclick="writeToTextArea('）')">　）</button>
+  <button onclick="writeToTextArea('「')">「　</button>
+  <button onclick="writeToTextArea('」')">　」</button>
+  <button onclick="writeToTextArea('ー')">ー　</button>
+  <button onclick="writeToTextArea('＠')">＠　</button>
+
+
+  <button onclick="writeToTextArea('？')">？　</button>
+  <button onclick="writeToTextArea('／')">／　</button>
+  <button onclick="writeToTextArea('￥')">￥　</button>
+
+  <button onclick="writeToTextArea('＿')">＿　</button>
+
+  <button onclick="writeToTextArea('\n')">改行</button>
+  <button onclick="writeToTextArea('　')">空欄</button>
+  <textarea id="output" rows="15" cols="80" style="font-size:15pt;" ></textarea><br>
+
+</div>
+</div>
+
+
+<button style="background-color:yellow;"  onclick="mae_sakujyo()">前削除</button>
+<button style="background-color:yellow;"  onclick="writeToTextArea('')">選択部を削除</button>
+<button style="background-color:yellow;"  onclick="ato_sakujyo()">後削除</button>
+
+　<button onclick="removeBlanks()">選択部の空欄削除</button>
+<button onclick="select_zenkaku2hankaku()">選択部の全角英数を半角に</button>
+  <button onclick="select_hankaku2zenkaku()">選択部の半角英数を全角に</button>
+
+
+<br>
+<button onclick="selectAllText()">全文選択</button>
+<button onclick="yomiage_kakunin()">選択部の読み上げ開始</button>
+<button onclick="yomiage_stop()">選択部の読み上げ停止</button>
+
+　<button onclick="select_searchGoogle()">
+    <span>選択部を</span>
+<b>    <span style="color: blue;"  >G</span>
+    <span style="color: red;"   >o</span>
+    <span style="color: orange;">o</span>
+    <span style="color: blue;"  >g</span>
+    <span style="color: green;" >l</span>
+    <span style="color: red;"   >e</span>
+</b>    <span>で検索</span>
+  </button>
+  <button onclick="select_searchBing()">
+    <span>選択部を</span>
+<b>
+    <span style="color: mediumblue;">B</span>
+    <span style="color: dodgerblue;">i</span>
+    <span style="color: lightskyblue;">n</span>
+    <span style="color: limegreen;">g</span>
+</b>
+    <span>で検索</span>
+  </button>
+<br><br><br><br><br>
+------------------------------------------------------------------->
+
+
+
+<!----------------------------------------------------------------------------------------------------------
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ア')">ア</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('カ')">カ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('サ')">サ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('タ')">タ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ナ')">ナ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ハ')">ハ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('マ')">マ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ヤ')">ヤ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ラ')">ラ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ワ')">ワ</button><br>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('イ')">イ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('キ')">キ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('シ')">シ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('チ')">チ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ニ')">ニ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ヒ')">ヒ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ミ')">ミ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('')">　</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('リ')">リ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('')">　</button><br>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ウ')">ウ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ク')">ク</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ス')">ス</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ツ')">ツ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ヌ')">ヌ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('フ')">フ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ム')">ム</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ユ')">ユ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ル')">ル</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ヲ')">ヲ</button><br>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('エ')">エ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ケ')">ケ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('セ')">セ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('テ')">テ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ネ')">ネ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ヘ')">ヘ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('メ')">メ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('')">　</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('レ')">レ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('')">　</button><br>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('オ')">オ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('コ')">コ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ソ')">ソ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ト')">ト</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ノ')">ノ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ホ')">ホ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('モ')">モ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ヨ')">ヨ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ロ')">ロ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ン')">ン</button><br><br>
+---------------------------------------------------------------------------------------------------------->
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ワ')">ワ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ラ')">ラ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ヤ')">ヤ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('マ')">マ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ハ')">ハ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ナ')">ナ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('タ')">タ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('サ')">サ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('カ')">カ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ア')">ア</button><br>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ヲ')">ヲ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('リ')">リ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('')">　</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ミ')">ミ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ヒ')">ヒ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ニ')">ニ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('チ')">チ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('シ')">シ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('キ')">キ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('イ')">イ</button><br>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ン')">ン</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ル')">ル</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ユ')">ユ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ム')">ム</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('フ')">フ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ヌ')">ヌ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ツ')">ツ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ス')">ス</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ク')">ク</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ウ')">ウ</button><br>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('．')">．</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('レ')">レ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('')">　</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('メ')">メ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ヘ')">ヘ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ネ')">ネ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('テ')">テ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('セ')">セ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ケ')">ケ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('エ')">エ</button><br>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('＆')">＆</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ロ')">ロ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ヨ')">ヨ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('モ')">モ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ホ')">ホ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ノ')">ノ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ト')">ト</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('ソ')">ソ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('コ')">コ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('オ')">オ</button><br><br>
+<button style="font-size:12pt; height:35px; width:27px;  " onclick="writeToBotan('０')">０</button>
+<button style="font-size:12pt; height:35px; width:27px;  " onclick="writeToBotan('１')">１</button>
+<button style="font-size:12pt; height:35px; width:27px;  " onclick="writeToBotan('２')">２</button>
+<button style="font-size:12pt; height:35px; width:27px;  " onclick="writeToBotan('３')">３</button>
+<button style="font-size:12pt; height:35px; width:27px;  " onclick="writeToBotan('４')">４</button>
+<button style="font-size:12pt; height:35px; width:27px;  " onclick="writeToBotan('５')">５</button>
+<button style="font-size:12pt; height:35px; width:27px;  " onclick="writeToBotan('６')">６</button>
+<button style="font-size:12pt; height:35px; width:27px;  " onclick="writeToBotan('７')">７</button>
+<button style="font-size:12pt; height:35px; width:27px;  " onclick="writeToBotan('８')">８</button>
+<button style="font-size:12pt; height:35px; width:27px;  " onclick="writeToBotan('９')">９</button>
+<br>
+<br>
+
+<button  style="height:30px; width:30px; background-color:white; font-size:10pt; " onclick="saisyo_no_moji_wo_sakujyo();">削</button>
+<button id="output_b" style="height:30px; width:250px; background-color:white; font-size:10pt;" onclick="botan_kensaku();">　</button>
+<button  style="height:30px; width:30px; background-color:white; font-size:10pt; " onclick="saigo_no_moji_wo_sakujyo();">削</button>
+<br>
+<br>
+
+  <button style="height:30px; background-color:pink;   font-size:10pt;  " onclick="startSpeechRecognition_YYY()">声認識始</button>
+  <button style="height:30px; background-color:mediumorchid; font-size:10pt; " onclick="stopSpeechRecognition();startSpeechRecognition_2();">催促</button>
+  <!--button onclick="startSpeechRecognition_1()">音声認識開始(単回)</button-->
+  <button style="height:30px; background-color:lightblue; font-size:10pt; " onclick="stopSpeechRecognition()">声認識止</button>
+  <button style=" height:30px;width:60px;  background-color:yellow; font-size:10pt;  " onclick="Q_sakujyo()">Ｑ削除</button>
+  <button style=" height:30px;width:60px; background-color:yellow; font-size:10pt;  " onclick="A_sakujyo()">Ａ削除</button>
+<br>
+
+<font size="2">
+<p id="output_d"   ></p>
+</font>
+
+<br>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('Ａ')">Ａ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('Ｂ')">Ｂ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('Ｃ')">Ｃ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('Ｄ')">Ｄ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('Ｅ')">Ｅ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('Ｆ')">Ｆ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('Ｇ')">Ｇ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('Ｈ')">Ｈ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('Ｉ')">Ｉ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('Ｊ')">Ｊ</button><br>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('Ｋ')">Ｋ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('Ｌ')">Ｌ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('Ｍ')">Ｍ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('Ｎ')">Ｎ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('Ｏ')">Ｏ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('Ｐ')">Ｐ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('Ｑ')">Ｑ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('Ｒ')">Ｒ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('Ｓ')">Ｓ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('Ｔ')">Ｔ</button><br>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('Ｕ')">Ｕ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('Ｖ')">Ｖ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('Ｗ')">Ｗ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('Ｘ')">Ｘ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('Ｙ')">Ｙ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('Ｚ')">Ｚ</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('')">　</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('')">　</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('')">　</button>
+<button style="font-size:12pt; height:55px; width:27px;  " onclick="writeToBotan('')">　</button><br>
+
+<!-- ***************************************************************************************************************************** --> 
+<!-- ***************************************************************************************************************************** -->
+ <script>
+    function showDialog() {
+      //開始時に表示する 警告文===================================================================
+      var result = confirm("本ページは音声認識もできるテキストエディターです。"+"\n\n"+ "本ページの利用によりいかなる不都合が生じても、本ページの作者および管理者は一切の責任を負いません。以上ご了承されたらOKボタンを押しご利用ださい。ご了承されない場合ばキャンセルボタンを押し、本ページを利用せず終了してください。");
+      if (result) {
+        // OKがクリックされた場合
+        // 何もしない（ページはそのまま表示される）
+      } else {
+        // キャンセルがクリックされた場合
+        window.close(); // ページを閉じる
+      }
+    //開始時に表示する 警告文=ここまで==================================================================
+
+    }
+
+
+
+   // 音声認識オブジェクト
+
+var kensakugokuAry = [];
+
+var yakuhinmeiMarumeAry = [];//薬品名の濁音と撥音を点や丸のない文字にまるめたもの
+
+    let recognition;
+    var kurikaesi_flg = 0;//1なら音声認識を繰り返す
+
+   // var textBox_0 = document.getElementById('output_0');
+   // var textBox_b = document.getElementById('output');
+    var textBox_0 = document.createElement("textarea");
+    var textBox_b = document.createElement("textarea");
+
+
+   // textBox_0.inputMode = "kana";//textBoxの初期入力モードは、この設定をしても、IME が平仮名だと ひらがな入力になりIME が半角英数だと半角英数字入力になる
+   // textBox_b.inputMode = "kana";//textBoxの初期入力モードは、この設定をしても、IME が平仮名だと ひらがな入力になりIME が半角英数だと半角英数字入力になる
+
+
+
+    var textBot_b = document.getElementById('output_b');
+    var textBox_d = document.getElementById('output_d');
+
+    var startPos = 0;//次に音声認識の結果が書かれるときに上書きされる範囲の開始位置
+    var endPos = 0;//次に音声認識の結果が書かれるときに上書きされる範囲の終了位置
+
+
+    //=====ここから undo,redo用=================================================================
+    var undoStack = [];
+    var redoStack = [];
+    //=====ここまで undo,redo用=================================================================
+
+    //=====ここから undo,redo用=================================================================
+      undoStack.push(textBox_b.value);
+      redoStack = [];
+    //=====ここまで undo,redo用=================================================================
+
+
+
+
+    // ブラウザが音声認識をサポートしているかチェック
+ //  if ('webkitSpeechRecognition' in window) {
+      // 音声認識オブジェクトの作成
+      recognition = new webkitSpeechRecognition();
+
+      // 認識言語を設定（日本語に設定）
+      recognition.lang = 'ja-JP';
+            recognition.interimResults = false;//true か false
+            recognition.continuous = false;
+
+
+    var input_YYY_yobidasi = document.getElementById('YYY_yobidasi');
+     //======================================================================
+    function YYY_yakuhinnmei_yobidasi(){
+
+//textBox_0.value= Number(input_YYY_yobidasi.value)+1;
+	let tempAry = [];
+	tempAry= basyoAry[Number(input_YYY_yobidasi.value)].split('	');//tabでスプリット
+
+textBox_0.value= tempAry[0];
+
+}
+     //======================================================================
+    function YYY_yakuhinnmei_yobidasi_tugi(){
+
+	input_YYY_yobidasi.value=Number(input_YYY_yobidasi.value)+1;
+	YYY_yakuhinnmei_yobidasi();
+
+}
+     //======================================================================
+    // 音声認識を開始する関数（連続）
+    function startSpeechRecognition_2() {
+        textBox_b.focus()
+
+　　　　kurikaesi_flg = 2;
+        //textBox_b.style.backgroundColor = "#FF9966"; // 背景色をオレンジ色にする
+        //textBox_b.style.backgroundColor = "peachpuff"; // 背景色をオレンジ色にする
+        //textBox_b.style.backgroundColor = "mistyrose"; // 背景色をmistyroseにする
+        textBox_0.style.backgroundColor = "LightPink"; // 背景色をLightPinkにする
+        textBox_b.style.backgroundColor = "LightPink"; // 背景色をLightPinkにする
+
+      //if (recognition) {
+        recognition.start();
+      //}
+
+        textBox_b.focus()
+
+    }
+
+
+
+    //======================================================================
+    // 薬剤場所確認YYY用に音声認識を開始する関数（単回）
+    function startSpeechRecognition_YYY() {
+        //textBox_b.focus()
+
+　　　　kurikaesi_flg = 1;
+        textBot_b.style.backgroundColor = "LightPink"; // 背景色をLightPinkにする
+        textBot_b.style.backgroundColor = "LightPink"; // 背景色をLightPinkにする
+
+      //if (recognition) {
+        recognition.start();
+      //}
+
+
+        //textBox_b.focus()
+    }
+
+    //======================================================================
+    // 音声認識を開始する関数（単回）
+    function startSpeechRecognition_1() {
+        //textBox_b.focus()
+
+　　　　kurikaesi_flg = 1;
+        textBox_b.style.backgroundColor = "#FF9966"; // 背景色をオレンジ色にする
+        textBox_b.style.backgroundColor = "#FF9966"; // 背景色をオレンジ色にする
+
+      //if (recognition) {
+        recognition.start();
+      //}
+
+
+        //textBox_b.focus()
+    }
+
+     //======================================================================
+      // 音声認識開始時のイベントハンドラ
+      //recognition.onstart = function(event) {
+        //textBox_b.style.backgroundColor = "#FF9966"; // 背景色をオレンジ色にする
+      //};
+     //======================================================================
+
+     //======================================================================
+    // 音声認識を停止する関数
+    function stopSpeechRecognition() {
+      //if (recognition) {
+        kurikaesi_flg = 0;
+        textBox_b.style.backgroundColor = "white"; // 背景色を白色にする
+
+        textBot_b.style.backgroundColor = "white"; // 背景色を白色にする
+
+        recognition.stop();
+        //textBox_b.focus();
+      //}
+    }
+
+
+
+
+
+
+
+
+
+     //======================================================================
+      // 音声認識終了時のイベントハンドラ
+      recognition.onend = function(event) {
+       if (kurikaesi_flg == 2){
+         recognition.start();
+       }else if (kurikaesi_flg == 1){
+         kurikaesi_flg = 0;
+         textBox_0.style.backgroundColor = "white"; // 背景色を白色にする
+         textBox_b.style.backgroundColor = "white"; // 背景色を白色にする
+
+         textBot_b.style.backgroundColor = "white"; // 背景色を白色にする
+       }
+     };
+
+     //======================================================================
+	var transcript_flg=1;//認識結果の取得時に実行されるイベントハンドラの動作モード、0なら音声認識（標準テキストボックスに表示）、1ならYYY薬位置検索実施、2ならYYY音声データ作成
+     //======================================================================
+   	function onsei_ninsiki() { 
+		transcript_flg=0;
+	}
+     //======================================================================
+   	function YYY_yakuhin_basyo_kensaku() { 
+		transcript_flg=1;
+	}
+     //======================================================================
+	var YYY_tadasii_namae
+   	function YYY_onsei_deta_sakusei() { 
+		transcript_flg=2;
+		//YYY_tadasii_namae =textBox_0.value;
+
+		//（ここから）テキストボックスtextBox_0の文の選択された部分を取り出す 20231123
+		var start = textBox_0.selectionStart;
+            	var end   = textBox_0.selectionEnd;
+            	var text  = textBox_0.value;
+
+		var hontai_Text_a = text.substring(start, end);//セレクト部本体のテキストのこと
+		//（ここまで）テキストボックスtextBox_0の文の選択された部分を取り出す 20231123
+
+		YYY_tadasii_namae =hontai_Text_a;
+	}
+     //======================================================================
+      // 認識結果の取得時に実行されるイベントハンドラ
+      recognition.onresult = function(event) {
+        // 認識結果を取得
+        const transcript = event.results[0][0].transcript;
+
+
+	if (transcript_flg==0){
+		// 取得した認識結果をテキストボックスに表示
+        	textBox_0.value = transcript;
+        	if(getLastThreeCharacters(transcript)=="を検索"){
+            		text_select_searchGoogle(removeLastThreeCharacters(transcript));
+        	}
+        	writeToTextArea(transcript);
+	}
+	if (transcript_flg==1){
+		//YYY薬位置検索実施-----------------------------------
+		kensaku(transcript);
+	}
+	if (transcript_flg==2){
+		var str;
+		var YYY_jisyo_jyuufuku_flg=0;
+		str="#####"+transcript +"＝"+YYY_tadasii_namae+"\n";
+		if(transcript==YYY_tadasii_namae){
+				YYY_jisyo_jyuufuku_flg=1;
+			str="等しい";
+
+		}
+
+
+		for (let i=0; i<jisyoAry_0.length;i++) {
+			let tempAry = [];
+			tempAry= jisyoAry_0[i].split('＝');
+			if(transcript==tempAry[0]){
+			if(YYY_tadasii_namae+"\n"==tempAry[1]){
+
+				YYY_jisyo_jyuufuku_flg=2;
+			}
+			}
+		}
+		if(YYY_jisyo_jyuufuku_flg==2){
+			str="重複";
+		}
+
+        	writeToTextArea(str);
+		if(YYY_jisyo_jyuufuku_flg==0){
+			jisyoAry_0.push(transcript +"＝"+YYY_tadasii_namae+"\n");
+		}
+
+	}
+
+      }
+/*
+     //======================================================================
+   // 認識結果の取得時に実行されるイベントハンドラ
+      recognition.onresult = function(event) {
+        // 認識結果を取得
+        const transcript = event.results[0][0].transcript;
+	kensaku(transcript);
+      };
+
+*/
+
+
+
+     //======================================================================
+var botan_moji_kakikomi_flg=1;//ボタンに表示させる文字を上書きにするなら0、追加なら1
+     //======================================================================
+	function kensaku(transcript) {
+		let andAry = [];//これは引数のtranscriptを＆で分割した配列
+		andAry=transcript.split('＆');
+
+		var and_no_kazu=andAry.length-1;//検索する語句(=transcript)の中にある&の数
+
+			//if(and_no_kazu==0){kensaku1(transcript) ;}
+			//else if (and_no_kazu==1) {kensaku2(tempAry[0],tempAry[1]) ;}
+			//else if (and_no_kazu>1){kensaku2(tempAry[0],tempAry[1]) ;}
+			//else {;}		
+
+
+   		//function kensaku2(transcript,str)
+		botan_moji_kakikomi_flg=0;//20231118add
+
+		//音声解釈の結果から検索すべき語句の配列kensakugokuAryを求める----------------------------
+		kensakugokuAry = [];
+		kensakugokuAry.push(goku_marume(andAry[0]));//20231111空欄削除とカタカナに変換を実施
+
+		textBot_b.innerText = kensakugokuAry[0];
+		let damenakaisyaku = kensakugokuAry[0];
+		//for (let damenakaisyaku_seikai of jisyoAry) {
+		for(let i=0;i < jisyoAry.length; i++){
+
+			let tempAry = [];
+			tempAry= jisyoAry[i].split('＝');
+//console.log(tempAry);
+				//if ( hiragana2katakana(tempAry[0]) == damenakaisyaku ) {
+				if (tempAry[0] == damenakaisyaku ) {
+							 
+					kensakugokuAry.push( goku_marume(tempAry[1].replace(/\r?\n/g, '') ));//改行を削除
+
+				}			
+		}
+
+		
+		//---------------------------------------------------------------------------------------------------
+
+
+		//textBox_d.innerText =  "";//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<20231111
+
+		let mitukatta_kaisuu=0;//見つかった回数
+		let mitukatta_kekka="";//見つかった結果
+
+		for(let i=0;i < yakuhinmeiMarumeAry.length; i++){
+
+			let kensaku_ok_goukei=0;
+			let kensaku_ok_flg=0;
+
+			for (let yakuhinmei of kensakugokuAry) {
+				if (yakuhinmeiMarumeAry[i].indexOf(yakuhinmei) >-1 ) {
+					kensaku_ok_flg=1;
+				}
+			}
+			kensaku_ok_goukei=kensaku_ok_goukei+kensaku_ok_flg;
+
+			if (and_no_kazu>0) {
+
+			let kensaku_ok_flg=0;
+			if (yakuhinmeiMarumeAry[i].indexOf(andAry[1]) >-1 ){
+					kensaku_ok_flg=1;
+			}
+			kensaku_ok_goukei=kensaku_ok_goukei+kensaku_ok_flg;
+
+			}
+
+
+			var kensaku_ok_goukei_no_mokuhyouti
+ kensaku_ok_goukei_no_mokuhyouti=andAry.length
+if( kensaku_ok_goukei_no_mokuhyouti>2){ kensaku_ok_goukei_no_mokuhyouti=2}
+			if (kensaku_ok_goukei== kensaku_ok_goukei_no_mokuhyouti){
+					mitukatta_kaisuu=mitukatta_kaisuu+1;//見つかった回数
+					mitukatta_kekka=mitukatta_kekka+ basyoAry[i].replace(/	/g, "\n　---> "); 
+
+			}
+
+
+				
+
+		}
+		if (mitukatta_kaisuu>0) {
+			textBox_d.innerText = "**********検索結果******************\n" +mitukatta_kekka + textBox_d.innerText ;
+		}
+
+		if(textBot_b.innerText == " "){
+			textBot_b.innerText = "　";
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	}
+     //======================================================================
+     //======================================================================
+      // ボタン押したときにボタンの文字を取得して検索
+    function botan_kensaku() {
+
+	kensaku(textBot_b.innerText);
+
+      };
+     //======================================================================
+    	function writeToBotan(str){
+
+		if(str=="＆"){
+			botan_moji_kakikomi_flg=1;
+		}
+
+
+		if(botan_moji_kakikomi_flg==0){
+			textBot_b.innerText = "　"
+			botan_moji_kakikomi_flg=1;
+		}
+
+
+		//文字表記用ボタンに文字追加
+		textBot_b.innerText = textBot_b.innerText + str; 
+
+		//追加する文字の読み上げ
+		stopSpeechRecognition();
+		speechSynthesis.cancel();//Chromeで読み上げが打ち切られた時に、読み上げを再会するために必要な行。
+
+       // var text0 =textBox_b.value.slice(textBox_b.selectionStart, textBox_b.selectionEnd);
+
+        //if (text0.length>100){
+        //  window.alert("読み上げは100文字まで");
+        //}else{
+
+		var genkou;
+		genkou=str;
+		if(genkou=="０"){genkou="ゼロ";}
+		if(genkou=="．"){genkou="テン";}
+		if(genkou=="ン"){genkou="ンン";}
+            	var speech = new SpeechSynthesisUtterance(genkou);
+
+            	speechSynthesis.speak(speech);
+
+		if(textBot_b.innerText == " "){
+			textBot_b.innerText = "　";
+		}
+
+
+		if(textBot_b.innerText == ""){
+			textBot_b.innerText = "　";
+		}
+
+	}
+     //======================================================================
+    	function saisyo_no_moji_wo_sakujyo(){//最初の文字を削除
+		textBot_b.innerText = textBot_b.innerText.slice(1) ;
+
+		if(textBot_b.innerText == ""){
+			textBot_b.innerText = "　";
+		}
+	}	
+
+     //======================================================================
+    	function saigo_no_moji_wo_sakujyo(){//最後の文字を削除
+		textBot_b.innerText = textBot_b.innerText.slice( 0, -1 ) ;
+
+		if(textBot_b.innerText == ""){
+			textBot_b.innerText = "　";
+		}
+
+	}
+
+
+
+
+
+    //======================================================================
+    //読み上げ停止
+    function yomiage_stop() {
+        speechSynthesis.cancel();
+        //textBox_b.focus();
+    }
+
+    //======================================================================
+    // 読み上げ確認
+    function yomiage_kakunin(){
+
+        stopSpeechRecognition();
+
+        speechSynthesis.cancel();//Chromeで読み上げが打ち切られた時に、読み上げを再会するために必要な行。
+
+        var text0 =textBox_b.value.slice(textBox_b.selectionStart, textBox_b.selectionEnd);
+
+        //if (text0.length>100){
+        //  window.alert("読み上げは100文字まで");
+        //}else{
+            var speech = new SpeechSynthesisUtterance( text0);
+            speechSynthesis.speak(speech);
+        //}
+
+        textBox_b.focus()
+
+   }
+
+    //======================================================================
+    function writeToTextArea(text) {//textBoxの文章の選択位置をtextで置き換える関数
+       //選択されている位置を取得する
+       startPos = textBox_b.selectionStart;
+       endPos = textBox_b.selectionEnd;
+
+	//選択位置をtextで置き換える
+        textBox_b.value = textBox_b.value.slice(0, textBox_b.selectionStart) + text + textBox_b.value.slice(textBox_b.selectionEnd);
+
+        //選択位置を新たに決めなおす
+         endPos =  startPos  + text.length;
+         startPos =endPos;
+
+	textBox_b.setSelectionRange(startPos, endPos);
+        textBox_b.focus()
+
+
+
+
+      //=====ここから undo,redo用=================================================================
+      undoStack.push(textBox_b.value);
+      redoStack = [];
+      //=====ここまで undo,redo用=================================================================
+
+    }
+
+     //======================================================================
+    function textBox_copy(){ // textBoxの文字列全体をコピーする
+      navigator.clipboard.writeText(textBox_b.value);
+    }
+
+
+
+     //======================================================================
+   function zenbun_sakujyo(){ //全文削除
+	textBox_b.value ='';
+  }
+     //======================================================================
+    function Q_sakujyo(){ //全文削除
+	textBot_b.innerText ='　';
+   }
+     //======================================================================
+    function A_sakujyo(){ //全文削除
+ 	textBox_d.innerText ='';
+   }
+
+    //======================================================================
+      function searchGoogle() {//全文をGoogleで検索
+          WebSearch("https://www.google.com/search?q=",textBox_b.value);
+      }
+
+    //======================================================================
+      function searchBing() {//全文をBingで検索
+          WebSearch('https://www.bing.com/search?q=',textBox_b.value);
+      }
+
+    //======================================================================
+      function select_searchGoogle() {//選択部をGoogleで検索
+var selectedText =  sentaku_bubun();
+          WebSearch("https://www.google.com/search?q=",selectedText);
+      }
+
+    //======================================================================
+      function text_select_searchGoogle(str) {//文字列をGoogleで検索
+var selectedText =  str;
+          WebSearch("https://www.google.com/search?q=",selectedText);
+      }
+
+    //======================================================================
+      function select_searchBing() {//選択部をBingで検索
+var selectedText =  sentaku_bubun();
+          WebSearch('https://www.bing.com/search?q=',selectedText);
+      }
+
+
+    //======================================================================
+       function WebSearch(s_url,str) {
+         window.open( s_url +  encodeURIComponent(str), "_blank");
+         //textBox_b.focus()
+       }
+
+
+    //======================================================================
+    function selectAllText(){
+      //var textarea = document.getElementById("myTextarea");
+     // textBox_b.select();
+    }
+
+    //======================================================================
+     function removeBlanks() {//テキストボックスの文の選択された部分から空白を取り除く
+
+        var start = textBox_b.selectionStart;
+            var end = textBox_b.selectionEnd;
+            var text = textBox_b.value;
+            var mae_Text_a = text.substring(0, start);//最初からセレクト部の直前までのテキストのこと
+            var hontai_Text_a = text.substring(start, end);//セレクト部本体のテキストのこと
+            var ato_Text_a = text.substring(end);//セレクト部の直後から最後までのテキストのこと
+            var hontai_Text_b ;//操作後のセレクト部本体のテキスト
+
+            // 操作はここに書く
+            hontai_Text_b=kuuhaku_sakujyo( hontai_Text_a);
+
+            // セレクト部だけ操作を実施したテキストで置き換える
+            textBox_b.value = mae_Text_a + hontai_Text_b + ato_Text_a;
+
+            //新しくなった文にセレクト部を復活させる
+            textBox_b.setSelectionRange(start,start+hontai_Text_b.length );
+
+            //フォーカスをテキストエリアに戻す
+            textBox_b.focus()
+
+     }
+
+
+
+    //======================================================================
+    function kuuhaku_sakujyo(str) {//文字列中の空白を削除
+        var str1 = str.replace(/ /g, ""); // 半角空白を取り除く
+        var str2 =str1.replace(/　/g,""); // 全角空白を取り除く
+        return str2;
+    }
+
+    //======================================================================
+    function Hitosii_Jyuufuku_sakujyo(str) {//文字列中の空白を削除
+        var str1 = str.replace(/等しい/g, ""); // 半角空白を取り除く
+        var str2 =str1.replace(/重複/g,""); // 全角空白を取り除く
+        return str2;
+    }
+
+
+
+
+    //======================================================================
+     function AllremoveBlanks() {//テキストボックスの全文から空白を取り除く
+          var start = textBox_b.selectionStart;
+            var end = textBox_b.selectionEnd;
+            var text = textBox_b.value;
+            var mae_Text_a = text.substring(0, start);//最初からセレクト部の直前までのテキストのこと
+            var hontai_Text_a = text.substring(start, end);//セレクト部本体のテキストのこと
+            var ato_Text_a = text.substring(end);//セレクト部の直後から最後までのテキストのこと
+
+            var mae_Text_b;//操作後の、最初からセレクト部の直前までのテキスト
+            var hontai_Text_b ;//操作後のセレクト部本体のテキスト
+
+            textBox_b.value =kuuhaku_sakujyo(textBox_b.value );  // 操作はここに書く
+            mae_Text_b    =kuuhaku_sakujyo(mae_Text_a);      // 操作はここに書く
+            hontai_Text_b =kuuhaku_sakujyo( hontai_Text_a);  // 操作はここに書く
+
+            //新しくなった文にセレクト部を復活させる
+            textBox_b.setSelectionRange(mae_Text_b.length ,mae_Text_b.length+hontai_Text_b.length );
+
+            //フォーカスをテキストエリアに戻す
+            textBox_b.focus()
+
+     }
+
+    //======================================================================
+	function Allremove_Hitosii_Jyuufuku() {
+          var start = textBox_b.selectionStart;
+            var end = textBox_b.selectionEnd;
+            var text = textBox_b.value;
+            var mae_Text_a = text.substring(0, start);//最初からセレクト部の直前までのテキストのこと
+            var hontai_Text_a = text.substring(start, end);//セレクト部本体のテキストのこと
+            var ato_Text_a = text.substring(end);//セレクト部の直後から最後までのテキストのこと
+
+            var mae_Text_b;//操作後の、最初からセレクト部の直前までのテキスト
+            var hontai_Text_b ;//操作後のセレクト部本体のテキスト
+
+            textBox_b.value =Hitosii_Jyuufuku_sakujyo(textBox_b.value );  // 操作はここに書く
+            mae_Text_b    =Hitosii_Jyuufuku_sakujyo(mae_Text_a);      // 操作はここに書く
+            hontai_Text_b =Hitosii_Jyuufuku_sakujyo( hontai_Text_a);  // 操作はここに書く
+
+            //新しくなった文にセレクト部を復活させる
+            textBox_b.setSelectionRange(mae_Text_b.length ,mae_Text_b.length+hontai_Text_b.length );
+
+            //フォーカスをテキストエリアに戻す
+            textBox_b.focus()
+	}
+    //======================================================================
+//テキストボックスの中の文の選択された部分を返す関数
+function sentaku_bubun() {
+
+            var start = textBox_b.selectionStart;
+            var end = textBox_b.selectionEnd;
+            var text = textBox_b.value;
+            var selectedText = text.substring(start, end);
+
+  return selectedText;
+  return "";
+}
+
+    //======================================================================
+//文字列中の空白の数を返す
+function countSpaces(str) {
+  var count = 0;
+  for (var i = 0; i < str.length; i++) {
+    if (str[i] === ' ') {
+      count++;
+    }
+  }
+  return count;
+}
+
+
+    //=====ここから undo,redo用=================================================================
+    function undo() {
+      if (undoStack.length > 0) {
+        var previousState = undoStack.pop();
+        redoStack.push(textBox_b.value);
+        textBox_b.value = previousState;
+      }
+
+        textBox_b.focus()
+    }
+
+    //===================================
+    function redo() {
+      if (redoStack.length > 0) {
+        var nextState = redoStack.pop();
+        undoStack.push(textBox_b.value);
+        textBox_b.value = nextState;
+      }
+        textBox_b.focus()
+
+    }
+
+    //===================================
+  textBox_b.addEventListener("input", function() {
+      undoStack.push(textBox_b.value);
+      redoStack = [];
+    });
+
+
+    //=====ここまで undo,redo用=================================================================
+
+   //ここから テキストエリア内でタブ文字を入力============================================================
+   //テキストエリア内でタブ文字を入力できるように、キー入力を監視し、タブキーが押された場合にタブ文字を挿入する
+textBox_b.addEventListener('keydown', function(event) {
+    if (event.key === 'Tab') {
+      event.preventDefault(); // デフォルトの動作をキャンセル
+      const start = this.selectionStart;
+      const end = this.selectionEnd;
+      this.value = this.value.substring(0, start) + '\t' + this.value.substring(end);
+      this.selectionStart = this.selectionEnd = start + 1; // カーソル位置を調整
+    }
+  });
+   //ここまで テキストエリア内でタブ文字を入力　===============================================
+
+
+    //======================================================================
+     function select_zenkaku2hankaku() {//テキストボックスの文の選択された部分//全角英数字を半角英数字に変換
+       var start = textBox_b.selectionStart;
+            var end = textBox_b.selectionEnd;
+            var text = textBox_b.value;
+            var mae_Text_a = text.substring(0, start);//最初からセレクト部の直前までのテキストのこと
+            var hontai_Text_a = text.substring(start, end);//セレクト部本体のテキストのこと
+            var ato_Text_a = text.substring(end);//セレクト部の直後から最後までのテキストのこと
+            var hontai_Text_b ;//操作後のセレクト部本体のテキスト
+
+            hontai_Text_b=zenkaku2hankaku( hontai_Text_a); // 操作はここに書く（この行を書き換える）
+
+            // セレクト部だけ操作を実施したテキストで置き換える
+            textBox_b.value = mae_Text_a + hontai_Text_b + ato_Text_a;
+
+            //新しくなった文にセレクト部を復活させる
+            textBox_b.setSelectionRange(start,start+hontai_Text_b.length );
+
+            //フォーカスをテキストエリアに戻す
+            textBox_b.focus()
+
+     }
+
+    //======================================================================
+     function zentai_zenkaku2hankaku() {//テキストボックスの文の全体//全角英数字を半角英数字に変換
+          var start = textBox_b.selectionStart;
+            var end = textBox_b.selectionEnd;
+            var text = textBox_b.value;
+            var mae_Text_a = text.substring(0, start);//最初からセレクト部の直前までのテキストのこと
+            var hontai_Text_a = text.substring(start, end);//セレクト部本体のテキストのこと
+            var ato_Text_a = text.substring(end);//セレクト部の直後から最後までのテキストのこと
+
+            var mae_Text_b;//操作後の、最初からセレクト部の直前までのテキスト
+            var hontai_Text_b ;//操作後のセレクト部本体のテキスト
+
+            textBox_b.value =zenkaku2hankaku(textBox_b.value );  // 操作はここに書く（この行を書き換える）
+            mae_Text_b    =zenkaku2hankaku(mae_Text_a);      // 操作はここに書く（この行を書き換える）
+            hontai_Text_b =zenkaku2hankaku(hontai_Text_a );  // 操作はここに書く（この行を書き換える）
+
+            //新しくなった文にセレクト部を復活させる
+            textBox_b.setSelectionRange(mae_Text_b.length ,mae_Text_b.length+hontai_Text_b.length );
+
+            //フォーカスをテキストエリアに戻す
+            textBox_b.focus()
+
+     }
+
+
+
+    //======================================================================
+    function zenkaku2hankaku(str) {//全角英数字を半角英数字に変換
+       var str1= str.replace(/[Ａ-Ｚａ-ｚ０-９！-～]/g, function(s){return String.fromCharCode(s.charCodeAt(0)-0xFEE0);});
+       var str2=str1.replace(/、/g, ","); 
+       var str3=str2.replace(/。/g, "."); 
+       var str4=str3.replace(/　/g, " "); //スペースの変換
+       var str5=str4.replace(/「/g, "["); 
+       var str6=str5.replace(/」/g, "]"); 
+       var str7=str6.replace(/ー/g, "-");
+       var str8=str7.replace(/￥/g, "\\");
+    return str8;
+
+   }
+
+
+    //======================================================================
+     function select_hankaku2zenkaku() {//テキストボックスの文の選択された部分//半角英数字を全角英数字に変換
+          var start = textBox_b.selectionStart;
+            var end = textBox_b.selectionEnd;
+            var text = textBox_b.value;
+            var mae_Text_a = text.substring(0, start);//最初からセレクト部の直前までのテキストのこと
+            var hontai_Text_a = text.substring(start, end);//セレクト部本体のテキストのこと
+            var ato_Text_a = text.substring(end);//セレクト部の直後から最後までのテキストのこと
+            var hontai_Text_b ;//操作後のセレクト部本体のテキスト
+
+            hontai_Text_b=hankaku2zenkaku( hontai_Text_a); // 操作はここに書く（この行を書き換える）
+
+            // セレクト部だけ操作を実施したテキストで置き換える
+            textBox_b.value = mae_Text_a + hontai_Text_b + ato_Text_a;
+
+            //新しくなった文にセレクト部を復活させる
+            textBox_b.setSelectionRange(start,start+hontai_Text_b.length );
+
+            //フォーカスをテキストエリアに戻す
+            textBox_b.focus()
+
+     }
+
+    //======================================================================
+     function zentai_hankaku2zenkaku() {//テキストボックスの文の全体//半角英数字を全角英数字に変換
+           var start = textBox_b.selectionStart;
+            var end = textBox_b.selectionEnd;
+            var text = textBox_b.value;
+            var mae_Text_a = text.substring(0, start);//最初からセレクト部の直前までのテキストのこと
+            var hontai_Text_a = text.substring(start, end);//セレクト部本体のテキストのこと
+            var ato_Text_a = text.substring(end);//セレクト部の直後から最後までのテキストのこと
+
+            var mae_Text_b;//操作後の、最初からセレクト部の直前までのテキスト
+            var hontai_Text_b ;//操作後のセレクト部本体のテキスト
+
+            textBox_b.value =hankaku2zenkaku(textBox_b.value );  // 操作はここに書く（この行を書き換える）
+            mae_Text_b    =hankaku2zenkaku(mae_Text_a);      // 操作はここに書く（この行を書き換える）
+            hontai_Text_b =hankaku2zenkaku(hontai_Text_a );  // 操作はここに書く（この行を書き換える）
+
+            //新しくなった文にセレクト部を復活させる
+         //   textBox_b.setSelectionRange(mae_Text_b.length ,mae_Text_b.length+hontai_Text_b.length );
+
+            //フォーカスをテキストエリアに戻す
+            textBox_b.focus()
+
+     }
+
+
+
+
+
+    //======================================================================
+    function hankaku2zenkaku(str) {//半角英数字を全角英数字に変換
+       var str1= str.replace(/[A-Za-z0-9!-~]/g, function(s){return String.fromCharCode(s.charCodeAt(0)+0xFEE0);});
+       var str2=str1.replace(/\,/g, "、"); 
+       var str3=str2.replace(/\./g, "。"); 
+       var str4=str3.replace(/\ /g, "　"); //スペースの変換
+       var str5=str4.replace(/\[/g, "「"); 
+       var str6=str5.replace(/\]/g, "」"); 
+       var str7=str6.replace(/\-/g, "ー");
+       var str8=str7.replace(/＼/g, "￥"); 
+    return str8;
+
+}
+    //======================================================================
+    function hiragana2katakana(str) {//ひらがなをカタカナに変換
+       var str1= str.replace(/[ぁ-ん]/g, function(s) {return String.fromCharCode(s.charCodeAt(0) + 0x60);});
+    return str1;
+}
+
+
+//input type="file"のボタンの表記が直接変更することができないので、普通のボタン（id=file-input）を表示し、これを押したときにinput type="file"のボタンがクリックされるようにする関数。input type="file"のボタンは見えなくする。
+
+    function openFileInput() {
+      document.getElementById('file-input').click();
+    }
+
+
+    //======================================================================
+    function handleFileSelect(event) {//ファイル読み込み
+      const file = event.target.files[0];
+      const reader = new FileReader();
+
+  // ファイル名を取得する
+  const fileName = file.name;
+  console.log("ファイル名:", fileName);
+
+      reader.onload = function(event) {//このイベントハンドラは、ファイルの読み込みが完了した際に実行される。
+        const contents = event.target.result;
+        textBox_b.value = contents;
+      };
+
+      reader.readAsText(file);//ファイルをテキストとして読み込む。
+
+    }
+
+
+
+    //======================================================================
+
+	// ファイル書き出し（ここから）      
+	let fileHandle
+
+	async function bangumihyou_hozon()  {
+
+		try {
+			const content =textBox_b.value;
+
+			fileHandle = await window.showSaveFilePicker();
+			if (fileHandle.kind !== 'file') return
+
+			const writableStream = await fileHandle.createWritable()
+			await writableStream.write(content)
+			await writableStream.close()
+		} catch (e) {
+			console.error(e)
+		}
+	}
+
+	//  ファイル書き出し（ここまで）--------------------------------------------------------------------------------------------------------------------------- 
+
+
+
+//======================================================================
+function mae_sakujyo(){//選択の前1字を削除
+            var start = textBox_b.selectionStart;
+            var end = textBox_b.selectionEnd;
+            var text = textBox_b.value;
+
+         if(start>0){
+            var mae_Text_a = text.substring(0, start-1);
+            var ato_Text_a = text.substring(start);
+            textBox_b.value = mae_Text_a + ato_Text_a;
+
+            //新しくなった文にセレクト部を復活させる
+            textBox_b.setSelectionRange(start-1,end-1 );
+         }
+            //フォーカスをテキストエリアに戻す
+            textBox_b.focus()
+
+}
+
+//======================================================================
+function ato_sakujyo(){//選択の後1字を削除
+            var start = textBox_b.selectionStart;
+            var end = textBox_b.selectionEnd;
+            var text = textBox_b.value;
+
+         if(end<text.length){
+            var mae_Text_a = text.substring(0, end);
+            var ato_Text_a = text.substring(end+1);
+            textBox_b.value = mae_Text_a + ato_Text_a;
+
+            //新しくなった文にセレクト部を復活させる
+            textBox_b.setSelectionRange(start,end);
+         }
+            //フォーカスをテキストエリアに戻す
+           textBox_b.focus()
+
+}
+
+
+
+
+
+
+
+     //======================================================================
+     function select_sousa_hinagata() {//テキストボックスの文の選択された部分に操作を行う関数のひな型
+      /*      var start = textBox_b.selectionStart;
+            var end = textBox_b.selectionEnd;
+            var text = textBox_b.value;
+            var mae_Text_a = text.substring(0, start);//最初からセレクト部の直前までのテキストのこと
+            var hontai_Text_a = text.substring(start, end);//セレクト部本体のテキストのこと
+            var ato_Text_a = text.substring(end);//セレクト部の直後から最後までのテキストのこと
+            var hontai_Text_b ;//操作後のセレクト部本体のテキスト
+
+            //hontai_Text_b=function( hontai_Text_a); // 操作はここに書く（この行を書き換える）
+
+            // セレクト部だけ操作を実施したテキストで置き換える
+            textBox_b.value = mae_Text_a + hontai_Text_b + ato_Text_a;
+
+            //新しくなった文にセレクト部を復活させる
+            textBox_b.setSelectionRange(start,start+hontai_Text_b.length );
+
+            //フォーカスをテキストエリアに戻す
+            //textBox_b.focus()
+*/
+     }
+
+    //======================================================================
+     function zentai_sousa_hinagata() {//テキストボックスの文の全体に操作を行う関数のひな型
+ /*           var start = textBox_b.selectionStart;
+            var end = textBox_b.selectionEnd;
+            var text = textBox_b.value;
+            var mae_Text_a = text.substring(0, start);//最初からセレクト部の直前までのテキストのこと
+            var hontai_Text_a = text.substring(start, end);//セレクト部本体のテキストのこと
+            var ato_Text_a = text.substring(end);//セレクト部の直後から最後までのテキストのこと
+
+            var mae_Text_b;//操作後の、最初からセレクト部の直前までのテキスト
+            var hontai_Text_b ;//操作後のセレクト部本体のテキスト
+
+            //textBox_b.value =function(textBox_b.value );  // 操作はここに書く（この行を書き換える）
+            //mae_Text_b    =function(mae_Text_a);      // 操作はここに書く（この行を書き換える）
+            //hontai_Text_b =function( hontai_Text_a);  // 操作はここに書く（この行を書き換える）
+
+            //新しくなった文にセレクト部を復活させる
+            textBox_b.setSelectionRange(mae_Text_b.length ,mae_Text_b.length+hontai_Text_b.length );
+
+            //フォーカスをテキストエリアに戻す
+            //textBox_b.focus()
+*/
+     }
+
+    //======================================================================
+
+function getLastThreeCharacters(str) {//文字列の最後から3文字だけを取り出す関数
+  if (typeof str !== 'string') {
+    throw new Error('Input must be a string.');
+  }
+
+  if (str.length <= 3) {
+    return str;
+  }
+
+  return str.slice(-3);
+}
+
+    //======================================================================
+function removeLastThreeCharacters(str) {//文字列の最後から3文字だけを削除する関数
+  if (typeof str !== 'string') {
+    throw new Error('Input must be a string.');
+  }
+
+  if (str.length <= 3) {
+    return '';
+  }
+
+  return str.slice(0, -3);
+}
+    //======================================================================
+function replace_all(str, before, after) {
+    return str.split(before).join(after);
+}
+
+function hiragana_kara_katakana(str) {
+       var str1=  replace_all(str, "あ", "ア");
+
+
+    return str1;
+}
+
+
+
+
+
+        //textBox_b.focus()    //この行は開始時にテキストエリアの先頭にプロンプトが行くようにつけている
+
+
+let basyo = `#####開始	VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
+#####０．０２５Ｗ／Ｖ％ヂアミトール水　０．０２５％	1_管Q(向)横1
+#####０．０２ｗ／ｖ％マスキン水　０．０２％	1_管Q(向)横1
+#####０．０５Ｗ／Ｖ％マスキン水　０．０５％	1_管Q(向)横1
+#####０．１Ｗ／Ｖ％ヂアミトール水　０．１％	1_管Q(向)横1
+#####０．１ｗ／ｖ％マスキン水　０．１％	1_管Q(向)横1
+#####０．５ｗ／ｖ％マスキン水　０．５％	1_管Q(向)横1
+#####１％カルボカイン注	1_管H横3
+#####１％ディプリバン注－キット　２００ｍｇ２０ｍＬ	1_管I-b(冷)横3右
+#####１％ディプリバン注－キット　５００ｍｇ５０ｍＬ	1_管I-b(冷)横3右
+#####１％塩酸メピバカイン注ＰＢ　１０ｍＬ	1_管J横5
+#####５％ヒビテン液	1_管Q(向)横1
+#####５０％ブドウ糖注射液「ニッシン」　２０ｍＬ	1_管F横4
+#####ＤＴビック 注射剤 1本	1_調Q横4右
+#####ＨＭＧ筋注用７５単位「あすか」　（溶解液付）	1_管I-a(冷)横2左
+#####ＫＣＬ注２０ｍＥｑキット「テルモ」　１モル２０ｍＬ	1_管E横2
+#####ＬＨ－ＲＨ注０．１ｍｇ「タナベ」	1_管I-a(冷)横2左
+#####ＰＡ・ヨード点眼・洗眼液　０．２％	1_管I-a(冷)横4左
+#####ＴＲＨ注０．５ｍｇ「タナベ」	1_管I-a(冷)横2左
+#####アートセレブ脳脊髄手術用洗浄灌流液　５００ｍＬ	1_管D横3
+#####アイリーア硝子体内注射用キット４０ｍｇ／ｍＬ　２ｍｇ０．０５ｍＬ	1_管I-b(冷)横3左
+#####アクチット輸液　５００ｍＬ	1_管B横3
+#####アクテムラ点滴静注用２００ｍｇ　１０ｍＬ	1_管I-b(冷)横5左
+#####アクテムラ点滴静注用４００ｍｇ　２０ｍＬ	1_管I-b(冷)横5左
+#####アクテムラ点滴静注用８０ｍｇ　４ｍＬ	1_管I-b(冷)横5左
+#####アクトシン軟膏３％	1_調Q横4左
+#####アザクタム注射用０．５ｇ　５００ｍｇ	1_管G横3
+#####アシクロビル点滴静注液２５０ｍｇ「トーワ」	1_管E横1
+#####アスプール液（０．５％）	1_管N横2
+#####アセトアミノフェン坐剤小児用１００ｍｇ「シオエ」	1_調Q横5右
+#####アセトアミノフェン坐剤小児用２００ｍｇ「シオエ」	1_調Q横5右
+#####アセリオ静注液１０００ｍｇバッグ　１，０００ｍｇ１００ｍＬ	1_管A横3
+#####アセリオ静注液１０００ｍｇバッグ　１，０００ｍｇ１００ｍＬ	1_管H横3
+#####アセリオ静注液１０００ｍｇバッグ　１，０００ｍｇ１００ｍＬ	1_管J横1
+#####アタラックス－Ｐ注射液（２５ｍｇ／ｍｌ）　２．５％１ｍＬ	1_管E横1
+#####アタラックス－Ｐ注射液（５０ｍｇ／ｍｌ）　５％１ｍＬ	1_管E横1
+#####アデノシン負荷用静注６０ｍｇシリンジ「ＦＲＩ」　２０ｍＬ	1_管E横1
+#####アデホス－Ｌコーワ注２０ｍｇ	1_管I-a(冷)横1左
+#####アデホス－Ｌコーワ注４０ｍｇ	1_管I-a(冷)横1左
+#####アデラビン９号注１ｍＬ	1_管E横1
+#####アドナ注（静脈用）１００ｍｇ　０．５％２０ｍＬ	1_管E横2
+#####アトニン－Ｏ注５単位	1_管I-a(冷)横1左
+#####アドレナリン注０．１％シリンジ「テルモ」　１ｍＬ	1_管E横6
+#####アトロピン注０．０５％シリンジ「テルモ」　１ｍＬ	1_管E横6
+#####アトロピン硫酸塩注０．５ｍｇ「タナベ」　０．０５％１ｍＬ	1_管H横2
+#####アナペイン注１０ｍｇ／ｍＬ　１％１０ｍＬ	1_管H横1
+#####アナペイン注２ｍｇ／ｍＬ　０．２％１００ｍＬ	1_管H横1
+#####アナペイン注７．５ｍｇ／ｍＬ　０．７５％１０ｍＬ	1_管H横1
+#####アネメトロ点滴静注液５００ｍｇ　１００ｍＬ	1_管E横1
+#####アネメトロ点滴静注液５００ｍｇ　１００ｍＬ	1_管E横6
+#####アバスチン点滴静注用１００ｍｇ／４ｍＬ	1_管I-b(冷)横4左
+#####アバスチン点滴静注用４００ｍｇ／１６ｍＬ	1_管I-b(冷)横4左
+#####アミオダロン塩酸塩静注１５０ｍｇ「ＴＥ」　３ｍＬ	1_管H横1
+#####アミカシン硫酸塩注射液１００ｍｇ「明治」	1_管E横1
+#####アミカシン硫酸塩注射用２００ｍｇ「日医工」	1_管G横3
+#####アミサリン注２００ｍｇ　１０％２ｍＬ	1_管E横1
+#####アミパレン輸液　２００ｍＬ	1_管D横2
+#####アラセナ－Ａ点滴静注用３００ｍｇ	1_管E横1
+#####アルギニン点滴静注３０ｇ「ＡＹ」　１０％３００ｍＬ	1_管J横6
+#####アルツディスポ関節注２５ｍｇ　１％２．５ｍＬ	1_管E横2
+#####アルトチューブ	1_管N横4
+#####アルト原末　１ｇ	1_管N横4
+#####アルプロスタジル注１０μｇ「Ｆ」　２ｍＬ	1_管I-a(冷)横1右
+#####アルベカシン硫酸塩注射液１００ｍｇ「ＮＩＧ」　２ｍＬ	1_管H横1
+#####アルロイドＧ内用液５％	1_調Q横4左
+#####アレベール吸入用溶解液０．１２５％	1_管N横2
+#####アロキシ静注０．７５ｍｇ　５ｍＬ	1_管J横5
+#####アンチレクス静注１０ｍｇ　１％１ｍＬ	1_管H横1
+#####イーケプラ点滴静注５００ｍｇ　５ｍＬ	1_管E横2
+#####イオパミドール３００注１００ｍＬ「Ｆ」　６１．２４％	1_管G横6
+#####イオパミドール３７０注１００ｍＬ「Ｆ」　７５．５２％	1_管G横5
+#####イオパミドール３７０注２０ｍＬ「Ｆ」　７５．５２％	1_管G横5
+#####イオパミロン注３００　６１．２４％２０ｍＬ	1_管G横5
+#####イオパミロン注３００シリンジ　６１．２４％１００ｍＬ	1_管G横5
+#####イオパミロン注３７０　７５．５２％１００ｍＬ	1_管G横5
+#####イオパミロン注３７０　７５．５２％２０ｍＬ	1_管G横5
+#####イオパミロン注３７０シリンジ　７５．５２％１００ｍＬ	1_管G横5
+#####イオパミロン注３７０シリンジ　７５．５２％８０ｍＬ	1_管G横5
+#####イオヘキソール３００注１００ｍＬ「Ｆ」　６４．７１％	1_管G横6
+#####イオメロン３５０注シリンジ１３５ｍＬ　７１．４４％	1_管G横6
+#####イソゾール注射用０．５ｇ　５００ｍｇ（溶解液付）	1_管H横1
+#####イソゾール注射用０．５ｇ　５００ｍｇ（溶解液付）	1_管J横1
+#####イベニティ皮下注１０５ｍｇシリンジ　１．１７ｍＬ	1_管I-a(冷)横1左
+#####イムノブラダー膀注用80mg	1_管I-a(冷)横1右
+#####インジゴカルミン注２０ｍｇ「ＡＦＰ」　０．４％５ｍＬ	1_管E横1
+#####インデラル注射液２ｍｇ　０．１％２ｍＬ	1_管H横2
+#####イントラリポス輸液２０％　１００ｍＬ	1_管B横1
+#####インフリキシマブＢＳ点滴静注用１００ｍｇ「ＣＴＨ」	1_管I-b(冷)横4左
+#####ヴィーン３Ｇ輸液　２００ｍＬ	1_管A横3
+#####ヴィーン３Ｇ輸液　２００ｍＬ	1_管C横4
+#####ウエルアップハンドローション０．５％ 調剤用 500ｍＬ	1_管Q(向)横1
+#####ウェルパスフォームゼロ	1_管Q(向)横2
+#####ウェルフォーム１８０ｍL	1_管Q(向)横3
+#####ウェルフォーム３６０ｍL	1_管Q(向)横3
+#####ウテメリン注５０ｍｇ　１％５ｍＬ	1_管I-a(冷)横1右
+#####ウログラフイン注６０％　２０ｍＬ	1_管G横5
+#####ウログラフイン注７６％　２０ｍＬ	1_管G横3
+#####エコ消エタ消毒液	1_管Q(向)横4
+#####エナルモンデポー筋注１２５ｍｇ　１ｍＬ	1_管E横2
+#####エナルモンデポー筋注２５０ｍｇ　１ｍＬ	1_管G横3
+#####エポエチンアルファＢＳ３０００シリンジＪＣＲ　３０００ＩＵ２ｍＬ	1_管I-a(冷)横2右
+#####エホチール注１０ｍｇ　１％１ｍＬ	1_管H横2
+#####エムラクリーム	1_管N横1
+#####エリル点滴静注液３０ｍｇ　３０．８ｍｇ２ｍＬ	1_管H横2
+#####エルシトニン注２０Ｓディスポ　２０エルカトニン単位１ｍＬ	1_管H横2
+#####エルシトニン注４０単位　４０エルカトニン単位１ｍＬ	1_管H横2
+#####エルネオパＮＦ１号輸液　１０００ｍＬ	1_管B横2
+#####エルネオパＮＦ１号輸液　１５００ｍＬ	1_管B横2
+#####エルネオパＮＦ２号輸液　１０００ｍＬ	1_管B横2
+#####エルネオパＮＦ２号輸液　１５００ｍＬ	1_管B横2
+#####エレメンミック注　２ｍＬ	1_管E横2
+#####エンタイビオ点滴静注用３００ｍｇ	1_管I-b(冷)横5左
+#####エンハーツ点滴静注用１００ｍｇ	1_管I-b(冷)横5左
+#####オキシドール「ヨシダ」	1_管Q(向)横2
+#####オクトレオチド皮下注１００μｇ「あすか」　１ｍＬ	1_管I-a(冷)横2右
+#####オザグレルＮａ点滴静注８０ｍｇ／１００ｍＬバッグ「ＩＰ」	1_管E横3
+#####オノアクト点滴静注用５０ｍｇ	1_管H横2
+#####オビソート注射用０．１ｇ　１００ｍｇ（溶解液付）	1_管H横2
+#####オフサグリーン静注用２５ｍｇ　（溶解液付）	1_管N横2
+#####オプジーボ点滴静注２４０ｍｇ　２４ｍＬ	1_管I-b(冷)横5左
+#####オムニパーク２４０注１０ｍＬ　５１．７７％	1_管G横6
+#####オムニパーク３００注１０ｍＬ　６４．７１％	1_管G横6
+#####オムニパーク３００注２０ｍＬ　６４．７１％	1_管G横6
+#####オムニパーク３００注シリンジ１００ｍＬ　６４．７１％	1_管G横6
+#####オムニパーク３００注シリンジ１５０ｍＬ　６４．７１％	1_管G横6
+#####オムニパーク３００注シリンジ５０ｍＬ　６４．７１％	1_管G横6
+#####オムニパーク３００注シリンジ８０ｍＬ　６４．７１％	1_管G横6
+#####オムニパーク３５０注シリンジ１００ｍＬ　７５．４９％	1_管G横6
+#####オリブ油	1_管Q(向)横2
+#####オルガラン静注１２５０単位　１，２５０抗第Ｘａ因子活性単位１ｍＬ	1_管G横3
+#####オレンシア点滴静注用２５０ｍｇ	1_管I-b(冷)横3左
+#####オンダンセトロン注４ｍｇシリンジ「マルイシ」　２ｍＬ	1_管H横3
+#####オンデキサ静注用２００ｍｇ	1_管I-a(冷)横5左
+#####ガストログラフイン経口・注腸用	1_管N横3
+#####カルシトリオール静注液０．５μｇ「Ｆ」　１ｍＬ	1_管H横3
+#####カルシトリオール静注液１μｇ「Ｆ」　１ｍＬ	1_管H横3
+#####カルチコール注射液８．５％５ｍＬ	1_管E横3
+#####カルボカインアンプル注２％　１０ｍＬ	1_管H横3
+#####キイトルーダ点滴静注１００ｍｇ　４ｍＬ	1_管I-b(冷)横5左
+#####キサラタン点眼液０．００５％	1_調Q横2左
+#####キシロカインゼリー２％	1_管N横2
+#####キシロカインポンプスプレー８％	1_管N横2
+#####キシロカイン液「４％」	1_管N横2
+#####キシロカイン注ポリアンプ０．５％　１０ｍＬ	1_管H横3
+#####キシロカイン注ポリアンプ１％　１０ｍＬ	1_管H横3
+#####キシロカイン注ポリアンプ２％　１０ｍＬ	1_管H横3
+#####キシロカイン注射液「０．５％」エピレナミン１：１００，０００含有	1_管I-a(冷)横2右
+#####キシロカイン注射液「１％」エピレナミン（１：１００，０００）含有	1_管I-a(冷)横2右
+#####キシロカイン注射液「２％」エピレナミン（１：８０，０００）含有	1_管I-a(冷)横3右
+#####キドミン輸液　２００ｍＬ	1_管D横2
+#####キュビシン静注用３５０ｍｇ	1_管I-a(冷)横2左
+#####キンダリー透析剤ＡＦ４号　６Ｌ（炭酸水素ナトリウム液付）	1_管L横2
+#####キンダリー透析剤ＡＦ４号　６Ｌ（炭酸水素ナトリウム液付）	1_管L横3
+#####キンダリー透析剤ＡＦ４号　９Ｌ（炭酸水素ナトリウム液付）	1_管M_外来のパスボックスの下
+#####グラニセトロン静注液３ｍｇ「サワイ」　３ｍＬ	1_管H横4
+#####クラビット点滴静注バッグ５００ｍｇ／１００ｍＬ	1_管E横3
+#####クリアクター静注用８０万　８０万国際単位	1_管E横3
+#####グリセオール注　２００ｍＬ	1_管B横3
+#####グリセオール注　５００ｍＬ	1_管B横3
+#####グリセリン「ニッコー」	1_管Q(向)横2
+#####グリセリンＢＣ液「ヨシダ」 調剤用 100ｍＬ	1_管N横3
+#####グリセリンＢＣ液「ヨシダ」 調剤用 250ｍＬ	1_管N横3
+#####グリセリン浣腸「オヲタ」１２０　５０％１２０ｍＬ	1_管N横1
+#####グリセリン浣腸「オヲタ」６０　５０％６０ｍＬ	1_管N横1
+#####グリセリン浣腸「オヲタ」小児用３０　５０％３０ｍＬ	1_管N横1
+#####グルアセト３５注　５００ｍＬ	1_管A横3
+#####グルアセト３５注　５００ｍＬ	1_管M
+#####グルカゴンＧノボ注射用１ｍｇ　（溶解液付）	1_管I-a(冷)横3右
+#####グルトパ注６００万　６００万国際単位（溶解液付）	1_管E横3
+#####クロスエイトＭＣ静注用１０００単位　１，０００単位（溶解液付）	1_管I-b(冷)横1右
+#####ケイセントラ静注用５００　５００国際単位（溶解液付）	1_管I-a(冷)横5左
+#####ケイツーＮ静注１０ｍｇ	1_管E横3
+#####ケナコルト－Ａ筋注用関節腔内用水懸注４０ｍｇ／１ｍＬ	1_管E横3
+#####ケナコルト－Ａ皮内用関節腔内用水懸注５０ｍｇ／５ｍＬ　１０ｍｇ	1_管E横3
+#####ゲンタシン注１０　１０ｍｇ	1_管H横4
+#####ゲンタシン注４０　４０ｍｇ	1_管H横4
+#####ゲンタシン注６０　６０ｍｇ	1_管H横4
+#####コアテック注５ｍｇ　５ｍＬ	1_管E横3
+#####コアベータ静注用１２．５ｍｇ	1_管H横4
+#####ゴージョー	1_管Q(向)横2
+#####ｺﾞｰｼｮｰの紐	1_管N横5
+#####ゴナックス皮下注用１２０ｍｇ　（溶解液付）	1_管G横3
+#####ゴナックス皮下注用８０ｍｇ　（溶解液付）	1_管G横3
+#####コリナコール点眼液　５ｍＬ	1_調Q横2左
+#####サージセル・アブソーバル・ヘモスタット	1_管I-a(冷)横5左
+#####サイラムザ点滴静注液１００ｍｇ　１０ｍＬ	1_管I-b(冷)横5左
+#####サブパックBi（2020ｍL）	1_管L横4
+#####サブパックBi（2020ｍL）	1_管L横5
+#####サムタス点滴静注用８ｍｇ	1_管H横4
+#####ザラカム配合点眼液	1_調Q横2左
+#####サンリズム注射液５０　５０ｍｇ５ｍＬ	1_管H横4
+#####ジアグノグリーン注射用２５ｍｇ　（溶解液付）	1_管E横4
+#####ジーラスタ皮下注３．６ｍｇ　０．３６ｍＬ	1_管I-a(冷)横2左
+#####ジェービックＶ 注射剤 1本	1_調Q横4右
+#####シェルガン０．５眼粘弾剤　０．５ｍＬ	1_管E横4
+#####ジオン注生食液付　１０ｍＬ（希釈液付）	1_管H横4
+#####ジクロフェナクＮａ点眼液０．１％「ニッテン」	1_調Q横2左
+#####ジゴシン注０．２５ｍｇ　０．０２５％１ｍＬ	1_管H横4
+#####ジスロマック点滴静注用５００ｍｇ	1_管E横4
+#####シナジス筋注液１００ｍｇ　１ｍＬ	1_調Q横3右
+#####シナジス筋注液５０ｍｇ　０．５ｍＬ	1_調Q横3右
+#####ジムソ膀胱内注入液５０％　５０ｍＬ	1_管G横3
+#####ジメチコン内用液２％「ホリイ」	1_管N横3
+#####シルガード９水性懸濁筋注シリンジ 注射剤 1筒	1_調Q横4右
+#####ジルチアゼム塩酸塩注射用５０ｍｇ「サワイ」	1_管H横4
+#####シングリックス筋注用 注射剤 0.5ｍＬ	1_調Q横4右
+#####シンポニー皮下注５０ｍｇシリンジ　０．５ｍＬ	1_管I-b(冷)横2右
+#####スープレン吸入麻酔液	1_管N横4
+#####スコピゾル眼科溶液	1_管N横2
+#####ステラーラ点滴静注１３０ｍｇ　２６ｍＬ	1_管I-b(冷)横5左
+#####ステラーラ皮下注４５ｍｇシリンジ　０．５ｍＬ	1_管I-b(冷)横2右
+#####ステリハイドＬ２Ｗ／Ｖ％液 調剤用 5000ｍＬ	1_管Q(向)横5
+#####スピリーバ２．５μｇレスピマット６０吸入　１５０μｇ	1_調Q横5左
+#####ズファジラン筋注５ｍｇ　０．５％１ｍＬ	1_管H横4
+#####スポンゼル　５ｃｍ×２．５ｃｍ	1_管N横1
+#####スロンノンＨＩ注１０ｍｇ／２ｍＬ	1_管E横4
+#####ゼビュディ(期限注意)	1_調Q横5右
+#####セファゾリンナトリウム注射用１ｇ「日医工」	1_管C横1
+#####セファゾリンナトリウム注射用１ｇ「日医工」	1_管E横4
+#####セファランチン注１０ｍｇ　０．５％２ｍＬ	1_管H横4
+#####セフォタックス注射用０．５ｇ　５００ｍｇ	1_管E横4
+#####セフォタックス注射用１ｇ	1_管E横4
+#####セフォチアム塩酸塩静注用０．５ｇ「ＮＰ」　５００ｍｇ	1_管E横5
+#####セフォチアム塩酸塩静注用１ｇ「ＮＰ」	1_管E横5
+#####セフォン静注用１ｇ	1_管E横4
+#####セフタジジム静注用１ｇ「ＮＰ」	1_管E横5
+#####セフトリアキソンＮａ静注用１ｇ「サワイ」	1_管C横1
+#####セフトリアキソンＮａ静注用１ｇ「サワイ」	1_管E横5
+#####セフメタゾールナトリウム静注用１ｇ「日医工」	1_管C横1
+#####セフメタゾールナトリウム静注用１ｇ「日医工」	1_管E横5
+#####セボフルラン吸入麻酔液「ニッコー」	1_管N横4
+#####セレネース注５ｍｇ　０．５％１ｍＬ	1_管H横4
+#####ソナゾイド注射用１６μＬ　（溶解液付）	1_管J横6
+#####ソフラチュール貼付剤１０ｃｍ　１０．８ｍｇ１０ｃｍ×１０ｃｍ	1_管I-a(冷)横5右
+#####ゾラデックスＬＡ１０．８ｍｇデポ　（ゴセレリンとして）	1_管I-a(冷)横3右
+#####ソル・コーテフ静注用５００ｍｇ　（溶解液付）	1_管E横5
+#####ソル・コーテフ注射用１００ｍｇ　（溶解液付）	1_管E横5
+#####ソル・メドロール静注用１２５ｍｇ　（溶解液付）	1_管E横5
+#####ソル・メドロール静注用５００ｍｇ　（溶解液付）	1_管E横5
+#####ソルアセトＦ輸液　５００ｍＬ	1_管A横2
+#####ソルアセトＦ輸液　５００ｍＬ	1_管M
+#####ソルダクトン静注用１００ｍｇ	1_管H横4
+#####ソルダクトン静注用２００ｍｇ	1_管H横4
+#####ソルデム１輸液　２００ｍＬ	1_管A横3
+#####ソルデム１輸液　２００ｍＬ	1_管A横4
+#####ソルデム１輸液　２００ｍＬ	1_管M
+#####ソルデム１輸液　５００ｍＬ	1_管A横3
+#####ソルデム１輸液　５００ｍＬ	1_管A横4
+#####ソルデム１輸液　５００ｍＬ	1_管M
+#####ソルデム３Ａ輸液　５００ｍＬ	1_管A横2
+#####ソルデム３Ａ輸液　５００ｍＬ	1_管M
+#####ゾレア皮下注１５０ｍｇシリンジ　１ｍＬ	1_管I-b(冷)横2右
+#####ゾレドロン酸点滴静注４ｍｇ／１００ｍＬバッグ「ＮＫ」	1_管H横4
+#####ダイアモックス注射用５００ｍｇ	1_管F横1
+#####タケプロン静注用３０ｍｇ	1_管F横1
+#####タコシール組織接着用シート　４．８ｃｍ×４．８ｃｍ	1_管I-a(冷)横2左
+#####タコシール組織接着用シート　９．５ｃｍ×４．８ｃｍ	1_管I-a(冷)横2左
+#####タゾピペ配合静注用２．２５「ニプロ」　２．２５ｇ	1_管F横1
+#####タゾピペ配合静注用２．２５「ニプロ」　２．２５ｇ	1_管F横6
+#####タゾピペ配合静注用４．５「ニプロ」　４．５ｇ	1_管F横1
+#####タゾピペ配合静注用４．５「ニプロ」　４．５ｇ	1_管F横6
+#####タプロスミニ点眼液０．００１５％　０．３ｍＬ	1_調Q横3左
+#####タミフルドライシロップ３％	1_調Q横5右
+#####ダラキューロ配合皮下注　１５ｍＬ	1_管I-b(冷)横5左
+#####ダラシンＳ注射液３００ｍｇ	1_管F横1
+#####ダラシンＳ注射液６００ｍｇ	1_管F横1
+#####ダルテパリンＮａ静注３千Ｕ１２ｍＬシリンジニプロ　３千低ヘパＩＵ	1_管L横1
+#####ダルベポエチン　アルファ注１０μｇシリンジ「ＫＫＦ」　０．５ｍＬ	1_管I-a(冷)横4右
+#####ダルベポエチン　アルファ注１２０μｇシリンジＫＫＦ　０．５ｍＬ	1_管I-a(冷)横4右
+#####ダルベポエチン　アルファ注１８０μｇシリンジＫＫＦ　０．５ｍＬ	1_管I-a(冷)横4右
+#####ダルベポエチン　アルファ注２０μｇシリンジ「ＫＫＦ」　０．５ｍＬ	1_管I-a(冷)横4右
+#####ダルベポエチン　アルファ注３０μｇシリンジ「ＫＫＦ」　０．５ｍＬ	1_管I-a(冷)横4右
+#####ダルベポエチン　アルファ注６０μｇシリンジ「ＫＫＦ」　０．５ｍＬ	1_管I-b(冷)横5右
+#####ダルベポエチン　アルファ注６０μｇシリンジ「ＫＫＦ」　０．５ｍＬ	1_管I-a(冷)横4右
+#####ダントリウム静注用２０ｍｇ	1_管F横1
+#####チエナム点滴静注用０．５ｇ　５００ｍｇ	1_管F横1
+#####ディスポーザブルエアー針	1_管N横4
+#####デカドロン注射液３．３ｍｇ　１ｍＬ	1_調Q横2左
+#####デキサート注射液１．６５ｍｇ　０．５ｍＬ	1_管F横2
+#####デキサート注射液３．３ｍｇ　１ｍＬ	1_管F横2
+#####デクスメデトミジン静注液２００μｇ／５０ｍＬシリンジ「ニプロ」	1_管C横1
+#####デクスメデトミジン静注液２００μｇ／５０ｍＬシリンジ「ニプロ」	1_管H横5
+#####デスモプレシン点鼻スプレー２．５μｇ「フェリング」　１２５μｇ	1_調Q横3左
+#####テセントリク点滴静注１２００ｍｇ　１，２００ｍｇ２０ｍＬ	1_管I-b(冷)横5左
+#####テタノブリン筋注用２５０単位　２５０国際単位	1_調Q横4右
+#####デトキソール静注液２ｇ　１０％２０ｍＬ	1_管F横2
+#####デノサリン１輸液　５００ｍＬ	1_管A横1
+#####デノサリン１輸液　５００ｍＬ	1_管M
+#####デュピクセント皮下注３００ｍｇシリンジ　２ｍＬ	1_管I-b(冷)横1左
+#####デュピクセント皮下注３００ｍｇペン　２ｍＬ	1_管I-b(冷)横1左
+#####テラルビシン注射用１０ｍｇ	1_管I-b(冷)横1左
+#####テリパラチド皮下注用５６．５μｇ「サワイ」　（溶解液付）	1_管G横3
+#####テルフュージョン通気針	1_管N横4
+#####テルモ生食　５００ｍＬ	1_管A横3
+#####テルモ生食　５００ｍＬ	1_管A横4
+#####テルモ生食　５００ｍＬ	1_管M
+#####ドキソルビシン塩酸塩注射用１０ｍｇ「ＮＫ」	1_管H横5
+#####ドキソルビシン塩酸塩注射用５０ｍｇ「ＮＫ」	1_管H横5
+#####ドパストン静注２５ｍｇ　０．２５％１０ｍＬ	1_管G横3
+#####ドパストン静注５０ｍｇ　０．２５％２０ｍＬ	1_管G横3
+#####ドパミン塩酸塩点滴２００ｍｇバッグＮＩＧ　０．１％２００ｍＬ	1_管A横3
+#####ドパミン塩酸塩点滴２００ｍｇバッグＮＩＧ　０．１％２００ｍＬ	1_管C横2
+#####ドパミン塩酸塩点滴６００ｍｇバッグＮＩＧ　０．３％２００ｍＬ	1_管A横3
+#####ドパミン塩酸塩点滴６００ｍｇバッグＮＩＧ　０．３％２００ｍＬ	1_管C横2
+#####ドブトレックス注射液１００ｍｇ	1_管H横5
+#####トブラシン注６０ｍｇ	1_管H横5
+#####ドプラム注射液４００ｍｇ　２０ｍｇ	1_管H横5
+#####トラバタンズ点眼液０．００４％	1_調Q横3左
+#####トランサミン注１０％　１０ｍＬ	1_管F横2
+#####トリクロリールシロップ１０％	1_調Q横5左
+#####ドロレプタン注射液２５ｍｇ　２．５ｍｇ	1_管H横5
+#####トロンビン液モチダ　ソフトボトル１万　１０，０００単位１０ｍＬ	1_調Q横5左
+#####トロンビン液モチダ　ソフトボトル５千　５，０００単位５ｍＬ	1_調Q横5左
+#####ナファモスタットメシル酸塩注射用５０ｍｇ「ＮＩＧ」	1_管J横3
+#####ナロキソン塩酸塩静注０．２ｍｇ「ＡＦＰ」　１ｍＬ	1_管J横3
+#####ニカルジピン塩酸塩注射液２５ｍｇ「サワイ」　２５ｍＬ	1_管J横3
+#####ニカルジピン塩酸塩注射液２ｍｇ「サワイ」　２ｍＬ	1_管J横3
+#####ニコランジル点滴静注用１２ｍｇ「サワイ」	1_管I-a(冷)横3左
+#####ニコランジル点滴静注用４８ｍｇ「サワイ」	1_管I-a(冷)横3左
+#####ニトロール点滴静注５０ｍｇバッグ　０．０５％１００ｍＬ	1_管C横2
+#####ニューモバックスＮＰシリンジ　０．５ｍＬ	1_調Q横4右
+#####ネオシネジンコーワ５％点眼液	1_管N横2
+#####ネオシネジンコーワ注１ｍｇ　０．１％１ｍＬ	1_管J横3
+#####ネオフィリン注２５０ｍｇ　２．５％１０ｍＬ	1_管F横2
+#####ネオレスタール注射液１０ｍｇ　１％１ｍＬ	1_管F横2
+#####ネスプ注射液１２０μｇプラシリンジ　０．５ｍＬ	1_管I-a(冷)横3右
+#####ノーベルバール静注用２５０ｍｇ	1_管J横3
+#####ノバクトＭ静注用１０００単位　１，０００単位（溶解液付）	1_管G横3
+#####ノルアドリナリン注１ｍｇ　０．１％１ｍＬ	1_管J横3
+#####パーサビブ静注透析用シリンジ５ｍｇ　２ｍＬ	1_管I-b(冷)横1左
+#####ハーセプチン注射用１５０　１５０ｍｇ	1_管I-a(冷)横5右
+#####ハーセプチン注射用６０　６０ｍｇ	1_管I-a(冷)横3左
+#####ハーセプチン注射用６０　６０ｍｇ	1_管I-a(冷)横5右
+#####ハイアミン液１０％	1_管Q(向)横5
+#####ハイカリックＲＦ輸液　５００ｍＬ	1_管B横3
+#####ハイポアルコール	1_管Q(向)横2
+#####パパベリン塩酸塩注４０ｍｇ「日医工」　４％１ｍＬ	1_管E横2
+#####バビースモ硝子体内注射液１２０ｍｇ／ｍＬ　６ｍｇ０．０５ｍＬ	1_管I-b(冷)横3左
+#####パム静注５００ｍｇ　２．５％２０ｍＬ	1_管F横2
+#####パルタンＭ注０．２ｍｇ　０．０２％１ｍＬ	1_管J横3
+#####バル筋注１００ｍｇ「ＡＦＰ」　１０％１ｍＬ	1_管I-a(冷)横3左
+#####パロノセトロン静注０．７５ｍｇ／５ｍＬ「タイホウ」	1_管J横3
+#####パントール注射液５００ｍｇ	1_管F横2
+#####ハンプ注射用１０００　１，０００μｇ	1_管J横3
+#####ヒアルロン酸Ｎａ０．８５眼粘弾剤１％「アルコン」　０．８５ｍＬ	1_管I-a(冷)横5右
+#####ビーフリード輸液　５００ｍＬ	1_管M
+#####ビームゲン注０．５ｍＬ	1_調Q横4右
+#####ヒーロンＶ眼粘弾剤２．３％シリンジ０．６ｍＬ	1_管I-a(冷)横5右
+#####ピヴラッツ点滴静注液１５０ｍｇ　６ｍＬ	1_管J横3
+#####ビクシリン注射用０．２５ｇ　２５０ｍｇ	1_管F横2
+#####ビクシリン注射用１ｇ	1_管F横2
+#####ピシリバクタ静注用１．５ｇ	1_管C横1
+#####ピシリバクタ静注用１．５ｇ	1_管F横3
+#####ビソルボン注４ｍｇ　０．２％２ｍＬ	1_管F横3
+#####ビタジェクト注キット　２筒	1_管F横2
+#####ビタジェクト注キット　２筒	1_管F横6
+#####ビタミンＣ注「フソー」－５００ｍｇ	1_管I-a(冷)横1左
+#####ビタメジン静注用	1_管F横3
+#####ピトレシン注射液２０　２０単位	1_管I-a(冷)横4左
+#####ピペラシリンＮａ注射用１ｇ「サワイ」	1_管F横3
+#####ピペラシリンＮａ注射用２ｇ「サワイ」	1_管F横3
+#####ビムパット点滴静注１００ｍｇ　１０ｍＬ	1_管J横3
+#####ビリスコピン点滴静注５０　１０．５５％１００ｍＬ	1_管J横6
+#####ヒルトニン２ｍｇ注射液　１ｍＬ	1_管F横3
+#####ファーストシン静注用１ｇ	1_管F横3
+#####ファモチジン静注２０ｍｇ「日新」　２０ｍＬ	1_管F横3
+#####フィジオ１４０輸液　５００ｍＬ	1_管A横1
+#####フィジオ１４０輸液　５００ｍＬ	1_管M
+#####フィニバックス点滴静注用０．２５ｇ　２５０ｍｇ	1_管F横4
+#####ブイフェンド２００ｍｇ静注用	1_管J横4
+#####フィブラストスプレー５００　５００μｇ（溶解液付）	1_調Q横3左
+#####フィブロガミンＰ静注用　２４０国際単位（溶解液付）	1_管I-a(冷)横4左
+#####フィルグラスチムＢＳ注７５μｇシリンジ「ＮＫ」　０．３ｍＬ	1_調Q横2右
+#####フェインジェクト静注５００ｍｇ　１０ｍＬ	1_管F横4
+#####フェジン静注４０ｍｇ　２ｍＬ	1_管F横4
+#####フェノバール注射液１００ｍｇ　１０％１ｍＬ	1_管J横4
+#####ブチルスコポラミン臭化物注２０ｍｇシリンジ「ＮＰ」　１ｍＬ	1_管J横4
+#####プラリア皮下注６０ｍｇシリンジ　１ｍＬ	1_管I-b(冷)横2左
+#####ブリカニール皮下注０．２ｍｇ	1_管J横4
+#####プリズバインド静注液２．５ｇ　５０ｍＬ	1_管I-a(冷)横5左
+#####ブリディオン静注２００ｍｇ　２ｍＬ	1_管F横4
+#####プリンペラン注射液１０ｍｇ　０．５％２ｍＬ	1_管F横4
+#####フルオレサイト静注５００ｍｇ　１０％５ｍＬ	1_管N横2
+#####フルオロウラシル注１０００ｍｇ「トーワ」　１，０００ｍｇ	1_管I-b(冷)横2左
+#####フルオロウラシル注２５０ｍｇ「トーワ」	1_管I-b(冷)横2左
+#####フルスルチアミン注５０ｍｇ「日新」　２０ｍＬ	1_管F横4
+#####フルマゼニル注射液０．５ｍｇ「Ｆ」　５ｍＬ	1_管J横4
+#####フルマリン静注用１ｇ	1_管F横5
+#####ブレビブロック注１００ｍｇ　１０ｍＬ	1_管J横4
+#####プロギノン・デポー筋注１０ｍｇ	1_管F横5
+#####プロゲデポー筋注１２５ｍｇ	1_管F横5
+#####プロゲホルモン筋注用１０ｍｇ	1_管F横5
+#####プロスタルモン・Ｆ注射液１０００　１ｍｇ１ｍＬ	1_管J横4
+#####プロスタンディン注射用２０μｇ	1_管J横4
+#####プロタノールＬ注０．２ｍｇ　０．０２％１ｍＬ	1_管J横4
+#####プロタミン硫酸塩静注１００ｍｇ「モチダ」　１％	1_管F横5
+#####プロポフォール静注１％２０ｍＬ「マルイシ」　２００ｍｇ	1_管J横4
+#####プロポフォール静注１％５０ｍＬ「マルイシ」　５００ｍｇ	1_管J横4
+#####ブロムヘキシン塩酸塩吸入液０．２％「タイヨー」	1_管N横2
+#####フロリードＦ注２００ｍｇ　１％２０ｍＬ	1_管G横3
+#####ベオビュ硝子体内注射用キット１２０ｍｇ／ｍＬ　６ｍｇ０．０５ｍＬ	1_管I-b(冷)横3右
+#####ベクティビックス点滴静注１００ｍｇ　５ｍＬ	1_管I-b(冷)横5左
+#####ベクティビックス点滴静注４００ｍｇ　２０ｍＬ	1_管I-b(冷)横5左
+#####ベクルリー点滴静注用１００ｍｇ	1_管F横6
+#####ベナンバックス注用３００ｍｇ	1_管G横3
+#####ベネトリン吸入液０．５％	1_管N横2
+#####ベノキシール点眼液０．４％	1_管N横2
+#####ヘパリンＮａロック１００Ｕ／ｍＬシリンジオーツカ１０ｍＬ　１千Ｕ	1_管D横1
+#####ヘパリンＮａロック１００Ｕ／ｍＬシリンジオーツカ１０ｍＬ　１千Ｕ	1_管F横5
+#####ヘパリンＮａ注５千単位／５ｍＬ「モチダ」　５，０００単位	1_管F横5
+#####ヘパリンＮａ透析用２５０Ｕ／ｍＬシリンジ２０ｍＬニプロ　５千Ｕ	1_管F横6
+#####ヘパリンカルシウム皮下注５千Ｕ／０．２ｍＬシリンジモチダ　５千Ｕ	1_管F横5
+#####ベリプラストＰ　コンビセット　組織接着用　１ｍＬ２キット	1_管I-b(冷)横4右
+#####ベリプラストＰ　コンビセット　組織接着用　３ｍＬ２キット	1_管I-b(冷)横4右
+#####ベリプラストＰ　コンビセット　組織接着用　５ｍＬ２キット	1_管I-b(冷)横4右
+#####ベルベゾロンＦ点眼・点鼻液	1_調Q横2左
+#####ホストイン静注７５０ｍｇ　１０ｍＬ	1_管I-b(冷)横2左
+#####ホスミシンＳ静注用２ｇ	1_管G横1
+#####ボスミン外用液０．１％	1_管N横2
+#####ボスミン注１ｍｇ　０．１％１ｍＬ	1_管J横4
+#####ポビドンヨードゲル１０％「明治」	1_管N横3
+#####ポビドンヨード消毒用液１０％「ＮＰ」	1_管Q(向)横5
+#####ポピヨドンスクラブ７．５％	1_管Q(向)横2
+#####ホリゾン注射液１０ｍｇ	1_管G横1
+#####ボルベン輸液６％　５００ｍＬ	1_管A横1
+#####ボルベン輸液６％　５００ｍＬ	1_管M
+#####ボンビバ静注１ｍｇシリンジ　１ｍＬ	1_管J横4
+#####マーカイン注脊麻用０．５％高比重　４ｍＬ	1_管J横5
+#####マーカイン注脊麻用０．５％等比重　４ｍＬ	1_管J横5
+#####マグセント注１００ｍＬ	1_管G横1
+#####マンニットールＳ注射液　３００ｍＬ	1_管D横3
+#####ミールビック 注射剤 1本	1_調Q横4右
+#####ミオテクター冠血管注　１瓶１管	1_管D横3
+#####ミカファンギンＮａ点滴静注用５０ｍｇ「ニプロ」	1_管J横5
+#####ミダゾラム注１０ｍｇ「サンド」　２ｍＬ	1_管G横1
+#####ミチーガ皮下注用６０ｍｇシリンジ	1_管G横3
+#####ミノサイクリン塩酸塩点滴静注用１００ｍｇ「日医工」	1_管G横1
+#####ミラクリッド注射液１０万単位　１００，０００単位２ｍＬ	1_管G横1
+#####ミラクリッド注射液５万単位　５０，０００単位１ｍＬ	1_管G横1
+#####ミリスロール注５ｍｇ／１０ｍＬ	1_管J横5
+#####ミルクポン3L	1_管Q(向)横5
+#####ミルセラ注シリンジ１５０μｇ　０．３ｍＬ	1_管I-b(冷)横4右
+#####ミルセラ注シリンジ２００μｇ　０．３ｍＬ	1_管I-b(冷)横4右
+#####ミルリーラ注射液１０ｍｇ　１０ｍＬ	1_管J横5
+#####ミレーナ５２ｍｇ	1_管N横3
+#####ミンクリア内用散布液０．８％　２０ｍＬ	1_管N横3
+#####メイロン静注７％　２０ｍＬ	1_管G横2
+#####メイロン静注７％　２５０ｍＬ	1_管D横3
+#####メチコバール注射液５００μｇ　０．５ｍｇ	1_管G横2
+#####メチルエルゴメトリンマレイン酸塩注０．２ｍｇＦ　０．０２％１ｍＬ	1_管J横5
+#####メプチン吸入液ユニット０．３ｍＬ　０．０１％	1_管N横2
+#####メロペネム点滴静注用０．５ｇ「ＮＰ」　５００ｍｇ	1_管G横2
+#####モリヘパミン500	1_管D横2
+#####ラクツロースシロップ６５％「タカタ」	1_調Q横4左
+#####ラクテックＤ輸液　５００ｍＬ	1_管A横2
+#####ラクテックＤ輸液　５００ｍＬ	1_管M
+#####ラジカット点滴静注バッグ３０ｍｇ　１００ｍＬ	1_管D横3
+#####ラシックス注２０ｍｇ	1_管G横2
+#####ラニビズマブＢＳ硝子体内注射用キット１０　０．５ｍｇ０．０５ｍＬ	1_管I-b(冷)横3左
+#####ラピアクタ点滴静注液バッグ３００ｍｇ　６０ｍＬ	1_管G横3
+#####ラビショットA	1_管Q(向)横4
+#####ランマーク皮下注１２０ｍｇ　１．７ｍＬ	1_管I-b(冷)横2左
+#####リクラスト点滴静注液５ｍｇ　１００ｍＬ	1_管G横3
+#####リコモジュリン点滴静注用１２８００　１２，８００単位	1_管G横2
+#####リスモダンＰ静注５０ｍｇ　５ｍＬ	1_管J横5
+#####リズモンＴＧ点眼液０．５％	1_調Q横3左
+#####リドカイン塩酸塩ビスカス２％「日新」	1_管N横3
+#####リドカイン点滴静注液１％「タカタ」　２００ｍＬ	1_管C横2
+#####リネゾリド点滴静注液６００ｍｇ「明治」　３００ｍＬ	1_管G横3
+#####リピオドール４８０注１０ｍＬ	1_管J横6
+#####リュープリンＰＲＯ注射用キット２２．５ｍｇ	1_管J横6
+#####リュープリンＳＲ注射用キット１１．２５ｍｇ	1_管J横6
+#####リュープリン注射用１．８８ｍｇ　（懸濁用液付）	1_管J横6
+#####リュープロレリン酢酸塩注射用キット１．８８ｍｇ「あすか」	1_管J横6
+#####リュープロレリン酢酸塩注射用キット３．７５ｍｇ「あすか」	1_管J横6
+#####リンデロン注４ｍｇ（０．４％）	1_管I-a(冷)横4左
+#####リン酸２カリウム注２０ｍＥｑキット「テルモ」　０．５モル２０ｍＬ	1_管G横3
+#####ルセンティス硝子体注キット１０ｍｇ／ｍＬ　０．５ｍｇ０．０５ｍＬ	1_管I-b(冷)横3左
+#####レパーサ皮下注４２０ｍｇオートミニドーザー　３．５ｍＬ	1_調Q横5左
+#####レミケード点滴静注用１００　１００ｍｇ	1_管I-b(冷)横4左
+#####ロセフィン静注用０．５ｇ　５００ｍｇ	1_管G横2
+#####ロナプリーブ(期限注意)	1_調Q横5右
+#####ロピオン静注５０ｍｇ　５ｍＬ	1_管J横5
+#####ロミプレート皮下注２５０μｇ調製用	1_管I-a(冷)横4左
+#####ワゴスチグミン注０．５ｍｇ　０．０５％１ｍＬ	1_管G横3
+#####ワソラン静注５ｍｇ　０．２５％２ｍＬ	1_管J横5
+#####ヱフェドリン「ナガヰ」注射液４０ｍｇ　４％１ｍＬ	1_管H横2
+#####一般診断用精製ツベルクリン（ＰＰＤ）１人用　０．２５μｇ溶解液付	1_調Q横4右
+#####塩酸バンコマイシン点滴静注用０．５ｇ（ＯＫ）	1_管G横3
+#####乾燥ＨＢグロブリン筋注用１千Ｕニチヤク　１千Ｕ５ｍＬ（溶解液付）	1_調Q横2右
+#####乾燥ＨＢグロブリン筋注用２００単位「ニチヤク」　１ｍＬ溶解液付	1_調Q横2右
+#####乾燥まむし抗毒素“化血研”　各６，０００単位入（溶解液付）	1_調Q横4右
+#####乾燥弱毒生おたふくかぜワクチン「タケダ」 注射剤 1瓶	1_調Q横4右
+#####乾燥弱毒生水痘ワクチン「ビケン」 注射剤 1本	1_調Q横4右
+#####乾燥弱毒生風しんワクチン「タケダ」 注射剤 1瓶	1_調Q横4右
+#####乾燥弱毒生風しんワクチン「タケダ」 注射剤 1瓶	1_調Q横4右
+#####強力ネオミノファーゲンシーＰ静注２０ｍＬ	1_管E横3
+#####献血アルブミン５％静注１２．５ｇ／２５０ｍＬ「タケダ」	1_管G横4
+#####献血グロベニン－Ｉ静注用２５００ｍｇ　２．５ｇ５０ｍＬ溶解液付	1_管G横4
+#####献血グロベニン－Ｉ静注用５０００ｍｇ　５ｇ１００ｍＬ（溶解液付）	1_管G横4
+#####献血ノンスロン１５００注射用　１，５００単位（溶解液付）	1_管G横4
+#####抗Ｄ人免疫グロブリン筋注用１千倍「ＪＢ」　１千倍（溶解液付）	1_調Q横2右
+#####硝酸イソソルビド注５ｍｇ／１０ｍＬ「タカタ」　０．０５％	1_管E横4
+#####酢酸「ケンエー」	1_管Q(向)横2
+#####水溶性プレドニン２０ｍｇ	1_管F横5
+#####生食注シリンジ「ＮＰ」　１０ｍＬ	1_管D横1
+#####生食注シリンジ「ＮＰ」　１０ｍＬ	1_管E横6
+#####生食注シリンジ「ＮＰ」　２０ｍＬ	1_管D横1
+#####生食注シリンジ「ＮＰ」　２０ｍＬ	1_管D横1
+#####生食注シリンジ「ＮＰ」　２０ｍＬ	1_管E横6
+#####生食注シリンジ５０ｍＬ「ニプロ」	1_管D横2
+#####生理食塩液ＰＬ「フソー」　２０ｍＬ	1_管E横4
+#####生理食塩液ＰＬ「フソー」　５０ｍＬ	1_管A横1
+#####生理食塩液ＰＬ「フソー」　５０ｍＬ	1_管B横1
+#####生理食塩液バッグ「フソー」　１．５Ｌ	1_管K横3
+#####生理食塩液バッグ「フソー」　１Ｌ	1_管K横3
+#####生理食塩液バッグ「フソー」　２５０ｍＬ	1_管A横1
+#####生理食塩液バッグ「フソー」　２５０ｍＬ	1_管K横3
+#####静注用キシロカイン２％　５ｍＬ	1_管H横3
+#####静注用マグネゾール２０ｍＬ	1_管G横1
+#####赤十字アルブミン２５％静注１２．５ｇ／５０ｍＬ	1_管G横4
+#####大塚塩カル注２％　２０ｍＬ	1_管E横2
+#####大塚蒸留水　１Ｌ	1_管A横4
+#####大塚蒸留水　１Ｌ	1_管K横1
+#####大塚蒸留水　５００ｍＬ	1_管A横4
+#####大塚蒸留水　５００ｍＬ	1_管A横4
+#####大塚蒸留水　５００ｍＬ	1_管K横2
+#####大塚蒸留水　５００ｍＬ	1_管K横2
+#####大塚食塩注１０％　２０ｍＬ	1_管E横3
+#####大塚生食注　１００ｍＬ	1_管A横1
+#####大塚生食注　１００ｍＬ	1_管B横1
+#####大塚生食注　１Ｌ	1_管K横1
+#####大塚生食注　５００ｍＬ	1_管A横4
+#####大塚生食注　５００ｍＬ	1_管K横2
+#####大塚生食注２ポート１００ｍＬ	1_管A横1
+#####大塚生食注２ポート１００ｍＬ	1_管B横1
+#####大塚糖液１０％　２０ｍＬ	1_管F横4
+#####大塚糖液１０％　５００ｍＬ	1_管C横4
+#####大塚糖液２０％　２０ｍＬ	1_管F横4
+#####大塚糖液５％　１００ｍＬ	1_管A横1
+#####大塚糖液５％　２０ｍＬ	1_管F横4
+#####大塚糖液５％　２５０ｍＬ	1_管A横2
+#####大塚糖液５％　２５０ｍＬ	1_管C横3
+#####大塚糖液５％　５００ｍＬ	1_管A横3
+#####大塚糖液５％　５００ｍＬ	1_管C横4
+#####大塚糖液５％　５０ｍＬ	1_管A横1
+#####大塚糖液５％　５０ｍＬ	1_管C横3
+#####大塚糖液５０％　２００ｍＬ	1_管C横4
+#####炭酸水素Ｎａ静注１．２６％バッグ「フソー」　１Ｌ	1_管D横3
+#####注射用エンドキサン１００ｍｇ	1_管I-a(冷)横2右
+#####注射用エンドキサン５００ｍｇ	1_管I-a(冷)横2右
+#####注射用タゴシッド２００ｍｇ	1_管H横4
+#####注射用パニマイシン１００ｍｇ	1_管G横3
+#####注射用フサン１０　１０ｍｇ	1_管J横3
+#####注射用ペニシリンＧカリウム１００万単位	1_管F横5
+#####注射用メソトレキセート５０ｍｇ	1_管J横5
+#####注射用水「フソー」　５ｍＬ	1_管G横2
+#####注射用水ＰＬ「フソー」　１００ｍＬ	1_管B横3
+#####注射用水ＰＬ「フソー」　２０ｍＬ	1_管G横2
+#####沈降破傷風トキソイド「生研」　０．５ｍＬ	1_調Q横4右
+#####日点アトロピン点眼液１％　５ｍＬ	1_調Q横3左
+#####硫酸Ｍｇ補正液１ｍＥｑ／ｍＬ　０．５モル２０ｍＬ	1_管G横3
+#####１％ディプリバン注－キット　２００ｍｇ２０ｍＬ	管I-b(冷)横3右
+#####１％ディプリバン注－キット　５００ｍｇ５０ｍＬ	管I-b(冷)横3右
+#####ＤＴビック 注射剤 1本	調Q(冷)横4右
+#####ＨＭＧ筋注用７５単位「あすか」　（溶解液付）	管I-a(冷)横2左
+#####ＫＣＬ注２０ｍＥｑキット「テルモ」　１モル２０ｍＬ	管E横2
+#####ＫＣＬ注２０ｍＥｑキット「テルモ」　１モル２０ｍＬ	管E横6
+#####ＬＨ－ＲＨ注０．１ｍｇ「タナベ」	管I-a(冷)横2左
+#####ＰＡ・ヨード点眼・洗眼液　０．２％	管I-a(冷)横4左
+#####ＴＲＨ注０．５ｍｇ「タナベ」	管I-a(冷)横2左
+#####アートセレブ脳脊髄手術用洗浄灌流液　５００ｍＬ	管D横4
+#####アイセントレス錠４００ｍｇ	毒薬・向精神薬保管室　O棚
+#####アクチット輸液　５００ｍＬ	管C横4
+#####アクトシン軟膏３％	調Q(冷)横4左
+#####アシクロビル点滴静注液２５０ｍｇ「トーワ」	管E横1
+#####アスプール液（０．５％）	管N横2
+#####アセトアミノフェン坐剤小児用１００ｍｇ「シオエ」	調Q(冷)横5右
+#####アセトアミノフェン坐剤小児用２００ｍｇ「シオエ」	調Q(冷)横5右
+#####アセリオ静注液１０００ｍｇバッグ　１，０００ｍｇ１００ｍＬ	管A横3
+#####アセリオ静注液１０００ｍｇバッグ　１，０００ｍｇ１００ｍＬ	管H横3
+#####アセリオ静注液１０００ｍｇバッグ　１，０００ｍｇ１００ｍＬ	管H横5
+#####アタラックス－Ｐ注射液（２５ｍｇ／ｍｌ）　２．５％１ｍＬ	管E横1
+#####アタラックス－Ｐ注射液（５０ｍｇ／ｍｌ）　５％１ｍＬ	管E横1
+#####アデノシン負荷用静注６０ｍｇシリンジ「ＦＲＩ」　２０ｍＬ	管E横1
+#####アデホス－Ｌコーワ注２０ｍｇ	管I-a(冷)横1左
+#####アデホス－Ｌコーワ注４０ｍｇ	管I-a(冷)横1左
+#####アデラビン９号注１ｍＬ	管E横1
+#####アドナ注（静脈用）１００ｍｇ　０．５％２０ｍＬ	管E横2
+#####アトニン－Ｏ注５単位	管I-a(冷)
+#####アトニン－Ｏ注５単位	管I-a(冷)横1左
+#####アドレナリン注０．１％シリンジ「テルモ」　１ｍＬ	管E横6
+#####アトロピン注０．０５％シリンジ「テルモ」　１ｍＬ	管E横6
+#####アトロピン点眼液１％　５ｍＬ	「日点アトロピン点眼液」を見よ
+#####アトロピン硫酸塩注０．５ｍｇ「タナベ」　０．０５％１ｍＬ	管H横2
+#####アナペイン注１０ｍｇ／ｍＬ　１％１０ｍＬ	管H横1
+#####アナペイン注２ｍｇ／ｍＬ　０．２％１００ｍＬ	管H横1
+#####アナペイン注７．５ｍｇ／ｍＬ　０．７５％１０ｍＬ	管H横1
+#####アネメトロ点滴静注液５００ｍｇ　１００ｍＬ	管E横1
+#####アネメトロ点滴静注液５００ｍｇ　１００ｍＬ	管E横6
+#####アブラキサン点滴静注用１００ｍｇ	毒薬・向精神薬保管室の化療薬品棚
+#####アミオダロン塩酸塩静注１５０ｍｇ「ＴＥ」　３ｍＬ	管H横1
+#####アミカシン硫酸塩注射液１００ｍｇ「明治」	管E横1
+#####アミカシン硫酸塩注射用２００ｍｇ「日医工」	管D横3　(限定の段ボールの中)
+#####アミサリン注２００ｍｇ　１０％２ｍＬ	管E横1
+#####アミパレン輸液　２００ｍＬ	管D横2
+#####アラセナ－Ａ点滴静注用３００ｍｇ	管E横1
+#####アルギニン点滴静注３０ｇ「ＡＹ」　１０％３００ｍＬ	管J横6
+#####アルツディスポ関節注２５ｍｇ　１％２．５ｍＬ	管E横2
+#####アルプロスタジル注１０μｇ「Ｆ」　２ｍＬ	管I-a(冷)
+#####アルプロスタジル注１０μｇ「Ｆ」　２ｍＬ	管I-a(冷)横1右
+#####アルベカシン硫酸塩注射液１００ｍｇ「ＮＩＧ」　２ｍＬ	管H横1
+#####アルロイドＧ内用液５％	調Q(冷)横4左
+#####アレベール吸入用溶解液０．１２５％	管N横2
+#####アンチレクス静注１０ｍｇ　１％１ｍＬ	管H横1
+#####イーケプラ点滴静注５００ｍｇ　５ｍＬ	管E横2
+#####イオパミドール３００注１００ｍＬ「Ｆ」　６１．２４％	管G横5
+#####イオパミドール３７０注１００ｍＬ「Ｆ」　７５．５２％	管G横5
+#####イオパミドール３７０注２０ｍＬ「Ｆ」　７５．５２％	管G横5
+#####イオパミロン注３００　６１．２４％２０ｍＬ	管G横5
+#####イオパミロン注３００シリンジ　６１．２４％１００ｍＬ	管G横5
+#####イオパミロン注３７０　７５．５２％１００ｍＬ	管G横5
+#####イオパミロン注３７０シリンジ　７５．５２％１００ｍＬ	管G横5
+#####イオパミロン注３７０シリンジ　７５．５２％１００ｍＬ	管G横5
+#####イオパミロン注３７０シリンジ　７５．５２％８０ｍＬ	管G横5
+#####イオヘキソール３００注１００ｍＬ「Ｆ」　６４．７１％	管G横5
+#####イオメロン３５０注シリンジ１３５ｍＬ　７１．４４％	管G横6
+#####イソゾール注射用０．５ｇ　５００ｍｇ（溶解液付）	管H横1
+#####イソゾール注射用０．５ｇ　５００ｍｇ（溶解液付）	管H横5
+#####イベニティ皮下注１０５ｍｇシリンジ　１．１７ｍＬ	管I-a(冷)
+#####イベニティ皮下注１０５ｍｇシリンジ　１．１７ｍＬ	管I-a(冷)横1左
+#####インジゴカルミン注２０ｍｇ「ＡＦＰ」　０．４％５ｍＬ	管E横1
+#####インデラル注射液２ｍｇ　０．１％２ｍＬ	管H横2
+#####イントラリポス輸液２０％　１００ｍＬ	管B横1
+#####インフリキシマブＢＳ点滴静注用１００ｍｇ「ＣＴＨ」	管I-b(冷)
+#####インフリキシマブＢＳ点滴静注用１００ｍｇ「ＣＴＨ」	管I-b(冷)横1右
+#####インフルエンザＨＡワクチン「ＫＭＢ」 注射剤 1瓶	毒薬・向精神薬保管室(冷)
+#####インフルエンザＨＡワクチン「生研」 注射剤 1瓶	毒薬・向精神薬保管室(冷)
+#####ヴィーン３Ｇ輸液　２００ｍＬ	管A横3
+#####ヴィーン３Ｇ輸液　２００ｍＬ	管C横4
+#####ウエルアップハンドローション０．５％ 調剤用 500ｍＬ	管N周囲(横側や天面上など)
+#####ウエルパス手指消毒液０．２％ 調剤用 1000ｍＬ	管N横5
+#####ウテメリン注５０ｍｇ　１％５ｍＬ	管I-a(冷)
+#####ウテメリン注５０ｍｇ　１％５ｍＬ	管I-a(冷)横1右
+#####ウログラフイン注７６％　２０ｍＬ	管D横3　(限定の段ボールの中)
+#####エナルモンデポー筋注１２５ｍｇ　１ｍＬ	管E横2
+#####エナルモンデポー筋注２５０ｍｇ　１ｍＬ	管D横3　(限定の段ボールの中)
+#####エピルビシン塩酸塩注射用１０ｍｇ「サワイ」	毒薬・向精神薬保管室の化療薬品棚
+#####エピルビシン塩酸塩注射用５０ｍｇ「サワイ」	毒薬・向精神薬保管室の化療薬品棚
+#####エポエチンアルファＢＳ３０００シリンジＪＣＲ　３０００ＩＵ２ｍＬ	管I-a(冷)
+#####エポエチンアルファＢＳ３０００シリンジＪＣＲ　３０００ＩＵ２ｍＬ	管I-a(冷)横2右
+#####エホチール注１０ｍｇ　１％１ｍＬ	管H横2
+#####エムラクリーム	管N横1
+#####エリル点滴静注液３０ｍｇ　３０．８ｍｇ２ｍＬ	管H横2
+#####エルシトニン注２０Ｓディスポ　２０エルカトニン単位１ｍＬ	管H横2
+#####エルシトニン注４０単位　４０エルカトニン単位１ｍＬ	管H横2
+#####エルネオパＮＦ１号輸液　１０００ｍＬ	管B横2
+#####エルネオパＮＦ１号輸液　１５００ｍＬ	管B横2
+#####エルネオパＮＦ２号輸液　１０００ｍＬ	管B横2
+#####エルネオパＮＦ２号輸液　１５００ｍＬ	管B横2
+#####エレメンミック注　２ｍＬ	管E横2
+#####エンハーツ点滴静注用１００ｍｇ	管I-b(冷)
+#####エンハーツ点滴静注用１００ｍｇ	管I-b(冷)横1右
+#####オキサリプラチン点滴静注液１００ｍｇ「ＮＫ」　２０ｍＬ	毒薬・向精神薬保管室の化療薬品棚
+#####オキサリプラチン点滴静注液２００ｍｇ「ＮＫ」　４０ｍＬ	毒薬・向精神薬保管室の化療薬品棚
+#####オキサリプラチン点滴静注液５０ｍｇ「ＮＫ」　１０ｍＬ	毒薬・向精神薬保管室の化療薬品棚
+#####オキシドール「ヨシダ」	管N周囲(横側や天面上など)
+#####オクトレオチド皮下注１００μｇ「あすか」　１ｍＬ	管I-a(冷)
+#####オクトレオチド皮下注１００μｇ「あすか」　１ｍＬ	管I-a(冷)横2右
+#####オザグレルＮａ点滴静注８０ｍｇ／１００ｍＬバッグ「ＩＰ」	管E横3
+#####オザグレルＮａ点滴静注８０ｍｇ／１００ｍＬバッグ「ＩＰ」	管E横6
+#####オノアクト点滴静注用５０ｍｇ	管H横2
+#####オビソート注射用０．１ｇ　１００ｍｇ（溶解液付）	管H横2
+#####オフサグリーン静注用２５ｍｇ　（溶解液付）	管J横6
+#####オプジーボ点滴静注２４０ｍｇ　２４ｍＬ	管I-b(冷)
+#####オプジーボ点滴静注２４０ｍｇ　２４ｍＬ	管I-b(冷)横1右
+#####オムニパーク２４０注１０ｍＬ　５１．７７％	管G横6
+#####オムニパーク３００注１０ｍＬ　６４．７１％	管G横6
+#####オムニパーク３００注２０ｍＬ　６４．７１％	管G横6
+#####オムニパーク３００注シリンジ１００ｍＬ　６４．７１％	管G横6
+#####オムニパーク３００注シリンジ１５０ｍＬ　６４．７１％	管G横6
+#####オムニパーク３００注シリンジ５０ｍＬ　６４．７１％	管G横6
+#####オムニパーク３００注シリンジ８０ｍＬ　６４．７１％	管G横6
+#####オムニパーク３５０注シリンジ１００ｍＬ　７５．４９％	管G横6
+#####オルガラン静注１２５０単位　１，２５０抗第Ｘａ因子活性単位１ｍＬ	管D横3　(限定の段ボールの中)
+#####オレンシア点滴静注用２５０ｍｇ	管I-b(冷)
+#####オレンシア点滴静注用２５０ｍｇ	管I-b(冷)横2右
+#####オンデキサ静注用２００ｍｇ	管I-a(冷)
+#####オンデキサ静注用２００ｍｇ	管I-a(冷)横5左
+#####ガストログラフイン経口・注腸用	管N横3
+#####カルシトリオール静注液０．５μｇ「Ｆ」　１ｍＬ	管H横3
+#####カルシトリオール静注液１μｇ「Ｆ」　１ｍＬ	管H横3
+#####カルチコール注射液８．５％５ｍＬ	管E横3
+#####カルボカインアンプル注２％　１０ｍＬ	管H横3
+#####カルボカイン注１％	管H横3
+#####カルボプラチン注射液１５０ｍｇ「日医工」　１５ｍＬ	毒薬・向精神薬保管室の化療薬品棚
+#####カルボプラチン注射液５０ｍｇ「日医工」　５ｍＬ	毒薬・向精神薬保管室の化療薬品棚
+#####キサラタン点眼液０．００５％	調Q(冷)横2左
+#####キシロカインゼリー２％	管N横2
+#####キシロカインポンプスプレー８％	管N横2
+#####キシロカイン液「４％」	管N横2
+#####キシロカイン注ポリアンプ０．５％　１０ｍＬ	管H横3
+#####キシロカイン注ポリアンプ１％　１０ｍＬ	管H横3
+#####キシロカイン注ポリアンプ２％　１０ｍＬ	管H横3
+#####キシロカイン注射液「０．５％」エピレナミン１：１００，０００含有	管I-a(冷)横2右
+#####キシロカイン注射液「１％」エピレナミン（１：１００，０００）含有	管I-a(冷)横2右
+#####キシロカイン注射液「２％」エピレナミン（１：８０，０００）含有	管I-a(冷)横3右
+#####キドミン輸液　２００ｍＬ	管D横2
+#####キュビシン静注用３５０ｍｇ	管I-a(冷)
+#####キュビシン静注用３５０ｍｇ	管I-a(冷)横2左
+#####グラニセトロン静注液３ｍｇ「マイラン」　３ｍＬ	管H横4
+#####クラビット点滴静注バッグ５００ｍｇ／１００ｍＬ	管E横3
+#####クリアクター静注用８０万　８０万国際単位	管E横3
+#####グリセオール注　２００ｍＬ	管B横3
+#####グリセオール注　５００ｍＬ	管B横3
+#####グリセリンＢＣ液「ヨシダ」 調剤用 100ｍＬ	管N横3
+#####グリセリンＢＣ液「ヨシダ」 調剤用 250ｍＬ	管N横3
+#####グリセリン浣腸「オヲタ」１２０　５０％１２０ｍＬ	管N横1
+#####グリセリン浣腸「オヲタ」６０　５０％６０ｍＬ	管N横1
+#####グリセリン浣腸「オヲタ」小児用３０　５０％３０ｍＬ	管N横1
+#####グルアセト３５注　５００ｍＬ	管A横3
+#####グルアセト３５注　５００ｍＬ	管M
+#####グルカゴンＧノボ注射用１ｍｇ　（溶解液付）	管I-a(冷)
+#####グルカゴンＧノボ注射用１ｍｇ　（溶解液付）	管I-a(冷)横3右
+#####グルトパ注６００万　６００万国際単位（溶解液付）	管E横3
+#####クロスエイトＭＣ静注用１０００単位　１，０００単位（溶解液付）	管I-b(冷)
+#####クロスエイトＭＣ静注用１０００単位　１，０００単位（溶解液付）	管I-b(冷)横1右
+#####ケイセントラ静注用５００　５００国際単位（溶解液付）	管I-a(冷)
+#####ケイセントラ静注用５００　５００国際単位（溶解液付）	管I-a(冷)横5左
+#####ケイツーＮ静注１０ｍｇ	管E横3
+#####ケナコルト－Ａ筋注用関節腔内用水懸注４０ｍｇ／１ｍＬ	管E横3
+#####ケナコルト－Ａ皮内用関節腔内用水懸注５０ｍｇ／５ｍＬ　１０ｍｇ	管E横3
+#####ゲムシタビン点滴静注用１ｇ「ヤクルト」	毒薬・向精神薬保管室の化療薬品棚
+#####ゲムシタビン点滴静注用２００ｍｇ「ヤクルト」	毒薬・向精神薬保管室の化療薬品棚
+#####ゲンタシン注１０　１０ｍｇ	管H横4
+#####ゲンタシン注４０　４０ｍｇ	管H横4
+#####ゲンタシン注６０　６０ｍｇ	管H横4
+#####コアテック注５ｍｇ　５ｍＬ	管E横3
+#####コアベータ静注用１２．５ｍｇ	管H横4
+#####ゴナックス皮下注用１２０ｍｇ　（溶解液付）	管D横3　(限定の段ボールの中)
+#####ゴナックス皮下注用８０ｍｇ　（溶解液付）	管J横6
+#####ゴナックス皮下注用８０ｍｇ　（溶解液付）	管D横3　(限定の段ボールの中)
+#####コリナコール点眼液　５ｍＬ	調Q(冷)
+#####コリナコール点眼液　５ｍＬ	調Q横2左
+#####サイラムザ点滴静注液５００ｍｇ　５０ｍＬ	管I-b(冷)
+#####サイラムザ点滴静注液５００ｍｇ　５０ｍＬ	管I-b(冷)横2右
+#####サイレース静注２ｍｇ	毒薬・向精神薬保管室入ってすぐ右棚下
+#####サムタス点滴静注用８ｍｇ	管H横4
+#####ザラカム配合点眼液	調Q(冷)
+#####ザラカム配合点眼液	調Q横2左
+#####サンリズム注射液５０　５０ｍｇ５ｍＬ	管H横4
+#####ジアグノグリーン注射用２５ｍｇ　（溶解液付）	管E横4
+#####ジーラスタ皮下注３．６ｍｇ　０．３６ｍＬ	管I-a(冷)
+#####ジーラスタ皮下注３．６ｍｇ　０．３６ｍＬ	管I-a(冷)横2左
+#####ジェービックＶ 注射剤 1本	調Q(冷)
+#####ジェービックＶ 注射剤 1本	調Q横4右
+#####ジェブタナ点滴静注６０ｍｇ　１．５ｍＬ（溶解液付）	毒薬・向精神薬保管室の化療薬品棚
+#####シェルガン０．５眼粘弾剤　０．５ｍＬ	管E横4
+#####ジオン注生食液付　１０ｍＬ（希釈液付）	管H横4
+#####ジクロフェナクＮａ点眼液０．１％「ニッテン」	調Q(冷)
+#####ジクロフェナクＮａ点眼液０．１％「ニッテン」	調Q横2左
+#####ジゴシン注０．２５ｍｇ　０．０２５％１ｍＬ	管H横4
+#####シスプラチン点滴静注１０ｍｇ「マルコ」　２０ｍＬ	毒薬・向精神薬保管室の化療薬品棚
+#####シスプラチン点滴静注５０ｍｇ「マルコ」　１００ｍＬ	毒薬・向精神薬保管室の化療薬品棚
+#####ジスロマック点滴静注用５００ｍｇ	管E横4
+#####シナジス筋注液１００ｍｇ　１ｍＬ	調Q(冷)
+#####シナジス筋注液１００ｍｇ　１ｍＬ	調Q横3右
+#####シナジス筋注液５０ｍｇ　０．５ｍＬ	調Q(冷)
+#####シナジス筋注液５０ｍｇ　０．５ｍＬ	調Q横3右
+#####ジムソ膀胱内注入液５０％　５０ｍＬ	管D横3　(限定の段ボールの中)
+#####ジメチコン内用液２％「ホリイ」	管N横3
+#####シルガード９水性懸濁筋注シリンジ 注射剤 1筒	調Q(冷)
+#####シルガード９水性懸濁筋注シリンジ 注射剤 1筒	調Q横4右
+#####ジルチアゼム塩酸塩注射用５０ｍｇ「サワイ」	管H横4
+#####シングリックス筋注用 注射剤 0.5ｍＬ	調Q(冷)
+#####シングリックス筋注用 注射剤 0.5ｍＬ	調Q横4右
+#####シンポニー皮下注５０ｍｇシリンジ　０．５ｍＬ	管I-b(冷)
+#####シンポニー皮下注５０ｍｇシリンジ　０．５ｍＬ	管I-b(冷)横2右
+#####スープレン吸入麻酔液	管N横4
+#####ステラーラ皮下注４５ｍｇシリンジ　０．５ｍＬ	管I-b(冷)
+#####ステラーラ皮下注４５ｍｇシリンジ　０．５ｍＬ	管I-b(冷)横2右
+#####ズファジラン筋注５ｍｇ　０．５％１ｍＬ	管H横4
+#####スポンゼル　５ｃｍ×２．５ｃｍ	管N横1
+#####スロンノンＨＩ注１０ｍｇ／２ｍＬ	管E横4
+#####ゼビュディ(要検討)	調Q横5右
+#####セファゾリンナトリウム注射用１ｇ「日医工」	管E横4
+#####セファランチン注１０ｍｇ　０．５％２ｍＬ	管J横5
+#####セフォタックス注射用０．５ｇ　５００ｍｇ	管E横4
+#####セフォタックス注射用１ｇ	管E横4
+#####セフォチアム塩酸塩静注用０．５ｇ「ＮＰ」　５００ｍｇ	管E横5
+#####セフォチアム塩酸塩静注用１ｇ「ＮＰ」	管E横5
+#####セフォン静注用１ｇ	管E横4
+#####セフタジジム静注用１ｇ「ＮＰ」	管E横5
+#####セフトリアキソンＮａ静注用１ｇ「サワイ」	管E横5
+#####セフメタゾールナトリウム静注用１ｇ「日医工」	管E横5
+#####セレネース注５ｍｇ　０．５％１ｍＬ	管J横3
+#####ソセゴン注射液１５ｍｇ	毒薬・向精神薬保管室入ってすぐ右棚下
+#####ソセゴン注射液３０ｍｇ	毒薬・向精神薬保管室入ってすぐ右棚下
+#####ソナゾイド注射用１６μＬ　（溶解液付）	管J横6
+#####ゾラデックス３．６ｍｇデポ　（ゴセレリンとして）	管I-a(冷)
+#####ゾラデックス３．６ｍｇデポ　（ゴセレリンとして）	管I-a(冷)横3右
+#####ゾラデックスＬＡ１０．８ｍｇデポ　（ゴセレリンとして）	管I-a(冷)
+#####ゾラデックスＬＡ１０．８ｍｇデポ　（ゴセレリンとして）	管I-a(冷)横3右
+#####ソル・コーテフ静注用５００ｍｇ　（溶解液付）	管E横5
+#####ソル・コーテフ注射用１００ｍｇ　（溶解液付）	管E横5
+#####ソル・メドロール静注用１２５ｍｇ　（溶解液付）	管E横5
+#####ソル・メドロール静注用５００ｍｇ　（溶解液付）	管E横5
+#####ソルアセトＦ輸液　５００ｍＬ	管A横2
+#####ソルアセトＦ輸液　５００ｍＬ	管M
+#####ソルダクトン静注用１００ｍｇ	管J横3
+#####ソルダクトン静注用２００ｍｇ	管J横3
+#####ソルデム１輸液　２００ｍＬ	管A横3
+#####ソルデム１輸液　２００ｍＬ	管M
+#####ソルデム１輸液　５００ｍＬ	管A横3
+#####ソルデム１輸液　５００ｍＬ	管M
+#####ソルデム３Ａ輸液　５００ｍＬ	管A横2
+#####ソルデム３Ａ輸液　５００ｍＬ	管M
+#####ゾレア皮下注１５０ｍｇシリンジ　１ｍＬ	管I-b(冷)
+#####ゾレア皮下注１５０ｍｇシリンジ　１ｍＬ	管I-b(冷)横2右
+#####ゾレドロン酸点滴静注４ｍｇ／１００ｍＬバッグ「ＮＫ」	管H横4
+#####ダイアモックス注射用５００ｍｇ	管F横1
+#####タケプロン静注用３０ｍｇ	管F横1
+#####タコシール組織接着用シート　４．８ｃｍ×４．８ｃｍ	管I-a(冷)
+#####タコシール組織接着用シート　４．８ｃｍ×４．８ｃｍ	管I-a(冷)横2左
+#####タコシール組織接着用シート　９．５ｃｍ×４．８ｃｍ	管I-a(冷)
+#####タコシール組織接着用シート　９．５ｃｍ×４．８ｃｍ	管I-a(冷)横2左
+#####タゾピペ配合静注用２．２５「ニプロ」　２．２５ｇ	管F横1
+#####タゾピペ配合静注用２．２５「ニプロ」　２．２５ｇ	管F横6
+#####タゾピペ配合静注用４．５「ニプロ」　４．５ｇ	管F横1
+#####タプロスミニ点眼液０．００１５％　０．３ｍＬ	調Q(冷)
+#####タプロスミニ点眼液０．００１５％　０．３ｍＬ	調Q横3左
+#####タミフルドライシロップ３％	調Q(冷)
+#####タミフルドライシロップ３％	調Q横5右
+#####ダラシンＳ注射液３００ｍｇ	管F横1
+#####ダラシンＳ注射液６００ｍｇ	管F横1
+#####ダルベポエチン　アルファ注１０μｇシリンジ「ＫＫＦ」　０．５ｍＬ	管I-a(冷)
+#####ダルベポエチン　アルファ注１０μｇシリンジ「ＫＫＦ」　０．５ｍＬ	管I-a(冷)横4右
+#####ダルベポエチン　アルファ注１２０μｇシリンジＫＫＦ　０．５ｍＬ	管I-a(冷)
+#####ダルベポエチン　アルファ注１２０μｇシリンジＫＫＦ　０．５ｍＬ	管I-a(冷)横4右
+#####ダルベポエチン　アルファ注１８０μｇシリンジＫＫＦ　０．５ｍＬ	管I-a(冷)
+#####ダルベポエチン　アルファ注１８０μｇシリンジＫＫＦ　０．５ｍＬ	管I-a(冷)横4右
+#####ダルベポエチン　アルファ注２０μｇシリンジ「ＫＫＦ」　０．５ｍＬ	管I-a(冷)
+#####ダルベポエチン　アルファ注２０μｇシリンジ「ＫＫＦ」　０．５ｍＬ	管I-a(冷)横4右
+#####ダルベポエチン　アルファ注３０μｇシリンジ「ＫＫＦ」　０．５ｍＬ	管I-a(冷)
+#####ダルベポエチン　アルファ注３０μｇシリンジ「ＫＫＦ」　０．５ｍＬ	管I-a(冷)横4右
+#####ダルベポエチン　アルファ注６０μｇシリンジ「ＫＫＦ」　０．５ｍＬ	管I-a(冷)
+#####ダルベポエチン　アルファ注６０μｇシリンジ「ＫＫＦ」　０．５ｍＬ	管I-a(冷)横4右
+#####ダントリウム静注用２０ｍｇ	管F横1
+#####ヂアミトール水　０．０２５％	管N横5
+#####ヂアミトール水　０．１％	管N横5
+#####チエナム点滴静注用０．５ｇ　５００ｍｇ	管F横1
+#####ツベルクリン（ＰＰＤ）１人用　０．２５μｇ	「一般診断用精製ツベルクリン（ＰＰＤ）」を見よ
+#####ツルバダ配合錠	毒薬・向精神薬保管室　O棚
+#####ディプリバン注－キット１％　２００ｍｇ２０ｍＬ	管I-b(冷)
+#####ディプリバン注－キット１％　５００ｍｇ５０ｍＬ	管I-b(冷)
+#####デカドロン注射液３．３ｍｇ　１ｍＬ	調Q(冷)
+#####デカドロン注射液３．３ｍｇ　１ｍＬ	調Q横2左
+#####デキサート注射液１．６５ｍｇ　０．５ｍＬ	管F横2
+#####デキサート注射液３．３ｍｇ　１ｍＬ	管F横2
+#####デクスメデトミジン静注液２００μｇ／５０ｍＬシリンジ「ニプロ」	管C横1
+#####デクスメデトミジン静注液２００μｇ／５０ｍＬシリンジ「ニプロ」	管J横3
+#####デスモプレシン点鼻スプレー２．５μｇ「フェリング」　１２５μｇ	調Q(冷)
+#####デスモプレシン点鼻スプレー２．５μｇ「フェリング」　１２５μｇ	調Q横3左
+#####テタノブリン筋注用２５０単位　２５０国際単位	調Q(冷)
+#####テタノブリン筋注用２５０単位　２５０国際単位	調Q(冷)
+#####テタノブリン筋注用２５０単位　２５０国際単位	調Q横4右
+#####デトキソール静注液２ｇ　１０％２０ｍＬ	管F横2
+#####デノサリン１輸液　５００ｍＬ	管A横1
+#####デノサリン１輸液　５００ｍＬ	管M
+#####デノシン点滴静注用５００ｍｇ	毒薬・向精神薬保管室入ってすぐ右棚上
+#####デュピクセント皮下注３００ｍｇシリンジ　２ｍＬ	管I-b(冷)
+#####デュピクセント皮下注３００ｍｇシリンジ　２ｍＬ	管I-b(冷)横1左
+#####デュピクセント皮下注３００ｍｇペン　２ｍＬ	管I-b(冷)
+#####デュピクセント皮下注３００ｍｇペン　２ｍＬ	管I-b(冷)横1左
+#####テラルビシン注射用１０ｍｇ	管I-b(冷)
+#####テラルビシン注射用１０ｍｇ	管I-b(冷)横1左
+#####テリパラチド皮下注用５６．５μｇ「サワイ」　（溶解液付）	管D横3　(限定の段ボールの中)
+#####テルモ生食　５００ｍＬ	管A横3
+#####テルモ生食　５００ｍＬ	管M
+#####ドキソルビシン塩酸塩注射用５０ｍｇ「ＮＫ」	管H横4
+#####ドセタキセル点滴静注２０ｍｇ／１ｍＬ「ヤクルト」	毒薬・向精神薬保管室の化療薬品棚
+#####ドパストン静注２５ｍｇ　０．２５％１０ｍＬ	管G横3
+#####ドパストン静注５０ｍｇ　０．２５％２０ｍＬ	管G横3
+#####ドパミン塩酸塩点滴２００ｍｇバッグＮＩＧ　０．１％２００ｍＬ	管C横2
+#####ドパミン塩酸塩点滴２００ｍｇバッグ武田テバ　０．１％２００ｍＬ	管A横3
+#####ドパミン塩酸塩点滴６００ｍｇバッグＮＩＧ　０．３％２００ｍＬ	管A横3
+#####ドパミン塩酸塩点滴６００ｍｇバッグＮＩＧ　０．３％２００ｍＬ	管C横2
+#####ドパミン塩酸塩点滴６００ｍｇバッグＮＩＧ　０．３％２００ｍＬ	管C横2
+#####ドブトレックス注射液１００ｍｇ	管J横4
+#####トブラシン注６０ｍｇ	管J横5
+#####ドプラム注射液４００ｍｇ　２０ｍｇ	管J横4
+#####トラバタンズ点眼液０．００４％	調Q(冷)
+#####トラバタンズ点眼液０．００４％	調Q横3左
+#####トランサミン注１０％　１０ｍＬ	管F横2
+#####トリクロリールシロップ１０％	調Q(冷)
+#####トリクロリールシロップ１０％	調Q横5左
+#####ドロレプタン注射液２５ｍｇ　２．５ｍｇ	管H横4
+#####トロンビン液モチダ　ソフトボトル１万　１０，０００単位１０ｍＬ	調Q(冷)
+#####トロンビン液モチダ　ソフトボトル１万　１０，０００単位１０ｍＬ	調Q横5左
+#####トロンビン液モチダ　ソフトボトル５千　５，０００単位５ｍＬ	調Q(冷)
+#####トロンビン液モチダ　ソフトボトル５千　５，０００単位５ｍＬ	調Q横5左
+#####ナファモスタットメシル酸塩注射用５０ｍｇ「ＮＩＧ」	管J横3
+#####ナロキソン塩酸塩静注０．２ｍｇ「ＡＦＰ」　１ｍＬ	管J横5
+#####ニカルジピン塩酸塩注射液２５ｍｇ「サワイ」　２５ｍＬ	管J横5
+#####ニカルジピン塩酸塩注射液２ｍｇ「サワイ」　２ｍＬ	管J横3
+#####ニコランジル点滴静注用１２ｍｇ「サワイ」	管I-a(冷)
+#####ニコランジル点滴静注用１２ｍｇ「サワイ」	管I-a(冷)横3左
+#####ニコランジル点滴静注用４８ｍｇ「サワイ」	管I-a(冷)
+#####ニコランジル点滴静注用４８ｍｇ「サワイ」	管I-a(冷)横3左
+#####ニトロール点滴静注５０ｍｇバッグ　０．０５％１００ｍＬ	管C横2
+#####ニューモバックスＮＰシリンジ　０．５ｍＬ	調Q(冷)
+#####ニューモバックスＮＰシリンジ　０．５ｍＬ	調Q横4右
+#####ニューモバックスＮＰシリンジ　０．５ｍＬ	調Q横4右
+#####ネオシネジンコーワ注１ｍｇ　０．１％１ｍＬ	管J横3
+#####ネオフィリン注２５０ｍｇ　２．５％１０ｍＬ	管F横2
+#####ネオレスタール注射液１０ｍｇ　１％１ｍＬ	管F横2
+#####ノーベルバール静注用２５０ｍｇ	管H横4
+#####ノバクトＭ静注用１０００単位　１，０００単位（溶解液付）	管D横3　(限定の段ボールの中)
+#####ノルアドリナリン注１ｍｇ　０．１％１ｍＬ	管J横5
+#####パーサビブ静注透析用シリンジ５ｍｇ　２ｍＬ	管I-b(冷)
+#####パーサビブ静注透析用シリンジ５ｍｇ　２ｍＬ	管I-b(冷)横1左
+#####ハーセプチン注射用１５０　１５０ｍｇ	管I-a(冷)
+#####ハーセプチン注射用１５０　１５０ｍｇ	管I-a(冷)横3左
+#####ハーセプチン注射用６０　６０ｍｇ	管I-a(冷)
+#####ハーセプチン注射用６０　６０ｍｇ	管I-a(冷)横3左
+#####ハイアミン液１０％	管N周囲(横側や天面上など)
+#####ハイアミン液１０％	管N周囲(横側や天面上など)
+#####ハイカリックＲＦ輸液　５００ｍＬ	管B横3
+#####パクリタキセル注１００ｍｇ／１６．７ｍＬ「ＮＫ」	毒薬・向精神薬保管室の化療薬品棚
+#####パクリタキセル注３０ｍｇ／５ｍＬ「ＮＫ」	毒薬・向精神薬保管室の化療薬品棚
+#####パパベリン塩酸塩注４０ｍｇ「日医工」　４％１ｍＬ	管E横2
+#####バビースモ硝子体内注射液１２０ｍｇ／ｍＬ　６ｍｇ０．０５ｍＬ	管I-b(冷)
+#####バビースモ硝子体内注射液１２０ｍｇ／ｍＬ　６ｍｇ０．０５ｍＬ	管I-b(冷)横1左
+#####ハプトグロビン静注２０００単位「ＪＢ」　２，０００単位１００ｍＬ	管I-b(冷)
+#####ハプトグロビン静注２０００単位「ＪＢ」　２，０００単位１００ｍＬ	管I-b(冷)横5右
+#####パム静注５００ｍｇ　２．５％２０ｍＬ	管F横2
+#####パルタンＭ注０．２ｍｇ　０．０２％１ｍＬ	管J横4
+#####バル筋注１００ｍｇ「ＡＦＰ」　１０％１ｍＬ	管I-a(冷)
+#####バル筋注１００ｍｇ「ＡＦＰ」　１０％１ｍＬ	管I-a(冷)横3左
+#####パロノセトロン静注０．７５ｍｇ／５ｍＬ「タイホウ」	管J横4
+#####パントール注射液５００ｍｇ	管F横2
+#####ハンプ注射用１０００　１，０００μｇ	管J横4
+#####ヒアルロン酸Ｎａ０．８５眼粘弾剤１％「アルコン」　０．８５ｍＬ	管I-a(冷)
+#####ヒアルロン酸Ｎａ０．８５眼粘弾剤１％「アルコン」　０．８５ｍＬ	管I-a(冷)
+#####ヒアルロン酸Ｎａ０．８５眼粘弾剤１％「アルコン」　０．８５ｍＬ	管I-a(冷)横5右
+#####ビーフリード輸液　５００ｍＬ	管M
+#####ビームゲン注０．５ｍＬ	調Q(冷)
+#####ビームゲン注０．５ｍＬ	調Q横4右
+#####ヒーロンＶ眼粘弾剤２．３％シリンジ０．６ｍＬ	管I-a(冷)
+#####ヒーロンＶ眼粘弾剤２．３％シリンジ０．６ｍＬ	管I-a(冷)横5右
+#####ピヴラッツ点滴静注液１５０ｍｇ　６ｍＬ	管J横4
+#####ビクシリン注射用０．２５ｇ　２５０ｍｇ	管F横2
+#####ビクシリン注射用１ｇ	管F横2
+#####ビケンＨＡ 注射剤 1瓶	調Q(冷)
+#####ビケンＨＡ 注射剤 1瓶	毒薬・向精神薬保管室(冷)
+#####ピシリバクタ静注用１．５ｇ	管F横3
+#####ビソルボン注４ｍｇ　０．２％２ｍＬ	管F横3
+#####ビタジェクト注キット　２筒	管F横2
+#####ビタジェクト注キット　２筒	管F横6
+#####ビタミンＣ注「フソー」－５００ｍｇ	管I-a(冷)
+#####ビタミンＣ注「フソー」－５００ｍｇ	管I-a(冷)横1左
+#####ビタメジン静注用	管F横3
+#####ピトレシン注射液２０　２０単位	管I-a(冷)
+#####ピトレシン注射液２０　２０単位	管I-a(冷)横4左
+#####ピトレシン注射液２０　２０単位	管I-a(冷)横4左
+#####ヒビテン液５％	管N周囲(横側や天面上など)
+#####ピペラシリンＮａ注射用１ｇ「サワイ」	管F横3
+#####ピペラシリンＮａ注射用２ｇ「サワイ」	管F横3
+#####ビムパット点滴静注１００ｍｇ　１０ｍＬ	管H横5
+#####ビムパット点滴静注１００ｍｇ　１０ｍＬ	管J横4
+#####ビリスコピン点滴静注５０　１０．５５％１００ｍＬ	管J横6
+#####ヒルトニン２ｍｇ注射液　１ｍＬ	管F横3
+#####ファーストシン静注用１ｇ	管F横3
+#####ファモチジン静注２０ｍｇ「日新」　２０ｍＬ	管F横3
+#####フィジオ１４０輸液　５００ｍＬ	管A横1
+#####フィジオ１４０輸液　５００ｍＬ	管M
+#####フィニバックス点滴静注用０．２５ｇ　２５０ｍｇ	管F横4
+#####ブイフェンド２００ｍｇ静注用	管H横5
+#####フィブラストスプレー５００　５００μｇ（溶解液付）	調Q(冷)
+#####フィブラストスプレー５００　５００μｇ（溶解液付）	調Q横3左
+#####フィブロガミンＰ静注用　２４０国際単位（溶解液付）	管I-a(冷)
+#####フィブロガミンＰ静注用　２４０国際単位（溶解液付）	管I-a(冷)横4左
+#####フィルグラスチムＢＳ注７５μｇシリンジ「ＮＫ」　０．３ｍＬ	管I-a(冷)
+#####フィルグラスチムＢＳ注７５μｇシリンジ「ＮＫ」　０．３ｍＬ	管I-a(冷)横4左
+#####フェインジェクト静注５００ｍｇ　１０ｍＬ	管F横4
+#####フェジン静注４０ｍｇ　２ｍＬ	管F横4
+#####フェソロデックス筋注２５０ｍｇ　５ｍＬ	管I-b(冷)
+#####フェソロデックス筋注２５０ｍｇ　５ｍＬ	管I-b(冷)横2左
+#####フェノバール注射液１００ｍｇ　１０％１ｍＬ	管J横5
+#####ブチルスコポラミン臭化物注２０ｍｇシリンジ「ＮＰ」　１ｍＬ	管J横6
+#####ブドウ糖注射液「ニッシン」５０％　２０ｍＬ	管F横4
+#####プラリア皮下注６０ｍｇシリンジ　１ｍＬ	管I-b(冷)
+#####プラリア皮下注６０ｍｇシリンジ　１ｍＬ	管I-b(冷)横2左
+#####ブリカニール皮下注０．２ｍｇ	管J横4
+#####プリズバインド静注液２．５ｇ　５０ｍＬ	管I-a(冷)
+#####プリズバインド静注液２．５ｇ　５０ｍＬ	管I-a(冷)横5左
+#####ブリディオン静注２００ｍｇ　２ｍＬ	管F横4
+#####プリンペラン注射液１０ｍｇ　０．５％２ｍＬ	管F横4
+#####フルオロウラシル注１０００ｍｇ「トーワ」　１，０００ｍｇ	管I-b(冷)
+#####フルオロウラシル注１０００ｍｇ「トーワ」　１，０００ｍｇ	管I-b(冷)横2左
+#####フルオロウラシル注２５０ｍｇ「トーワ」	管I-b(冷)
+#####フルオロウラシル注２５０ｍｇ「トーワ」	管I-b(冷)横2左
+#####フルスルチアミン注５０ｍｇ「日新」　２０ｍＬ	管F横4
+#####フルマゼニル注射液０．５ｍｇ「Ｆ」　５ｍＬ	管J横3
+#####フルマリン静注用１ｇ	管F横5
+#####ブレビブロック注１００ｍｇ　１０ｍＬ	管J横4
+#####プロギノン・デポー筋注１０ｍｇ	管F横5
+#####プロゲデポー筋注１２５ｍｇ	管F横5
+#####プロゲホルモン筋注用１０ｍｇ	管F横5
+#####プロスタルモン・Ｆ注射液１０００　１ｍｇ１ｍＬ	管J横4
+#####プロスタンディン注射用２０μｇ	管H横5
+#####プロスタンディン注射用２０μｇ	管J横4
+#####プロタノールＬ注０．２ｍｇ　０．０２％１ｍＬ	管J横4
+#####プロタミン硫酸塩静注１００ｍｇ「モチダ」　１％	管F横5
+#####プロナーゼＭＳ　２０，０００単位	管N横3
+#####プロポフォール静注１％２０ｍＬ「マルイシ」　２００ｍｇ	管J横3
+#####プロポフォール静注１％５０ｍＬ「マルイシ」　５００ｍｇ	管J横5
+#####ブロムヘキシン塩酸塩吸入液０．２％「タイヨー」	管N横2
+#####フロリードＦ注２００ｍｇ　１％２０ｍＬ	管D横3　(限定の段ボールの中)
+#####ベオビュ硝子体内注射用キット１２０ｍｇ／ｍＬ　６ｍｇ０．０５ｍＬ	管I-b(冷)
+#####ベオビュ硝子体内注射用キット１２０ｍｇ／ｍＬ　６ｍｇ０．０５ｍＬ	管I-b(冷)横3右
+#####ベクティビックス点滴静注４００ｍｇ　２０ｍＬ	管I-b(冷)
+#####ベクティビックス点滴静注４００ｍｇ　２０ｍＬ	管I-b(冷)横4右
+#####ベクルリー点滴静注用１００ｍｇ	管F横6
+#####ベナンバックス注用３００ｍｇ	管D横3　(限定の段ボールの中)
+#####ベネトリン吸入液０．５％	管N横2
+#####ベノキシール点眼液０．４％	管N横2
+#####ヘパリンＮａロック１００Ｕ／ｍＬシリンジオーツカ１０ｍＬ　１千Ｕ	管D横1
+#####ヘパリンＮａロック１００Ｕ／ｍＬシリンジオーツカ１０ｍＬ　１千Ｕ	管F横5
+#####ヘパリンＮａ注５千単位／５ｍＬ「モチダ」　５，０００単位	管F横5
+#####ヘパリンＮａ透析用２５０Ｕ／ｍＬシリンジ２０ｍＬニプロ　５千Ｕ	管F横6
+#####ヘパリンカルシウム皮下注５千Ｕ／０．２ｍＬシリンジモチダ　５千Ｕ	管F横5
+#####ヘプタバックス－２水性懸濁注シリンジ０．５ｍＬ	調Q(冷)
+#####ヘプタバックス－２水性懸濁注シリンジ０．５ｍＬ	調Q横5右
+#####ベリプラストＰ　コンビセット　組織接着用　１ｍＬ２キット	管I-b(冷)
+#####ベリプラストＰ　コンビセット　組織接着用　１ｍＬ２キット	管I-b(冷)横5右
+#####ベリプラストＰ　コンビセット　組織接着用　３ｍＬ２キット	管I-b(冷)
+#####ベリプラストＰ　コンビセット　組織接着用　３ｍＬ２キット	管I-b(冷)横5右
+#####ベリプラストＰ　コンビセット　組織接着用　５ｍＬ２キット	管I-b(冷)
+#####ベリプラストＰ　コンビセット　組織接着用　５ｍＬ２キット	管I-b(冷)横5右
+#####ベルケイド注射用３ｍｇ	毒薬・向精神薬保管室の化療薬品棚
+#####ベルベゾロンＦ点眼・点鼻液	調Q(冷)
+#####ベルベゾロンＦ点眼・点鼻液	調Q横2左
+#####ホストイン静注７５０ｍｇ　１０ｍＬ	管I-b(冷)
+#####ホストイン静注７５０ｍｇ　１０ｍＬ	管I-b(冷)横2左
+#####ホスミシンＳ静注用２ｇ	管G横1
+#####ボスミン外用液０．１％	管N横2
+#####ボスミン注１ｍｇ　０．１％１ｍＬ	管J横5
+#####ポビドンヨードゲル１０％「ＶＴＲＳ」	管N横3
+#####ポビドンヨードゲル１０％「明治」	管N横3
+#####ポビドンヨード消毒用液１０％「ＮＰ」	管N横4
+#####ポピヨドンスクラブ７．５％	管N周囲(横側や天面上など)
+#####ホリゾン注射液１０ｍｇ	管G横1
+#####ポリドカスクレロール０．５％注２ｍＬ	管J横6
+#####ボルベン輸液６％　５００ｍＬ	管A横1
+#####ボルベン輸液６％　５００ｍＬ	管M
+#####ボンビバ静注１ｍｇシリンジ　１ｍＬ	管J横3
+#####マーカイン注脊麻用０．５％高比重　４ｍＬ	管J横3
+#####マーカイン注脊麻用０．５％等比重　４ｍＬ	管J横3
+#####マイトマイシン眼科外用液用２ｍｇ	毒薬・向精神薬保管室の化療薬品棚
+#####マグセント注１００ｍＬ	管G横1
+#####マグセント注１００ｍＬ	管G横3
+#####マグセント注１００ｍＬ	管G横3
+#####マスキン水　０．０２％	管N横5
+#####マスキン水　０．０５％	管N横5
+#####マスキン水　０．１％	管N横5
+#####マスキン水　０．５％	管N横5
+#####マンニットールＳ注射液　３００ｍＬ	管D横4
+#####ミールビック 注射剤 1本	調Q(冷)
+#####ミールビック 注射剤 1本	調Q横4右
+#####ミオテクター冠血管注　１瓶１管	管D横4
+#####ミカファンギンＮａ点滴静注用５０ｍｇ「ニプロ」	管J横5
+#####ミカファンギンＮａ点滴静注用５０ｍｇ「ニプロ」	管J横5
+#####ミダゾラム注１０ｍｇ「サンド」　２ｍＬ	管G横1
+#####ミチーガ皮下注用６０ｍｇシリンジ	管D横3　(限定の段ボールの中)
+#####ミノサイクリン塩酸塩点滴静注用１００ｍｇ「日医工」	管G横1
+#####ミラクリッド注射液１０万単位　１００，０００単位２ｍＬ	管G横1
+#####ミラクリッド注射液５万単位　５０，０００単位１ｍＬ	管G横1
+#####ミリスロール注５ｍｇ／１０ｍＬ	管J横5
+#####ミルセラ注シリンジ１５０μｇ　０．３ｍＬ	管I-b(冷)
+#####ミルセラ注シリンジ１５０μｇ　０．３ｍＬ	管I-b(冷)横4右
+#####ミルセラ注シリンジ２００μｇ　０．３ｍＬ	管I-b(冷)
+#####ミルセラ注シリンジ２００μｇ　０．３ｍＬ	管I-b(冷)横4右
+#####ミルリーラ注射液１０ｍｇ　１０ｍＬ	管J横4
+#####ミレーナ５２ｍｇ	管N横3
+#####メイロン静注７％　２０ｍＬ	管G横2
+#####メイロン静注７％　２５０ｍＬ	管D横3
+#####メチコバール注射液５００μｇ　０．５ｍｇ	管G横2
+#####メチルエルゴメトリンマレイン酸塩注０．２ｍｇＦ　０．０２％１ｍＬ	管J横5
+#####メプチン吸入液ユニット０．３ｍＬ　０．０１％	管N横2
+#####メロペネム点滴静注用０．５ｇ「ＮＰ」　５００ｍｇ	管G横2
+#####モリヘパミン点滴静注　５００ｍＬ	管D横2
+#####ユベラ軟膏	調Q(冷)
+#####ユベラ軟膏	調Q横4左
+#####ラクツロースシロップ６５％「タカタ」	調Q(冷)
+#####ラクツロースシロップ６５％「タカタ」	調Q横4左
+#####ラクテックＤ輸液　５００ｍＬ	管A横2
+#####ラクテックＤ輸液　５００ｍＬ	管M
+#####ラジカット点滴静注バッグ３０ｍｇ　１００ｍＬ	管D横3
+#####ラシックス注２０ｍｇ	管G横2
+#####ラニビズマブＢＳ硝子体内注射用キット１０　０．５ｍｇ０．０５ｍＬ	管I-b(冷)
+#####ラニビズマブＢＳ硝子体内注射用キット１０　０．５ｍｇ０．０５ｍＬ	管I-b(冷)横3左
+#####ラピアクタ点滴静注液バッグ３００ｍｇ　６０ｍＬ	管D横3　(限定の段ボールの中)
+#####ランマーク皮下注１２０ｍｇ　１．７ｍＬ	管I-b(冷)
+#####ランマーク皮下注１２０ｍｇ　１．７ｍＬ	管I-b(冷)横2左
+#####リクラスト点滴静注液５ｍｇ　１００ｍＬ	管D横3　(限定の段ボールの中)
+#####リコモジュリン点滴静注用１２８００　１２，８００単位	管G横2
+#####リスモダンＰ静注５０ｍｇ　５ｍＬ	管J横5
+#####リズモンＴＧ点眼液０．５％	調Q(冷)
+#####リズモンＴＧ点眼液０．５％	調Q横3左
+#####リドカイン塩酸塩ビスカス２％「日新」	管N横3
+#####リドカイン点滴静注液１％「タカタ」　２００ｍＬ	管C横2
+#####リネゾリド点滴静注液６００ｍｇ「明治」　３００ｍＬ	管G横3
+#####リピオドール４８０注１０ｍＬ	管J横6
+#####リュープリンＰＲＯ注射用キット２２．５ｍｇ	管J横6
+#####リュープリンＰＲＯ注射用キット２２．５ｍｇ	管J横6
+#####リュープリンＳＲ注射用キット１１．２５ｍｇ	管J横6
+#####リュープリン注射用１．８８ｍｇ　（懸濁用液付）	管J横6
+#####リュープロレリン酢酸塩注射用キット１．８８ｍｇ「あすか」	管J横6
+#####リュープロレリン酢酸塩注射用キット３．７５ｍｇ「あすか」	管J横6
+#####リュープロレリン酢酸塩注射用キット３．７５ｍｇ「あすか」	管J横6
+#####リンデロン注４ｍｇ（０．４％）	管I-a(冷)
+#####リンデロン注４ｍｇ（０．４％）	管I-a(冷)横4左
+#####リン酸２カリウム注２０ｍＥｑキット「テルモ」　０．５モル２０ｍＬ	管D横3　(限定の段ボールの中)
+#####ルセンティス硝子体注キット１０ｍｇ／ｍＬ　０．５ｍｇ０．０５ｍＬ	管I-b(冷)
+#####ルセンティス硝子体注キット１０ｍｇ／ｍＬ　０．５ｍｇ０．０５ｍＬ	管I-b(冷)横3左
+#####レパーサ皮下注４２０ｍｇオートミニドーザー　３．５ｍＬ	調Q(冷)
+#####レパーサ皮下注４２０ｍｇオートミニドーザー　３．５ｍＬ	調Q横5右
+#####レペタン注０．２ｍｇ	毒薬・向精神薬保管室入ってすぐ右棚下
+#####レボホリナート点滴静注用１００ｍｇ「ヤクルト」	毒薬・向精神薬保管室の化療薬品棚
+#####レボホリナート点滴静注用２５ｍｇ「ヤクルト」	毒薬・向精神薬保管室の化療薬品棚
+#####レミケード点滴静注用１００　１００ｍｇ	管I-b(冷)
+#####レミケード点滴静注用１００　１００ｍｇ	管I-b(冷)横3左
+#####ロクロニウム臭化物静注液２５ｍｇ／２．５ｍＬ「Ｆ」	毒薬・向精神薬保管室入ってすぐ右棚上
+#####ロクロニウム臭化物静注液５０ｍｇ／５．０ｍＬ「Ｆ」　５ｍＬ	毒薬・向精神薬保管室入ってすぐ右棚上
+#####ロセフィン静注用０．５ｇ　５００ｍｇ	管G横2
+#####ロタリックス内用液 包装小 1本	調Q(冷)
+#####ロタリックス内用液 包装小 1本	調Q横4右
+#####ロナプリーブ(要検討)	調Q横5右
+#####ロピオン静注５０ｍｇ　５ｍＬ	管J横3
+#####ロミプレート皮下注２５０μｇ調製用	管I-b(冷)
+#####ロミプレート皮下注２５０μｇ調製用	管I-b(冷)横1右
+#####ワゴスチグミン注０．５ｍｇ　０．０５％１ｍＬ	管D横3　(限定の段ボールの中)
+#####ワソラン静注５ｍｇ　０．２５％２ｍＬ	管J横5
+#####ヱフェドリン「ナガヰ」注射液４０ｍｇ　４％１ｍＬ	管H横2
+#####一般診断用精製ツベルクリン（ＰＰＤ）１人用　０．２５μｇ溶解液付	調Q横4右
+#####塩酸バンコマイシン点滴静注用０．５ｇ（ＯＫ）	管G横3
+#####塩酸メピバカイン注ＰＢ１％　１０ｍＬ	管J横3
+#####乾燥ＨＢグロブリン筋注用１千Ｕニチヤク　１千Ｕ５ｍＬ（溶解液付）	調Q横4右
+#####乾燥ＨＢグロブリン筋注用２００単位「ニチヤク」　１ｍＬ溶解液付	調Q横4右
+#####乾燥まむしウマ抗毒素注射用６千Ｕ　ＫＭＢ　各６千Ｕ入（溶解液付）	調Q横4右
+#####乾燥まむし抗毒素“化血研”　各６，０００単位入（溶解液付）	調Q横4右
+#####乾燥弱毒生おたふくかぜワクチン「タケダ」 注射剤 1瓶	調Q横4右
+#####乾燥弱毒生水痘ワクチン「ビケン」 注射剤 1本	調Q横4右
+#####乾燥弱毒生風しんワクチン「タケダ」 注射剤 1瓶	調Q横4右
+#####強力ネオミノファーゲンシーＰ静注２０ｍＬ	管E横3
+#####献血アルブミン５％静注１２．５ｇ／２５０ｍＬ「タケダ」	管G横4
+#####献血アルブミン５％静注１２．５ｇ／２５０ｍＬ「タケダ」	管G横4
+#####献血グロベニン－Ｉ静注用２５００ｍｇ　２．５ｇ５０ｍＬ溶解液付	管G横4
+#####献血グロベニン－Ｉ静注用５０００ｍｇ　５ｇ１００ｍＬ（溶解液付）	管G横4
+#####献血ノンスロン１５００注射用　１，５００単位（溶解液付）	管G横4
+#####抗Ｄ人免疫グロブリン筋注用１千倍「ＪＢ」　１千倍（溶解液付）	調Q横2右
+#####硝酸イソソルビド注５ｍｇ／１０ｍＬ「タカタ」　０．０５％	管E横2
+#####硝酸イソソルビド注５ｍｇ／１０ｍＬ「タカタ」　０．０５％	管E横4
+#####酢酸「ケンエー」	管N周囲(横側や天面上など)
+#####酢酸「ケンエー」	管N周囲(横側や天面上など)
+#####水溶性プレドニン２０ｍｇ	管F横5
+#####生食注シリンジ「ＮＰ」　１０ｍＬ	管D横1
+#####生食注シリンジ「ＮＰ」　２０ｍＬ	管D横1
+#####生食注シリンジ「ＮＰ」　２０ｍＬ	管D周囲(横側や天面上など)
+#####生食注シリンジ「ＮＰ」　２０ｍＬ	管D周囲(横側や天面上など)
+#####生食注シリンジ「ＮＰ」　２０ｍＬ	管E横6
+#####生食注シリンジ５０ｍＬ「ニプロ」	管D周囲(横側や天面上など)
+#####生理食塩液「フソー」　５ｍＬ	管E横4
+#####生理食塩液ＰＬ「フソー」　２０ｍＬ	管E横4
+#####生理食塩液ＰＬ「フソー」　５０ｍＬ	管A横1
+#####生理食塩液ＰＬ「フソー」　５０ｍＬ	管B横1
+#####生理食塩液バッグ「フソー」　１．５Ｌ	管K横3
+#####生理食塩液バッグ「フソー」　１Ｌ	管K横3
+#####生理食塩液バッグ「フソー」　２５０ｍＬ	管A横1
+#####生理食塩液バッグ「フソー」　２５０ｍＬ	管K横3
+#####静注用キシロカイン２％　５ｍＬ	管H横3
+#####静注用マグネゾール２０ｍＬ	管G横1
+#####赤十字アルブミン２５％静注１２．５ｇ／５０ｍＬ	管G横4
+#####大塚塩カル注２％　２０ｍＬ	管E横2
+#####大塚蒸留水　１Ｌ	管B周囲(横側や天面上など)
+#####大塚蒸留水　５００ｍＬ	管B横3
+#####大塚蒸留水　５００ｍＬ	管A周囲(横側や天面上など)
+#####大塚蒸留水　５００ｍＬ	管K横2
+#####大塚食塩注１０％　２０ｍＬ	管E横3
+#####大塚生食注　１００ｍＬ	管A横1
+#####大塚生食注　１００ｍＬ	管B横1
+#####大塚生食注　１Ｌ	管B周囲(横側や天面上など)
+#####大塚生食注　１Ｌ	管K横1
+#####大塚生食注　５００ｍＬ	管B周囲(横側や天面上など)
+#####大塚生食注　５００ｍＬ	管K横2
+#####大塚生食注２ポート１００ｍＬ	管A横1
+#####大塚生食注２ポート１００ｍＬ	管B横1
+#####大塚糖液１０％　２０ｍＬ	管F横4
+#####大塚糖液１０％　５００ｍＬ	管C横3
+#####大塚糖液１０％　５００ｍＬ	管C横4
+#####大塚糖液２０％　２０ｍＬ	管F横4
+#####大塚糖液５％　１００ｍＬ	管A横1
+#####大塚糖液５％　１００ｍＬ	管C横3
+#####大塚糖液５％　２０ｍＬ	管F横4
+#####大塚糖液５％　２５０ｍＬ	管A横2
+#####大塚糖液５％　２５０ｍＬ	管C横3
+#####大塚糖液５％　５００ｍＬ	管C横3
+#####大塚糖液５％　５０ｍＬ	管A横1
+#####大塚糖液５％　５０ｍＬ	管C横3
+#####大塚糖液５０％　２００ｍＬ	管C横4
+#####炭酸水素Ｎａ静注１．２６％バッグ「フソー」　１Ｌ	管D横4
+#####注射用エンドキサン１００ｍｇ	管I-a(冷)
+#####注射用エンドキサン１００ｍｇ	管I-a(冷)横2右
+#####注射用タゴシッド２００ｍｇ	管J横4
+#####注射用パニマイシン１００ｍｇ	管D横3　(限定の段ボールの中)
+#####注射用フサン１０　１０ｍｇ	管J横4
+#####注射用ペニシリンＧカリウム１００万単位	管F横5
+#####注射用メソトレキセート５０ｍｇ	管J横3
+#####注射用水「フソー」　５ｍＬ	管G横2
+#####注射用水ＰＬ「フソー」　１００ｍＬ	管B横3
+#####注射用水ＰＬ「フソー」　２０ｍＬ	管G横2
+#####沈降破傷風トキソイド「生研」　０．５ｍＬ	調Q(冷)
+#####沈降破傷風トキソイド「生研」　０．５ｍＬ	調Q横4右
+#####日点アトロピン点眼液１％　５ｍＬ	調Q(冷)
+#####日点アトロピン点眼液１％　５ｍＬ	調Q横3左
+#####破傷風トキソイド「生研」　０．５ｍＬ	「沈降破傷風トキソイド「生研」　０．５ｍＬ」を見よ
+#####無水エタノール注「フソー」 注射剤 1管	管G横1
+#####硫酸Ｍｇ補正液１ｍＥｑ／ｍＬ　０．５モル２０ｍＬ	管D横3　(限定の段ボールの中)
+#####終了	AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA`;
+
+
+let basyoAry = basyo.split('#####');
+
+for (let i=0; i<basyoAry.length;i++) {//20231112
+	let tempAry = [];
+	tempAry= basyoAry[i].split('	');//tabでスプリット
+	yakuhinmeiMarumeAry.push( goku_marume(  tempAry[0]));
+}
+
+
+
+
+
+
+
+//検索語句変換辞書
+let jisyo = `#####開始	VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
+#####リプリバン＝ディプリバン
+#####デブリマン＝ディプリバン
+#####リブリマン＝ディプリバン
+#####りプリ ばん＝ディプリバン
+#####リプ リバ＝ディプリバン
+#####リプレイ＝ディプリバン
+#####レプリカ＝ディプリバン
+#####りプリガン＝ディプリバン
+#####ディフリバン＝ディプリバン
+#####テフリハン＝ディプリバン
+#####ビブリバン＝ディプリバン
+#####ディープ リボン＝ディプリバン
+#####ディプリバン＝ディプリバン
+#####リプリマ＝ディプリバン
+#####リプリバン＝ディプリバン
+#####リプ リバ＝ディプリバン
+#####リプリフ＝ディプリバン
+#####everyone＝ディプリバン
+#####リプ リボン＝ディプリバン
+#####HMG＝ＨＭＧ
+#####KCN＝ＫＣＬ
+#####tcl＝ＫＣＬ
+#####緊急＝筋注
+#####きんちゅう＝筋注
+#####真鍮＝筋注
+#####金中＝筋注
+#####建中＝筋注
+#####近中＝筋注
+#####lhrh＝ＬＨ－ＲＨ
+#####PA 用度＝ＰＡ・ヨード
+#####PA 用土＝ＰＡ・ヨード
+#####ピーエー 用度＝ＰＡ・ヨード
+#####PA ヨード＝ＰＡ・ヨード
+#####trh＝ＴＲＨ
+#####アイセントです＝アイセントレス
+#####はいセントです＝アイセントレス
+#####はいセントレス＝アイセントレス
+#####足クロビル＝アシクロビル
+#####アスプードゥ＝アスプール
+#####アスプール 駅＝アスプール液
+#####瀬戸アミノフェン＝アセトアミノフェン
+#####焦りを＝アセリオ
+#####汗リオ＝アセリオ
+#####アセディオ＝アセリオ
+#####あた ダックス＝アタラックス
+#####アート ダックス＝アタラックス
+#####adona＝アドナ
+#####アニメ メトロ＝アネメトロ
+#####油木さん＝アブラキサン
+#####浪岡 ロン＝アミオダロン
+#####上尾 だろう＝アミオダロン
+#####アミオーダーの＝アミオダロン
+#####アミカ 新＝アミカシン
+#####アメリカ市＝アミカシン
+#####アミ 家電＝アミパレン
+#####ラミバレン＝アミパレン
+#####歩きに＝アルギニン
+#####マルチディスポ＝アルツディスポ
+#####アルツディスコ＝アルツディスポ
+#####あずつ＝アルツ
+#####バルプロ スタジアム＝アルプロスタジル
+#####アレヴェール＝アレベール
+#####アルベール＝アレベール
+#####アルベージュ＝アレベール
+#####アンチレックス＝アンチレクス
+#####アンチで＝アンチレクス
+#####擁壁 ソール＝イオパミロン
+#####擁壁 ソール＝イオヘキソール
+#####医療 ヘキソール＝イオヘキソール
+#####胃をヘキソール＝イオヘキソール
+#####意を壁 ソール＝イオヘキソール
+#####いいよ へき ソウル＝イオヘキソール
+#####胃弱 ソール＝イオヘキソール
+#####移動平均 ソール＝イオヘキソール
+#####医療 壁 ソウル＝イオヘキソール
+#####伊予 ヘキソール＝イオヘキソール
+#####伊予 碧 ソール＝イオヘキソール
+#####移動 ヘキソール＝イオヘキソール
+#####ビオヘキソウル＝イオヘキソール
+#####両ヘキソール＝イオヘキソール
+#####岩壁 ソール＝イオヘキソール
+#####胃弱 ソウル＝イオヘキソール
+#####医療 壁 ソール＝イオヘキソール
+#####医療費 ソール＝イオヘキソール
+#####EO ヘキソール＝イオヘキソール
+#####利用 メロン＝イオメロン
+#####リオ メロン＝イオメロン
+#####伊予 メロン＝イオメロン
+#####イオン メロン＝イオメロン
+#####ビオメロン＝イオメロン
+#####医療メロン＝イオメロン
+#####企業 メロン＝イオメロン
+#####イベニティ＝イソゾール
+#####人参 アカデミー＝インジゴカルミン
+#####インディゴカルミン＝インジゴカルミン
+#####インディゴ アカデミー＝インジゴカルミン
+#####隣人 アカデミー＝インジゴカルミン
+#####インディゴカルビ＝インジゴカルミン
+#####ヒンジのアカデミー＝インジゴカルミン
+#####インディゴカルビン＝インジゴカルミン
+#####印字のカルミン＝インジゴカルミン
+#####インチのカルミン＝インジゴカルミン
+#####インディゴ＝インジゴカルミン
+#####人参をカルミン＝インジゴカルミン
+#####インフレ きしまぶ＝インフリキシマブ
+#####インフレキシマブ＝インフリキシマブ
+#####インフィニティも＝インフリキシマブ
+#####23時＝ヴィーン３Ｇ
+#####ウィーン サンジ＝ヴィーン３Ｇ
+#####ウィーン サンジー＝ヴィーン３Ｇ
+#####ウィーンさんちー＝ヴィーン３Ｇ
+#####ビーンさんジー＝ヴィーン３Ｇ
+#####ビーン サンジ＝ヴィーン３Ｇ
+#####ウィーン＝ヴィーン
+#####ビーン＝ヴィーン
+#####レベルアップ＝ウエルアップ
+#####ウェルアップ＝ウエルアップ
+#####メルアップ＝ウエルアップ
+#####ウェルパス＝ウエルパス
+#####ベルパス＝ウエルパス
+#####ゆめりん＝ウテメリン
+#####うてみりん＝ウテメリン
+#####うために＝ウテメリン
+#####ぶて メリン＝ウテメリン
+#####うためにん＝ウテメリン
+#####うてメディ＝ウテメリン
+#####運転免許＝ウテメリン
+#####運転めりん＝ウテメリン
+#####ウログラフィン＝ウログラフイン
+#####プログラミング＝ウログラフイン
+#####ぶどう グラフィン＝ウログラフイン
+#####うど グラフィン＝ウログラフイン
+#####ウドグラフィン＝ウログラフイン
+#####運動 グラフィン＝ウログラフイン
+#####ブログラフィン＝ウログラフイン
+#####メガネ モンデポ＝エナルモンデポー
+#####メガ レモン＝エナルモン
+#####ってなるもん＝エナルモン
+#####えなるもん＝エナルモン
+#####れなるもん＝エナルモン
+#####デビル 美人＝エピルビシン
+#####エビル 美人＝エピルビシン
+#####デビルビシン＝エピルビシン
+#####エビルビシン＝エピルビシン
+#####恵比寿 美人＝エピルビシン
+#####エビ レシピ＝エピルビシン
+#####エビル ミシン＝エピルビシン
+#####レプリカ＝エポエチンアルファ
+#####やっぱ 相手にアルファ＝エポエチンアルファ
+#####エポジン アルファ＝エポエチンアルファ
+#####エヴァちん アルファ＝エポエチンアルファ
+#####エヴァ＝エポエチンアルファ
+#####エポイ ちん アルファ＝エポエチンアルファ
+#####鉄板ちん アルファ＝エポエチンアルファ
+#####ネパール人 アルファ＝エポエチンアルファ
+#####デプレ ちん アルファ＝エポエチンアルファ
+#####ナポレオン アルファ＝エポエチンアルファ
+#####エバ＝エポエチン
+#####エヴァ＝エポエチン
+#####エポイ ちん＝エポエチン
+#####ネパール人＝エポエチン
+#####エコ チーズ＝エホチール
+#####えほ チーズ＝エホチール
+#####エホチーズ＝エホチール
+#####みほチーズ＝エホチール
+#####ニコ チーズ＝エホチール
+#####ネコ チーズ＝エホチール
+#####F ティール＝エホチール
+#####エコティール＝エホチール
+#####F チーズ＝エホチール
+#####ペコ チーズ＝エホチール
+#####エフ チーズ＝エホチール
+#####ヤフーチーズ＝エホチール
+#####ヨフ チーズ＝エホチール
+#####エボ チーズ＝エホチール
+#####平和 チーズ＝エホチール
+#####ftg＝エホチール
+#####日本 チーズ＝エホチール
+#####エゴ チーズ＝エホチール
+#####ネフティス＝エホチール
+#####ネオ チーズ＝エホチール
+#####エムだ クリーム＝エムラクリーム
+#####エムがクリーム＝エムラクリーム
+#####mwm＝エムラクリーム
+#####MW クリーム＝エムラクリーム
+#####江村 クリーム＝エムラクリーム
+#####江村 クリーン＝エムラクリーム
+#####エムだ＝エムラ
+#####エムな＝エムラ
+#####エムが＝エムラ
+#####M が＝エムラ
+#####エムダ＝エムラ
+#####江村＝エムラ
+#####エムは＝エムラ
+#####エムザ＝エムラ
+#####エリーズ＝エリル
+#####エーテル＝エリル
+#####エンディング＝エリル
+#####エンディーズ＝エリル
+#####エディーズ＝エリル
+#####レディース＝エリル
+#####エド しそ に＝エルシトニン
+#####得ず 人に＝エルシトニン
+#####やる人に＝エルシトニン
+#####得る人に＝エルシトニン
+#####エジソンに＝エルシトニン
+#####寝る人に＝エルシトニン
+#####やる人人＝エルシトニン
+#####江頭＝エルシトニン
+#####江戸人＝エルシトニン
+#####エリストに＝エルシトニン
+#####えリストに＝エルシトニン
+#####でリストに＝エルシトニン
+#####テキストに＝エルシトニン
+#####レジストに＝エルシトニン
+#####エジソン＝エルシトニン
+#####レディーストニン＝エルシトニン
+#####レジスタ にん＝エルシトニン
+#####レジスト＝エルシトニン
+#####エディストーン＝エルシトニン
+#####レジストニン＝エルシトニン
+#####エリストにん＝エルシトニン
+#####エジプト人＝エルシトニン
+#####レジスタン＝エルシトニン
+#####オフィシャル プラチン＝オキサリプラチン
+#####北斗で落ち度＝オクトレオチド
+#####オクトレ おちど＝オクトレオチド
+#####オークとれおちど＝オクトレオチド
+#####夫で落ちの＝オクトレオチド
+#####オクトレオチート＝オクトレオチド
+#####奥利根 落ち度＝オクトレオチド
+#####夫で落ち度＝オクトレオチド
+#####オクトで落ち度＝オクトレオチド
+#####夫で落ちろ＝オクトレオチド
+#####ボットで落ち度＝オクトレオチド
+#####多くと寝落ち度＝オクトレオチド
+#####僕と寝落ちの＝オクトレオチド
+#####沖トレおちど＝オクトレオチド
+#####ぽザグで＝オザグレル
+#####小野 アクト＝オノアクト
+#####小野 あくと＝オノアクト
+#####おびそうと＝オビソート
+#####ボビー ソート＝オビソート
+#####ホビー ソート＝オビソート
+#####福生 グリーン＝オフサグリーン
+#####おふさ GReeeeN＝オフサグリーン
+#####おふさ グリーン＝オフサグリーン
+#####大阪グリーン＝オフサグリーン
+#####オフさ グリーン＝オフサグリーン
+#####ossa GREEN＝オフサグリーン
+#####オフィスはグリーン＝オフサグリーン
+#####fossa GREEN＝オフサグリーン
+#####オン デキサ＝オンデキサ
+#####おんできさ＝オンデキサ
+#####オンできさ＝オンデキサ
+#####飲んできさ＝オンデキサ
+#####飛んできた＝オンデキサ
+#####ガストログラフィン＝ガストログラフイン
+#####アストログラフィン＝ガストログラフイン
+#####ガストのグラフィン＝ガストログラフイン
+#####ラストログラフィン＝ガストログラフイン
+#####カストロ グラフィン＝ガストログラフイン
+#####アストログラフィ＝ガストログラフイン
+#####ガス プログラム＝ガストログラフイン
+#####キャストのグラフィン＝ガストログラフイン
+#####ラストグラフィン＝ガストログラフイン
+#####ガストログラフィー＝ガストログラフイン
+#####パルストリオール＝カルシトリオール
+#####風ひとりオール＝カルシトリオール
+#####風刺とディオール＝カルシトリオール
+#####彼氏とディオール＝カルシトリオール
+#####彼氏 トリオール＝カルシトリオール
+#####彼氏とりよーる＝カルシトリオール
+#####風邪ひとりオール＝カルシトリオール
+#####彼 一人を＝カルシトリオール
+#####カルスト ディオール＝カルシトリオール
+#####風 1人 オール＝カルシトリオール
+#####きし ド カンゼリー＝キシロカインゼリー
+#####キス ド カンゼリー＝キシロカインゼリー
+#####必要 会員 ゼリー＝キシロカインゼリー
+#####静岡 インゼリー＝キシロカインゼリー
+#####記者 会員 ゼリー＝キシロカインゼリー
+#####キスオカインゼリー＝キシロカインゼリー
+#####宍戸カインゼリー＝キシロカインゼリー
+#####奇数を買い ゼリー＝キシロカインゼリー
+#####石岡 インゼリー＝キシロカインゼリー
+#####生徒会員 ゼリー＝キシロカインゼリー
+#####起業 会員 ゼリー＝キシロカインゼリー
+#####一度帰り ゼリー＝キシロカインゼリー
+#####気仙の改善に＝キシロカインゼリー
+#####キスを買いに ゼリー＝キシロカインゼリー
+#####石岡医院＝キシロカイン
+#####岸里＝キシロカイン
+#####シドカイン＝キシロカイン
+#####宍戸 開院＝キシロカイン
+#####引き戸 会＝キシロカイン
+#####日常 会員＝キシロカイン
+#####宍戸 開院＝キシロカイン
+#####キス用 カイン＝キシロカイン
+#####Q 美人＝キュビシン
+#####qbc＝キュビシン
+#####QVC＝キュビシン
+#####久喜市＝キュビシン
+#####グー アセト＝グルアセト
+#####狂わせと＝グルアセト
+#####フルアセト＝グルアセト
+#####ググ アセット＝グルアセト
+#####グッド アセット＝グルアセト
+#####ブルーアセト＝グルアセト
+#####ぐる 汗と＝グルアセト
+#####ぐず アセット＝グルアセト
+#####グッド 汗と＝グルアセト
+#####ググ アセト＝グルアセト
+#####グルアセット＝グルアセト
+#####Google 汗と＝グルアセト
+#####狂わせと＝グルアセト
+#####フルアセト＝グルアセト
+#####グッド 汗と＝グルアセト
+#####グッド アセト＝グルアセト
+#####グルーアセット＝グルアセト
+#####ぐず 汗と＝グルアセト
+#####ブルー 汗と＝グルアセト
+#####グズ アセト＝グルアセト
+#####ルル アセット＝グルアセト
+#####グル 汗と＝グルアセト
+#####Google 汗と＝グルアセト
+#####ググ 汗と＝グルアセト
+#####Google 音声と＝グルアセト
+#####Google アシェット＝グルアセト
+#####ウルアセット＝グルアセト
+#####潤わせと＝グルアセト
+#####Google アセット＝グルアセト
+#####ググ アセト＝グルアセト
+#####Google アースと＝グルアセト
+#####Google アシスト＝グルアセト
+#####ぐるあせと＝グルアセト
+#####うずら せと＝グルアセト
+#####ぐる 汗＝グルアセト
+#####くず アセト＝グルアセト
+#####Google アセト＝グルアセト
+#####ウデアセト＝グルアセト
+#####ぐず アセト＝グルアセト
+#####グッド アセット＝グルアセト
+#####くずあせと＝グルアセト
+#####狂わせと＝グルアセト
+#####グッド アセット＝グルアセト
+#####くずあせと＝グルアセト
+#####グッド 忘れ と＝グルアセト
+#####グルラチェット＝グルアセト
+#####にわか雨＝グルアセト
+#####グルカ＝グルカゴン
+#####ゆで卵＝グルカゴン
+#####グッド ぱ＝グルトパ
+#####クルト ぱ＝グルトパ
+#####ぐるとぱ＝グルトパ
+#####ぐるとば＝グルトパ
+#####ぐるトパ＝グルトパ
+#####Google とぱ＝グルトパ
+#####フルスイート＝クロスエイト
+#####広末エイト＝クロスエイト
+#####黒瀬 8＝クロスエイト
+#####ロゼ 8＝クロスエイト
+#####フルセト＝クロスエイト
+#####グロスエイト＝クロスエイト
+#####ぐろ スイート＝クロスエイト
+#####クロス 8＝クロスエイト
+#####黒 生徒＝クロスエイト
+#####黒酢 8＝クロスエイト
+#####プロサイト＝クロスエイト
+#####両性と＝クロスエイト
+#####広末＝クロスエイト
+#####クロスイート＝クロスエイト
+#####グロスイーツ＝クロスエイト
+#####行政＝クロスエイト
+#####CROSS 8＝クロスエイト
+#####黒星と＝クロスエイト
+#####行政と＝クロスエイト
+#####crose 8＝クロスエイト
+#####黒瀬＝クロスエイト
+#####クロ＝クロスエイト
+#####両性＝クロスエイト
+#####のせい＝クロスエイト
+#####黒 繊維と＝クロスエイト
+#####両生徒＝クロスエイト
+#####服のスイート＝クロスエイト
+#####プロジェクト＝クロスエイト
+#####プロ＝クロスエイト
+#####プロセイート＝クロスエイト
+#####広末と＝クロスエイト
+#####罫線 トラ＝ケイセントラ
+#####経緯 セントラ＝ケイセントラ
+#####罫線との＝ケイセントラ
+#####けい セントラ＝ケイセントラ
+#####ケイ セントラ＝ケイセントラ
+#####罫線とは＝ケイセントラ
+#####罫線と＝ケイセントラ
+#####経緯とは＝ケイセントラ
+#####経セントが＝ケイセントラ
+#####ゲイ セントだ＝ケイセントラ
+#####経緯とな＝ケイセントラ
+#####経セントな＝ケイセントラ
+#####経セントだ＝ケイセントラ
+#####けいせん とだ＝ケイセントラ
+#####罫線とだ＝ケイセントラ
+#####ペイセントだ＝ケイセントラ
+#####ヘイ セントラ＝ケイセントラ
+#####てい セントラ＝ケイセントラ
+#####ケイセントだ＝ケイセントラ
+#####経営センター＝ケイセントラ
+#####ていセントだ＝ケイセントラ
+#####経線 トラ＝ケイセントラ
+#####ペイ セントラ＝ケイセントラ
+#####恵泉 虎＝ケイセントラ
+#####罫線とな＝ケイセントラ
+#####経 セントラ＝ケイセントラ
+#####K2＝ケイツー
+#####頚椎＝ケイツー
+#####K2 N＝ケイツーＮ
+#####ケナコルト A＝ケナコルト－Ａ
+#####ケナコルト エイ＝ケナコルト－Ａ
+#####てなことへ＝ケナコルト－Ａ
+#####ケナコルト へ＝ケナコルト－Ａ
+#####ケナコルト ええ＝ケナコルト－Ａ
+#####けが来ると えー＝ケナコルト－Ａ
+#####てなことで＝ケナコルト－Ａ
+#####れなこると ええ＝ケナコルト－Ａ
+#####てなくると ええ＝ケナコルト－Ａ
+#####って なこると ええ＝ケナコルト－Ａ
+#####って残ると ええ＝ケナコルト－Ａ
+#####てな コルトレーン＝ケナコルト－Ａ
+#####てなこと A＝ケナコルト－Ａ
+#####てなくると えー＝ケナコルト－Ａ
+#####れなくると えー＝ケナコルト－Ａ
+#####けなくると ええ＝ケナコルト－Ａ
+#####てなこと ええ＝ケナコルト－Ａ
+#####へなくると えー＝ケナコルト－Ａ
+#####テナ コルトレーン＝ケナコルト－Ａ
+#####ってなことへ＝ケナコルト－Ａ
+#####オート A＝ケナコルト－Ａ
+#####ってなくると ええ＝ケナコルト－Ａ
+#####ケナコルト＝ケナコルト－
+#####れな コルト＝ケナコルト－
+#####えなこと＝ケナコルト－
+#####エナコルト＝ケナコルト－
+#####けむした瓶＝ゲムシタビン
+#####ゲームした瓶＝ゲムシタビン
+#####ゲームしたり＝ゲムシタビン
+#####ゴアテック＝コアテック
+#####コアデータ＝コアベータ
+#####モア ベータ＝コアベータ
+#####こナックス＝ゴナックス
+#####コナックす＝ゴナックス
+#####INAX＝ゴナックス
+#####ゴリラ コール＝コリナコール
+#####サインダムさん＝サイラムザ
+#####さいダムだ＝サイラムザ
+#####サイアムザ＝サイラムザ
+#####苛むだ＝サイラムザ
+#####サイレンサー＝サイラムザ
+#####サイラム＝サイラムザ
+#####サイレンだ＝サイラムザ
+#####埼玉＝サイラムザ
+#####さいなむさん＝サイラムザ
+#####最南端＝サイラムザ
+#####祭壇座＝サイラムザ
+#####さいだ むさ＝サイラムザ
+#####さいダムさん＝サイラムザ
+#####さい 寒さ＝サイラムザ
+#####さいらんさ＝サイラムザ
+#####さい ザムザ＝サイラムザ
+#####サイン 寒さ＝サイラムザ
+#####さいダムさ＝サイラムザ
+#####たい ラムサ＝サイラムザ
+#####さいだの＝サイラムザ
+#####さいなむざ＝サイラムザ
+#####タイランド＝サイラムザ
+#####鯛 ラムサ＝サイラムザ
+#####西山さん＝サイラムザ
+#####サインダムさ＝サイラムザ
+#####サイナムさん＝サイラムザ
+#####さいらむさ＝サイラムザ
+#####ファイラ＝サイラムザ
+#####さいだ 草＝サイラムザ
+#####平草＝サイラムザ
+#####さいなむさ＝サイラムザ
+#####サイレンス＝サイレース
+#####ハイエース＝サイレース
+#####パイレーツ＝サイレース
+#####ハイレース＝サイレース
+#####タイ レース＝サイレース
+#####サイエンス＝サイレース
+#####ハムたす＝サムタス
+#####さむたす＝サムタス
+#####バカむ＝ザラカム
+#####貞観＝ザラカム
+#####だだ神＝ザラカム
+#####サラダ カム＝ザラカム
+#####サラカム＝ザラカム
+#####ザーザー間＝ザラカム
+#####サダカム＝ザラカム
+#####ピアノ グリーン＝ジアグノグリーン
+#####ジアムグリーン＝ジアグノグリーン
+#####事案のグリーン＝ジアグノグリーン
+#####キアヌ グリーン＝ジアグノグリーン
+#####ジアのグリーン＝ジアグノグリーン
+#####市販のグリーン＝ジアグノグリーン
+#####シェアのグリーン＝ジアグノグリーン
+#####チアのグリーン＝ジアグノグリーン
+#####治安のグリーン＝ジアグノグリーン
+#####ジーダスター＝ジーラスタ
+#####ジーザス た＝ジーラスタ
+#####ジーアスた＝ジーラスタ
+#####じー出した＝ジーラスタ
+#####ジーダスト＝ジーラスタ
+#####道理だった＝ジーラスタ
+#####ジー アスタ＝ジーラスタ
+#####事 言い出した＝ジーラスタ
+#####ジーザスと＝ジーラスタ
+#####ジーダス＝ジーラスタ
+#####ジェイビッグ＝ジェービック
+#####ジェイビック＝ジェービック
+#####ジブ たな＝ジェブタナ
+#####ぜぷたな＝ジェブタナ
+#####ゼブ 棚＝ジェブタナ
+#####じぷた＝ジェブタナ
+#####じぷたな＝ジェブタナ
+#####ジェフたな＝ジェブタナ
+#####ジップ たな＝ジェブタナ
+#####ゼブラ＝ジェブタナ
+#####ケプタナ＝ジェブタナ
+#####ジェフだ＝ジェブタナ
+#####ゼブ たな＝ジェブタナ
+#####チップ たな＝ジェブタナ
+#####ジェップタナ＝ジェブタナ
+#####ジェプータな＝ジェブタナ
+#####ちぇぷったな＝ジェブタナ
+#####西武 がん＝シェルガン
+#####西武 マン＝シェルガン
+#####西南＝シェルガン
+#####ジヨン＝ジオン
+#####シオン＝ジオン
+#####イオン＝ジオン
+#####守護神＝ジゴシン
+#####チロシン＝ジゴシン
+#####蕁麻疹＝ジゴシン
+#####自由人＝ジゴシン
+#####事後 新＝ジゴシン
+#####事後進＝ジゴシン
+#####地方新＝ジゴシン
+#####稚児 新＝ジゴシン
+#####地獄 進＝ジゴシン
+#####稚児＝ジゴシン
+#####自己新＝ジゴシン
+#####ちスプラちん＝シスプラチン
+#####しな ディス＝シナジス
+#####シナジー＝シナジス
+#####しーなーちす＝シナジス
+#####しな＝シナジス
+#####シナジー す＝シナジス
+#####事務所＝ジムソ
+#####G むーそ＝ジムソ
+#####simカード＝シルガード
+#####しず ガード＝シルガード
+#####ジル チェアで＝ジルチアゼム
+#####地図チェアで＝ジルチアゼム
+#####地図 チアで＝ジルチアゼム
+#####事実は＝ジルチアゼム
+#####打ち合わせ＝ジルチアゼム
+#####事実や でも＝ジルチアゼム
+#####事実やで＝ジルチアゼム
+#####地図チャーズ＝ジルチアゼム
+#####11月＝ジルチアゼム
+#####11月で＝ジルチアゼム
+#####10チャンネル＝ジルチアゼム
+#####ジャズチェアで＝ジルチアゼム
+#####フューチャー デブ＝ジルチアゼム
+#####フューチャーで＝ジルチアゼム
+#####11月に＝ジルチアゼム
+#####地図 チアゼム＝ジルチアゼム
+#####地図 チャム＝ジルチアゼム
+#####ユー チアで＝ジルチアゼム
+#####事実 チェアで＝ジルチアゼム
+#####11時アラーム＝ジルチアゼム
+#####シンフォニー＝シンポニー
+#####進歩に＝シンポニー
+#####スープで＝スープレン
+#####スープ レーン＝スープレン
+#####スープ レン＝スープレン
+#####スープでん＝スープレン
+#####ループレンズ＝スープレン
+#####スープ 電＝スープレン
+#####ステラが＝ステラーラ
+#####ステダーナ＝ステラーラ
+#####ステラーナ＝ステラーラ
+#####ステラーだ＝ステラーラ
+#####ず ファジア＝ズファジラン
+#####スーパー ジダン＝ズファジラン
+#####ずーファー ディラン＝ズファジラン
+#####スーパー ディラン＝ズファジラン
+#####スーパー ジラン＝ズファジラン
+#####スパ ディラン＝ズファジラン
+#####スパジアン＝ズファジラン
+#####スーパー 二段＝ズファジラン
+#####ずば デュラン＝ズファジラン
+#####じファジア＝ズファジラン
+#####スーパー 次男＝ズファジラン
+#####サファリラン＝ズファジラン
+#####ズーファジア＝ズファジラン
+#####グーパージーラン＝ズファジラン
+#####スパ ジダン＝ズファジラン
+#####ず ファディ らん＝ズファジラン
+#####ゼファー ジアン＝ズファジラン
+#####スポンジル＝スポンゼル
+#####スポンジの＝スポンゼル
+#####スポンジエル＝スポンゼル
+#####スポンジ＝スポンゼル
+#####スーパーモデル＝スポンゼル
+#####スポンジで＝スポンゼル
+#####スプーンで＝スポンゼル
+#####混んでる＝スポンゼル
+#####モンベル＝スポンゼル
+#####スーパーホテル＝スポンゼル
+#####飛んでる＝スポンゼル
+#####仕込んでる＝スポンゼル
+#####スザンヌ＝スロンノン
+#####すどんなん＝スロンノン
+#####スローンの＝スロンノン
+#####つどんどん＝スロンノン
+#####すどんどん＝スロンノン
+#####うどんどん＝スロンノン
+#####スダンの＝スロンノン
+#####ロンドン＝スロンノン
+#####つどんのん＝スロンノン
+#####普通の＝スロンノン
+#####スワンの＝スロンノン
+#####セダンの＝スロンノン
+#####スノーマン＝スロンノン
+#####スワンなん＝スロンノン
+#####スワンナ＝スロンノン
+#####それどんどん＝スロンノン
+#####スノンノン＝スロンノン
+#####スウォンの＝スロンノン
+#####うどんのん＝スロンノン
+#####通常のん＝スロンノン
+#####通話の＝スロンノン
+#####スロンの＝スロンノン
+#####ゼビディ＝ゼビュディ
+#####せびり＝ゼビュディ
+#####ゼビオ＝ゼビュディ
+#####J ビューティー＝ゼビュディ
+#####セキュリティ＝ゼビュディ
+#####セビューティ＝ゼビュディ
+#####せ ビューティー＝ゼビュディ
+#####デビューティー＝ゼビュディ
+#####ゼビティー＝ゼビュディ
+#####レビディオラ＝ゼビュディ
+#####でビューティ＝ゼビュディ
+#####ぜビューティー＝ゼビュディ
+#####DVD＝ゼビュディ
+#####エブリイ＝ゼビュディ
+#####ゼブリナ＝ゼビュディ
+#####J ビューティ＝ゼビュディ
+#####jbd＝ゼビュディ
+#####聖ファラン ちん＝セファランチン
+#####FIFA ランキング＝セファランチン
+#####聖和団地の＝セファランチン
+#####せこ タックス＝セフォタックス
+#####セポ タックス＝セフォタックス
+#####ベポ タックス＝セフォタックス
+#####成功 タックス＝セフォタックス
+#####正方 チーム＝セフォチアム
+#####CHEHON＝セフォン
+#####シェフォン＝セフォン
+#####セボン＝セフォン
+#####セイフォン＝セフォン
+#####ヴィクトリアキソン＝セフトリアキソン
+#####セフトに＝セフトリ
+#####政府と＝セフトリ
+#####創成館＝ソセゴン
+#####創成高校＝ソセゴン
+#####創生婚＝ソセゴン
+#####創成 ゴーン＝ソセゴン
+#####創生郡＝ソセゴン
+#####創成コン＝ソセゴン
+#####総選挙＝ソセゴン
+#####祖先＝ソセゴン
+#####朝鮮軍＝ソセゴン
+#####創生 音＝ソセゴン
+#####創世 ごん＝ソセゴン
+#####宋世論＝ソセゴン
+#####朝鮮＝ソセゴン
+#####創成論＝ソセゴン
+#####ソラデックス＝ゾラデックス
+#####ソルコーテフ＝ソル・コーテフ
+#####ソルコーティング＝ソル・コーテフ
+#####ソルメドロール＝ソル・メドロール
+#####バルメドロール＝ソル・メドロール
+#####ソルアセト＝ソルアセトＦ
+#####育てと＝ソルアセトＦ
+#####そる汗とエフ＝ソルアセトＦ
+#####そりゃ せと＝ソルアセトＦ
+#####ソル 汗とエフ＝ソルアセトＦ
+#####ソルアセト F＝ソルアセトＦ
+#####それは 瀬戸＝ソルアセトＦ
+#####育て＝ソルアセトＦ
+#####食べ合わせ と＝ソルアセトＦ
+#####それ 汗とエフ＝ソルアセトＦ
+#####それは 瀬戸 F＝ソルアセトＦ
+#####それはセット F＝ソルアセトＦ
+#####育てと F＝ソルアセトＦ
+#####袖 汗とエフ＝ソルアセトＦ
+#####育てとエフ＝ソルアセトＦ
+#####育てた F＝ソルアセトＦ
+#####それはセット エフ＝ソルアセトＦ
+#####飛べわせとエフ＝ソルアセトＦ
+#####そりゃとエフ＝ソルアセトＦ
+#####そりゃ セット エフ＝ソルアセトＦ
+#####それは生徒エフ＝ソルアセトＦ
+#####それは 瀬戸 エフ＝ソルアセトＦ
+#####飲み合わせ と F＝ソルアセトＦ
+#####それは生徒 F＝ソルアセトＦ
+#####ソル 汗と F＝ソルアセトＦ
+#####育てたエフ＝ソルアセトＦ
+#####それ 汗と F＝ソルアセトＦ
+#####ソルアセット エフ＝ソルアセトＦ
+#####ソウル 汗とエフ＝ソルアセトＦ
+#####そぎ 汗と F＝ソルアセトＦ
+#####袖 汗と F＝ソルアセトＦ
+#####取り寄せ と F＝ソルアセトＦ
+#####ソレハアセトF＝ソルアセトＦ
+#####そりゃ セット＝ソルアセト
+#####ソルアセット＝ソルアセト
+#####遭遇 合わせと＝ソルアセト
+#####ソル 汗と＝ソルアセト
+#####ソウル 汗と＝ソルアセト
+#####そる 汗と＝ソルアセト
+#####それ 汗と＝ソルアセト
+#####そら せと＝ソルアセト
+#####袖 汗と＝ソルアセト
+#####そぐわせと＝ソルアセト
+#####ソル合わせと＝ソルアセト
+#####それはせと＝ソルアセト
+#####F＝Ｆ
+#####ソルデム1＝ソルデム１
+#####ソルデムワン＝ソルデム１
+#####それでもマン＝ソルデム１
+#####それでもワン＝ソルデム１
+#####それでも＝ソルデム１
+#####ソルで＝ソルデム
+#####ソウルで＝ソルデム
+#####外で＝ソルデム
+#####ソルデム3 A＝ソルデム３Ａ
+#####それでも3 A＝ソルデム３Ａ
+#####ソルデム スリーエー＝ソルデム３Ａ
+#####それでも水泳＝ソルデム３Ａ
+#####ゾディア＝ゾレア
+#####そうでや＝ゾレア
+#####東電や＝ゾレア
+#####条例 や＝ゾレア
+#####増税や＝ゾレア
+#####上田や＝ゾレア
+#####それや 皮下注＝ゾレア皮下注
+#####ゾディア ピカチュウ＝ゾレア皮下注
+#####そうだよ ピカチュウ＝ゾレア皮下注
+#####ソ連 や ピカチュウ＝ゾレア皮下注
+#####増税 や ピカチュウ＝ゾレア皮下注
+#####人では ピカチュウ＝ゾレア皮下注
+#####そうで や ピカチュウ＝ゾレア皮下注
+#####それ や ピカチュウ＝ゾレア皮下注
+#####そうでは ピカチュウ＝ゾレア皮下注
+#####ゾディア 皮下注＝ゾレア皮下注
+#####ゾレア ピカチュウ＝ゾレア皮下注
+#####ドネア皮下注＝ゾレア皮下注
+#####どで や ピカチュウ＝ゾレア皮下注
+#####どれや 皮下注＝ゾレア皮下注
+#####ヒトデ や ピカチュウ＝ゾレア皮下注
+#####ヒデ や ピカチュウ＝ゾレア皮下注
+#####ゾロ や ピカチュウ＝ゾレア皮下注
+#####朝礼 ドロン＝ゾレドロン
+#####それドロン＝ゾレドロン
+#####条例 どろん＝ゾレドロン
+#####そこで どろん＝ゾレドロン
+#####ずれ どろん＝ゾレドロン
+#####増税 どの＝ゾレドロン
+#####どれどろん＝ゾレドロン
+#####それどろん＝ゾレドロン
+#####そこで トロン＝ゾレドロン
+#####ゾレドドン＝ゾレドロン
+#####増税 どろん＝ゾレドロン
+#####それどろ＝ゾレドロン
+#####増税との＝ゾレドロン
+#####そのデトロ＝ゾレドロン
+#####トレドロ＝ゾレドロン
+#####どで どろん＝ゾレドロン
+#####それ ドドン＝ゾレドロン
+#####ジョゼ どろん＝ゾレドロン
+#####ソデドロン＝ゾレドロン
+#####それぞれの＝ゾレドロン
+#####それぞれ＝ゾレドロン
+#####そこでドロン＝ゾレドロン
+#####ドデトロン＝ゾレドロン
+#####それでドドン＝ゾレドロン
+#####そこでドローン＝ゾレドロン
+#####女性との＝ゾレドロン
+#####それドローン＝ゾレドロン
+#####それぞれどの＝ゾレドロン
+#####それぞれどろん＝ゾレドロン
+#####ダイヤモックス＝ダイアモックス
+#####たぞピペ＝タゾピペ
+#####だぞピペ＝タゾピペ
+#####タップ ドス ミニ＝タプロスミニ
+#####ダダシン＝ダラシン
+#####ダダシン S＝ダラシンＳ
+#####ダダシン＝ダラシンＳ
+#####ただし＝ダラシンＳ
+#####ただしん S＝ダラシンＳ
+#####新しい S＝ダラシンＳ
+#####ダラシン S＝ダラシンＳ
+#####正しい S＝ダラシンＳ
+#####ただし エス＝ダラシンＳ
+#####新しい＝ダラシンＳ
+#####チア ミドル＝ヂアミトール
+#####ジアミトール＝ヂアミトール
+#####チア ミト る＝ヂアミトール
+#####次亜み トール＝ヂアミトール
+#####チアミール＝ヂアミトール
+#####チア ミトン＝ヂアミトール
+#####チェナム＝チエナム
+#####ちえなん＝チエナム
+#####知恵 ナム＝チエナム
+#####つべ 作り＝ツベルクリン
+#####つー パダ＝ツルバダ
+#####つぶ ばだ＝ツルバダ
+#####つづばだ＝ツルバダ
+#####つぐばだ＝ツルバダ
+#####つづばた＝ツルバダ
+#####つぐば＝ツルバダ
+#####ツールバー だ＝ツルバダ
+#####デブリ ばん＝ディプリバン
+#####りぷり＝ディプリバン
+#####ディープリバン＝ディプリバン
+#####ディプティバン＝ディプリバン
+#####テックス メテト ミティ＝デクスメデトミジン
+#####ってくすめでとみち＝デクスメデトミジン
+#####デックスメデトミジン＝デクスメデトミジン
+#####デックスめでとうみず＝デクスメデトミジン
+#####レックスめでとう みち＝デクスメデトミジン
+#####レックスメデトミジン＝デクスメデトミジン
+#####テックスめでとう みち＝デクスメデトミジン
+#####テックスメデトミジン＝デクスメデトミジン
+#####テックスめでとう＝デクスメデトミジン
+#####できすめでとう 美人＝デクスメデトミジン
+#####エクス 目でとみちん＝デクスメデトミジン
+#####ってくすめでとむ＝デクスメデトミジン
+#####レックス メテと＝デクスメデトミジン
+#####って進めてと＝デクスメデトミジン
+#####レックスめでとう＝デクスメデトミジン
+#####ってくすめてとみちん＝デクスメデトミジン
+#####レックス 目でとみちん＝デクスメデトミジン
+#####ってくすめでと みちん＝デクスメデトミジン
+#####デックス ベテラン＝デクスメデトミジン
+#####X - medit＝デクスメデトミジン
+#####テックスめでとう みじん＝デクスメデトミジン
+#####出口まで とみち＝デクスメデトミジン
+#####テックスメイト 美人＝デクスメデトミジン
+#####レク 進めて と 美人＝デクスメデトミジン
+#####てくつめて とみじん＝デクスメデトミジン
+#####テクス名でとみちん＝デクスメデトミジン
+#####テックス 目でとみちん＝デクスメデトミジン
+#####出口 めでとう 美人＝デクスメデトミジン
+#####テックス メテトミジ＝デクスメデトミジン
+#####デックス メテオ＝デクスメデトミジン
+#####テックスめでとう 美人＝デクスメデトミジン
+#####デックスめでとう みちん＝デクスメデトミジン
+#####テクス 目でとみち＝デクスメデトミジン
+#####X - meet ミシン＝デクスメデトミジン
+#####レックス メテトリジン＝デクスメデトミジン
+#####デックス メテとみちん＝デクスメデトミジン
+#####ステークス 目でとみじん＝デクスメデトミジン
+#####出口 メデトミジン＝デクスメデトミジン
+#####デックス目でとみちん＝デクスメデトミジン
+#####レックス メテトミジ＝デクスメデトミジン
+#####デックス めでたし＝デクスメデトミジン
+#####デックス メディット ミンチ＝デクスメデトミジン
+#####セックスメデトミジン＝デクスメデトミジン
+#####レックス 目でとみじん＝デクスメデトミジン
+#####って靴めでとう 美人＝デクスメデトミジン
+#####って詰めてとみちん＝デクスメデトミジン
+#####鉄のグリーン＝テタノブリン
+#####鉄の部品＝テタノブリン
+#####下駄のプリン＝テタノブリン
+#####データのプリン＝テタノブリン
+#####でたのプリン＝テタノブリン
+#####で他の部に＝テタノブリン
+#####てたのぶりに＝テタノブリン
+#####って他の＝テタノブリン
+#####ベタのプリン＝テタノブリン
+#####データのブリン＝テタノブリン
+#####てた のぶりん＝テタノブリン
+#####テタノ グリーン＝テタノブリン
+#####デ タ のぶりん＝テタノブリン
+#####てたの部品＝テタノブリン
+#####てたのに＝テタノブリン
+#####エタノ グリーン＝テタノブリン
+#####エタノール＝テタノブリン
+#####エタノ＝テタノブリン
+#####北の部品＝テタノブリン
+#####てたの グリーン＝テタノブリン
+#####でたの部品＝テタノブリン
+#####てたのプリン＝テタノブリン
+#####てたのブリン＝テタノブリン
+#####てたの部分＝テタノブリン
+#####北のプリン＝テタノブリン
+#####でたのブリン＝テタノブリン
+#####で他の部分＝テタノブリン
+#####へたのプリン＝テタノブリン
+#####鉄 のぶりん＝テタノブリン
+#####エタノブリン＝テタノブリン
+#####北の国＝テタノブリン
+#####てたのぐりん＝テタノブリン
+#####鉄の不倫＝テタノブリン
+#####北のプリ＝テタノブリン
+#####データのぶりに＝テタノブリン
+#####てたのり＝テタノブリン
+#####鉄のプリン＝テタノブリン
+#####での サリン＝デノサリン
+#####ディノサリン＝デノサリン
+#####レノ サリン＝デノサリン
+#####電脳サリン＝デノサリン
+#####デのサリン＝デノサリン
+#####デド サリン＝デノサリン
+#####での車輪＝デノサリン
+#####性能 サリン＝デノサリン
+#####ディノ さ＝デノサリン
+#####手のサリン＝デノサリン
+#####点のサリン＝デノサリン
+#####ゼノサリン＝デノサリン
+#####手のしん＝デノシン
+#####での 新＝デノシン
+#####芸能人＝デノシン
+#####での＝デノシン
+#####手軽日神＝テラルビシン
+#####ベラル 美人＝テラルビシン
+#####手軽 ビシン＝テラルビシン
+#####てなる 美人＝テラルビシン
+#####土星 たきせず＝ドセタキセル
+#####どせた キセル＝ドセタキセル
+#####どせた気せず＝ドセタキセル
+#####土星たち＝ドセタキセル
+#####土星たちせず＝ドセタキセル
+#####土製タクセル＝ドセタキセル
+#####土星 タクセル＝ドセタキセル
+#####女性たち＝ドセタキセル
+#####土石 せず＝ドセタキセル
+#####女性 タクセル＝ドセタキセル
+#####女性的＝ドセタキセル
+#####同性 たきせず＝ドセタキセル
+#####同性 たきせる＝ドセタキセル
+#####飛ぶ だし＝トブラシン
+#####飛ぶ打診＝トブラシン
+#####飛ぶざしん＝トブラシン
+#####とブラシン＝トブラシン
+#####東ブラシン＝トブラシン
+#####飛ぶ 写真＝トブラシン
+#####とブラシ＝トブラシン
+#####飛ぶらしい＝トブラシン
+#####とぶなしん＝トブラシン
+#####トップ打診＝トブラシン
+#####東武 打診＝トブラシン
+#####トップがしん＝トブラシン
+#####徳田新＝トブラシン
+#####トップ 写真＝トブラシン
+#####飛ぶだしん＝トブラシン
+#####戸 ブラシ＝トブラシン
+#####戸倉 新＝トブラシン
+#####おブラシン＝トブラシン
+#####とぶらしん＝トブラシン
+#####トップガン＝トブラシン
+#####トップガン＝ドプラム
+#####トップダウン＝ドプラム
+#####同封 ダム＝ドプラム
+#####ドッグダム＝ドプラム
+#####トップガンの＝ドプラム
+#####トップが＝ドプラム
+#####どくだみ＝ドプラム
+#####トップダム＝ドプラム
+#####トップ ガム＝ドプラム
+#####ドブ ナム＝ドプラム
+#####登壇 さび＝トランサミン
+#####登壇者に＝トランサミン
+#####登壇サミン＝トランサミン
+#####トリック ドリーズ＝トリクロリール
+#####どどんびん＝トロンビン
+#####とドンビン＝トロンビン
+#####長野 スタッド＝ナファモスタット
+#####中もスタッド＝ナファモスタット
+#####ニコ 団地妻＝ニコランジル
+#####イオン シネジン＝ネオシネジン
+#####ネオシネ人口は＝ネオシネジンコーワ
+#####寝落ちの人口は＝ネオシネジンコーワ
+#####のバクト＝ノバクト
+#####のバット＝ノバクト
+#####ノルアドレナリン＝ノルアドリナリン
+#####パーサ ビブ＝パーサビブ
+#####パーセプション＝ハーセプチン
+#####パーセプトロン＝ハーセプチン
+#####はい アミン＝ハイアミン
+#####はいあみ＝ハイアミン
+#####タイタニック＝ハイカリック
+#####バービスの＝バビースモ
+#####バービスも＝バビースモ
+#####ハム＝パム
+#####あるたん＝パルタン
+#####バルタン＝パルタン
+#####かずたん＝パルタン
+#####パールパン＝パルタン
+#####ぱるたん＝パルタン
+#####カルタン＝パルタン
+#####パール たん＝パルタン
+#####かるたん＝パルタン
+#####パルタ ネーム＝パルタンＭ
+#####パルタン M＝パルタンＭ
+#####バルタン M＝パルタンＭ
+#####バール＝バル
+#####バズ＝バル
+#####バル 緊急＝バル筋注
+#####バルキンチュー＝バル筋注
+#####バル 緊張＝バル筋注
+#####ある 筋注＝バル筋注
+#####ある 緊張＝バル筋注
+#####ビーム券＝ビームゲン
+#####ビーム 県＝ビームゲン
+#####ビーム圏＝ビームゲン
+#####ビーム 弦＝ビームゲン
+#####ビーム けん＝ビームゲン
+#####ビーム 減＝ビームゲン
+#####ビーム＝ビームゲン
+#####ひーどん＝ヒーロン
+#####ヒガン＝ヒーロン
+#####ヒートン＝ヒーロン
+#####ひーの＝ヒーロン
+#####シーズン V＝ヒーロンＶ
+#####ひいろん V＝ヒーロンＶ
+#####ヒヨンブイ＝ヒーロンＶ
+#####ひいろん 部位＝ヒーロンＶ
+#####ヒートン ブイ＝ヒーロンＶ
+#####ひよん B＝ヒーロンＶ
+#####フィーオン V＝ヒーロンＶ
+#####フィーガン V＝ヒーロンＶ
+#####ひードン V＝ヒーロンＶ
+#####ヒロン V＝ヒーロンＶ
+#####ヒートン V＝ヒーロンＶ
+#####ヒートン 部位＝ヒーロンＶ
+#####ヒガン V＝ヒーロンＶ
+#####P 4V＝ヒーロンＶ
+#####フィーガン ブイ＝ヒーロンＶ
+#####ヒドン V＝ヒーロンＶ
+#####ひい ロン V＝ヒーロンＶ
+#####日南 V＝ヒーロンＶ
+#####pmv＝ヒーロンＶ
+#####ヒドン V＝ヒーロンＶ
+#####フィーどん 部位＝ヒーロンＶ
+#####ひーの部位＝ヒーロンＶ
+#####ヒヨン 部位＝ヒーロンＶ
+#####比叡山 V＝ヒーロンＶ
+#####金曜日＝ヒーロンＶ
+#####きいろん V＝ヒーロンＶ
+#####ひい ロン部位＝ヒーロンＶ
+#####フィロン V＝ヒーロンＶ
+#####フィーロン V＝ヒーロンＶ
+#####ヒーロン V＝ヒーロンＶ
+#####イーロン ブイ＝ヒーロンＶ
+#####ピブナッツ＝ピヴラッツ
+#####ビブ ナッツ＝ピヴラッツ
+#####ぴ ブラッツ＝ピヴラッツ
+#####ピグ ナッツ＝ピヴラッツ
+#####ビブラ＝ピヴラッツ
+#####ピグ ザッツ＝ピヴラッツ
+#####ピクシィ＝ビクシリン
+#####ピクシ りん＝ビクシリン
+#####ぴくしん＝ビクシリン
+#####ピクシィん＝ビクシリン
+#####ビケン Ha＝ビケンＨＡ
+#####美研 Ha＝ビケンＨＡ
+#####美研 エイチエー＝ビケンＨＡ
+#####美研＝ビケン
+#####美尻 バッタ＝ピシリバクタ
+#####豚肉と＝ビタジェクト
+#####ビタミン C＝ビタミンＣ
+#####ヒトデ し＝ピトレシン
+#####ピトで＝ピトレシン
+#####人で＝ピトレシン
+#####人出＝ピトレシン
+#####ヒトデ 神＝ピトレシン
+#####人手＝ピトレシン
+#####ビート レジン＝ピトレシン
+#####B トレイン＝ピトレシン
+#####ピート レーシング＝ピトレシン
+#####ヒトデ しん＝ピトレシン
+#####ヒトデ 心＝ピトレシン
+#####日々展＝ヒビテン
+#####響 店＝ヒビテン
+#####TB 展＝ヒビテン
+#####イビデン＝ヒビテン
+#####日々店＝ヒビテン
+#####EB 展＝ヒビテン
+#####日比谷駅＝ヒビテン液
+#####ヒビテン 駅＝ヒビテン液
+#####日々店 駅＝ヒビテン液
+#####海老天 液＝ヒビテン液
+#####ピーピー らしいん＝ピペラシリン
+#####スペシャル＝ピペラシリン
+#####ビリース コピー＝ビリスコピン
+#####右すこぴん＝ビリスコピン
+#####リリス コピン＝ビリスコピン
+#####BD すこぴん＝ビリスコピン
+#####V フレンド＝ブイフェンド
+#####ブイペンド＝ブイフェンド
+#####ブイ ヘッド＝ブイフェンド
+#####V ペンド＝ブイフェンド
+#####ウィー ヘッド＝ブイフェンド
+#####ブイフレンド＝ブイフェンド
+#####ウインド＝ブイフェンド
+#####ブイエンド＝ブイフェンド
+#####ひぐらし と スプレー＝フィブラストスプレー
+#####日比野神＝フィブロガミン
+#####ヒプロガミン＝フィブロガミン
+#####ヒプノ 神＝フィブロガミン
+#####日頃神＝フィブロガミン
+#####ヒプロがみん＝フィブロガミン
+#####氷室神社＝フィブロガミン
+#####氷室神＝フィブロガミン
+#####日ブロガミン＝フィブロガミン
+#####日比谷 神＝フィブロガミン
+#####日野神＝フィブロガミン
+#####ヒブの神＝フィブロガミン
+#####キムの神＝フィブロガミン
+#####ヒブの画面＝フィブロガミン
+#####イブの神＝フィブロガミン
+#####ピルグラスチム＝フィルグラスチム
+#####フェイン ジェクト＝フェインジェクト
+#####ペイン ジェクト＝フェインジェクト
+#####タイ人＝フェジン
+#####北京＝フェジン
+#####巨人＝フェジン
+#####手相 デックス＝フェソロデックス
+#####ペソ ロレックス＝フェソロデックス
+#####決勝 ロレックス＝フェソロデックス
+#####地図 スコポラミン＝ブチルスコポラミン
+#####BRAVIA＝プラリア
+#####グリコ ニーズ＝ブリカニール
+#####プリカ ニーズ＝ブリカニール
+#####グルカ ニーズ＝ブリカニール
+#####ブリカにいる＝ブリカニール
+#####ぶりか ニーズ＝ブリカニール
+#####ブリ カニ いる＝ブリカニール
+#####ぶりか ニール＝ブリカニール
+#####グリか ニーズ＝ブリカニール
+#####プリカニール＝ブリカニール
+#####ブリタニーる＝ブリカニール
+#####売りか ニーズ＝ブリカニール
+#####ベリカ ニーズ＝ブリカニール
+#####ピリカニール＝ブリカニール
+#####プリカにいる＝ブリカニール
+#####プリカニーヌ＝ブリカニール
+#####うりか ニーズ＝ブリカニール
+#####ぶり カニず＝ブリカニール
+#####ブリタニーズ＝ブリカニール
+#####チーズ バインド＝プリズバインド
+#####ブリリオン＝ブリディオン
+#####うり リオン＝ブリディオン
+#####ぶーディオン＝ブリディオン
+#####不動の裏地図＝フルオロウラシル
+#####不動の裏 支部＝フルオロウラシル
+#####不良のうざしず＝フルオロウラシル
+#####不良 地図＝フルオロウラシル
+#####不動産を出してる＝フルオロウラシル
+#####不動産 施設＝フルオロウラシル
+#####不良を出してる＝フルオロウラシル
+#####フルオロを出し＝フルオロウラシル
+#####フルオロを出してる＝フルオロウラシル
+#####不動の出汁＝フルオロウラシル
+#####不動の出し汁＝フルオロウラシル
+#####不動のうな地図＝フルオロウラシル
+#####フルオロを出してる＝フルオロウラシル
+#####不良を出せる＝フルオロウラシル
+#####無料の村 地図＝フルオロウラシル
+#####不動ローラ 汁＝フルオロウラシル
+#####不平等を出してる＝フルオロウラシル
+#####フルオロを出せる＝フルオロウラシル
+#####無料動画を出し ず＝フルオロウラシル
+#####無料動画を出せる＝フルオロウラシル
+#####フルオルを出し＝フルオロウラシル
+#####不動の＝フルオロウラシル
+#####不良なし＝フルオロウラシル
+#####ぶどうな汁＝フルオロウラシル
+#####不動らせる＝フルオロウラシル
+#####不平等な 地図＝フルオロウラシル
+#####不良 らしい＝フルオロウラシル
+#####無料動画 知る＝フルオロウラシル
+#####不要な地図＝フルオロウラシル
+#####不動論を出してる＝フルオロウラシル
+#####ふるお＝フルオロウラシル
+#####不平等だし＝フルオロウラシル
+#####不良な地図＝フルオロウラシル
+#####不良が知る＝フルオロウラシル
+#####無料動画を出している＝フルオロウラシル
+#####フローラを出し＝フルオロウラシル
+#####風流しず＝フルオロウラシル
+#####フードを出し ず＝フルオロウラシル
+#####不良だし＝フルオロウラシル
+#####風道路なし＝フルオロウラシル
+#####フルオロ＝フルオロウラシル
+#####無料動画 地図＝フルオロウラシル
+#####不動の脱出＝フルオロウラシル
+#####うろうろ らしい＝フルオロウラシル
+#####不良を出し ず＝フルオロウラシル
+#####不動のなし＝フルオロウラシル
+#####不動 だし＝フルオロウラシル
+#####フード うざ しず＝フルオロウラシル
+#####フルおどら 地図＝フルオロウラシル
+#####不動産 地図＝フルオロウラシル
+#####フード らしい＝フルオロウラシル
+#####フクロウ らしい＝フルオロウラシル
+#####ウブロウラシル＝フルオロウラシル
+#####不動ローラ 地図＝フルオロウラシル
+#####フローラ 地図＝フルオロウラシル
+#####フルオロシズ＝フルオロウラシル
+#####運動 動画 知る＝フルオロウラシル
+#####不要 動画 シェル＝フルオロウラシル
+#####運動 ローラ 地図＝フルオロウラシル
+#####有料道路 地図＝フルオロウラシル
+#####不動なし＝フルオロウラシル
+#####不要ロードで地図＝フルオロウラシル
+#####不動の地図＝フルオロウラシル
+#####ふぐをどう出し ず＝フルオロウラシル
+#####フローラを出せる＝フルオロウラシル
+#####フルオロメトロン＝フルオロウラシル
+#####不動産＝フルオロウラシル
+#####不動産なしず＝フルオロウラシル
+#####無料動画 シェル＝フルオロウラシル
+#####風流する＝フルオロウラシル
+#####不良なしず＝フルオロウラシル
+#####不動なしず＝フルオロウラシル
+#####葛尾の裏地図＝フルオロウラシル
+#####不良＝フルオロウラシル
+#####不動のなしに＝フルオロウラシル
+#####フルオロシル＝フルオロウラシル
+#####不良な 知る＝フルオロウラシル
+#####不良のなしず＝フルオロウラシル
+#####不動のなしで＝フルオロウラシル
+#####フルスーツ チアミン＝フルスルチアミン
+#####フルーツ チアミン＝フルスルチアミン
+#####フーズチアミン＝フルスルチアミン
+#####フルス チアミン＝フルスルチアミン
+#####車 デニーズ＝フルマゼニル
+#####フルまで煮る＝フルマゼニル
+#####フルマ デニーズ＝フルマゼニル
+#####車で煮る＝フルマゼニル
+#####振るまでに＝フルマゼニル
+#####フルまで 水＝フルマゼニル
+#####ふるまで水＝フルマゼニル
+#####ふずまでに ず＝フルマゼニル
+#####ふるまでに＝フルマゼニル
+#####冬までに＝フルマゼニル
+#####くるま デニーズ＝フルマゼニル
+#####車 ジャニーズ＝フルマゼニル
+#####ふずまデニーズ＝フルマゼニル
+#####車で見る＝フルマゼニル
+#####ふるまでに ず＝フルマゼニル
+#####振るまでにいる＝フルマゼニル
+#####ふぐ までに＝フルマゼニル
+#####振るまでに ず＝フルマゼニル
+#####来るまでに＝フルマゼニル
+#####テレビ ブロック＝ブレビブロック
+#####プレビ ブロック＝ブレビブロック
+#####ブレーキ ブロック＝ブレビブロック
+#####プレミ ブロック＝ブレビブロック
+#####プロぎノンデポ＝プロギノン・デポー
+#####プロキオン デポ＝プロギノン・デポー
+#####プロギノンデポー＝プロギノン・デポー
+#####プロキオンデネブ＝プロギノン・デポー
+#####ブログ ノンデポ＝プロギノン・デポー
+#####ブログのデポ＝プロギノン・デポー
+#####プロ 議論＝プロギノン
+#####黒木の＝プロギノン
+#####プロぎのん＝プロギノン
+#####プロギノ＝プロギノン
+#####不良 議論＝プロギノン
+#####プロキオン＝プロギノン
+#####ぷよ 議論＝プロギノン
+#####工藤 機能＝プロギノン
+#####プロ技能＝プロギノン
+#####ブログ デポ＝プロゲデポー
+#####ぶどう げホルモン＝プロゲホルモン
+#####ブログ ホルモン＝プロゲホルモン
+#####黒毛 ホルモン＝プロゲホルモン
+#####プロげ ホルモン＝プロゲホルモン
+#####武道家 ホルモン＝プロゲホルモン
+#####ブロスタ＝プロスタルモン
+#####クロス たるもん＝プロスタルモン
+#####ブロスタモン＝プロスタルモン
+#####プロスタンディン＝プロスタルモン
+#####プロスタジオん＝プロスタルモン
+#####ブロスタ デモン＝プロスタルモン
+#####ブロスタジーン＝プロスタルモン
+#####ブロスタ リボン＝プロスタルモン
+#####プロスタジアム＝プロスタルモン
+#####プロスタジオ＝プロスタルモン
+#####ブロス たるもん＝プロスタルモン
+#####プロスタジオもん＝プロスタルモン
+#####ブロスタ アルモン＝プロスタルモン
+#####クロスカルマン＝プロスタルモン
+#####トヨタノール＝プロタノール
+#####プロポ ホール＝プロポフォール
+#####プロトコール＝プロポフォール
+#####ベオビュー＝ベオビュ
+#####ペクスリー＝ベクルリー
+#####レクリエ＝ベクルリー
+#####ペクレディ＝ベクルリー
+#####ベクトル リー＝ベクルリー
+#####ペク ルディ＝ベクルリー
+#####ペクり＝ベクルリー
+#####結局＝ベクルリー
+#####ビクレディ＝ベクルリー
+#####ピカルディ＝ベクルリー
+#####ベクトルディ＝ベクルリー
+#####ペク ディ＝ベクルリー
+#####ペティ＝ベクルリー
+#####エクリ＝ベクルリー
+#####ピクミー＝ベクルリー
+#####ビクトリー＝ベクルリー
+#####フェノキシ＝ベノキシール
+#####えのきシリーズ＝ベノキシール
+#####ベリーブラスト＝ベリプラスト
+#####ペディブラスト＝ベリプラスト
+#####ベリプラスと＝ベリプラスト
+#####レディブラスト＝ベリプラスト
+#####ベリブラスト＝ベリプラスト
+#####ペリプラスと＝ベリプラスト
+#####デリケート＝ベルケイド
+#####ポピドン＝ポビドン
+#####おびドン＝ポビドン
+#####ポヴィトン＝ポビドン
+#####こびドン＝ポビドン
+#####コピー用 どん スクラブ＝ポピヨドンスクラブ
+#####ポピヨドン スクラブ＝ポピヨドンスクラブ
+#####HORIZON＝ホリゾン
+#####ポリ どかす クレドール＝ポリドカスクレロール
+#####コリード コスプレドール＝ポリドカスクレロール
+#####ボリード＝ポリドカスクレロール
+#####ポリとか作れ ドール＝ポリドカスクレロール
+#####ポリとかす クレドール＝ポリドカスクレロール
+#####ポイント タスクでドール＝ポリドカスクレロール
+#####ポイント 加速でドール＝ポリドカスクレロール
+#####こりとか作れ ドール＝ポリドカスクレロール
+#####ポリとカスクでドール＝ポリドカスクレロール
+#####ポイント カスクでドール＝ポリドカスクレロール
+#####阿蘇山＝ワソラン
+#####イカノ事件＝ニカルジピン
+#####三日月ピン＝ニカルジピン
+#####マソラン＝ワソラン
+#####ハスラン＝ワソラン
+#####ミカルリン＝ニカルジピン
+#####ミカルシヒン＝ニカルジピン
+#####マスカン＝ワソラン
+#####マァソラン＝ワソラン
+#####アソウナン＝ワソラン
+#####マソラ＝ワソラン
+#####バスカン＝ワソラン
+#####早稲田＝ワソラン
+#####ウワー相談＝ワソラン
+#####マストタウン＝ワソラン
+#####ファスナー＝ワソラン
+#####マツタ＝ワソラン
+#####イヤ相談＝ワソラン
+#####ハ相談＝ワソラン
+#####ワー相談＝ワソラン
+#####ワ相談＝ワソラン
+#####あ そうなん＝ワソラン
+#####わーそらん＝ワソラン
+#####わーそうなん＝ワソラン
+#####あそうだ＝ワソラン
+#####まあ そらん＝ワソラン
+#####わー 相談＝ワソラン
+#####そらそうなん＝ワソラン
+#####ああ そうだん＝ワソラン
+#####あーそうだーん＝ワソラン
+#####まあ そうだん＝ワソラン
+#####うまそうだん＝ワソラン
+#####うわそうなん＝ワソラン
+#####あーそうだん＝ワソラン
+#####ああ そうなん＝ワソラン
+#####あーそうなん＝ワソラン
+#####まそらん＝ワソラン
+#####まあ そうなん＝ワソラン
+#####そりゃそうなん＝ワソラン
+#####ああ そうだん＝ワソラン
+#####うわそうだん＝ワソラン
+#####松山＝ワソラン
+#####和相談＝ワソラン
+#####カソリン＝ワソラン
+#####マセラン＝ワソラン
+#####朝顔＝ワソラン
+#####マソンナ＝ワソラン
+#####ばそうだん＝ワソラン
+#####あそうだん＝ワソラン
+#####後任＝アトニン
+#####増田＝ワソラン
+#####イカノ時期＝ニカルジピン
+#####セフトリアクション＝セフトリアキソン
+#####生殖＝生食
+#####生殖＝生理食塩
+#####生食＝生理食塩
+#####生理食塩＝生食
+#####ブドウ糖＝大塚糖液
+#####ブドウ＝大塚糖液
+#####ワッサー＝蒸留水
+#####ワッサー＝注射用水
+#####黒部人＝グロベニン
+#####クロヘリン＝グロベニン
+#####東駅＝大塚糖液
+#####東武駅＝大塚糖液
+#####当駅＝大塚糖液
+#####駅頭＝大塚糖液
+#####意気投＝大塚糖液
+#####水セラ＝ミルセラ
+#####水セタ＝ミルセラ
+#####ミルセタ＝ミルセラ
+#####水 セナ＝ミルセラ
+#####ミルセナ＝ミルセラ
+#####寝癖が＝ミルセラ
+#####水せだ＝ミルセラ
+#####水 セダ＝ミルセラ
+#####水すら＝ミルセラ
+#####ビル セナ＝ミルセラ
+#####水瀬だ＝ミルセラ
+#####ミズセナ＝ミルセラ
+#####水瀬が＝ミルセラ
+#####ミド セダ＝ミルセラ
+#####終了	AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA`;
+
+let jisyoAry_0 = jisyo.split('#####');
+
+let jisyoAry=[];
+
+ //console.log("配列jisyoAryの項数=", jisyoAry.length);
+
+var marumeta_goku;
+var jisyo_jyuufuku_flg=0;//辞書の重複を知るためのflg
+for (let i=0; i<jisyoAry_0.length;i++) {//20231119
+	let tempAry = [];
+	tempAry= jisyoAry_0[i].split('＝');//
+
+	marumeta_goku=goku_marume(  tempAry[0]);
+
+	// console.log("配列jisyoAryの項数=", jisyoAry.length);
+	if(jisyoAry.length==0){
+		jisyoAry.push(marumeta_goku+'＝'+tempAry[1]);
+	}
+	if(jisyoAry.length>0){
+		jisyo_jyuufuku_flg=0;
+		for (let j=0; j<jisyoAry.length;j++) {
+			let tempAry2 = [];
+			tempAry2= jisyoAry[j].split('＝');
+			if(marumeta_goku==tempAry2[0]){
+			if(tempAry[1]==tempAry2[1]){
+				jisyo_jyuufuku_flg=1;
+
+			}
+			}
+		}
+		if(jisyo_jyuufuku_flg==0){
+			jisyoAry.push(marumeta_goku+'＝'+tempAry[1]);
+		}
+	}
+} 
+
+
+    //======================================================================
+    function goku_marume(str) {//文字列を丸める
+        var str_r
+
+	str = str.replace(/汗/g, "アセ"); 
+	str = str.replace(/美人/g, "ビジン");
+	str = str.replace(/小野/g, "オノ"); 
+	str = str.replace(/買い/g, "カイ");
+	str = str.replace(/狂わせ/g, "クルワセ"); 
+	str = str.replace(/Google/g, "グル");
+	str = str.replace(/袖/g, "ソデ");
+	str = str.replace(/瀬戸/g, "セト");
+	str = str.replace(/飛ぶ/g, "トブ");
+	str = str.replace(/東部/g, "トウブ");
+	str = str.replace(/打診/g, "ダシン");
+	str = str.replace(/日々/g, "ヒビ");
+	str = str.replace(/駅/g, "エキ");
+	str = str.replace(/液/g, "エキ");
+	str = str.replace(/展/g, "テン");
+	str = str.replace(/海老/g, "エビ");
+	str = str.replace(/糖/g, "トウ");
+
+
+
+
+
+	str = hankaku2zenkaku(str);//半角英数字を全角英数字に変換
+	str = str.toUpperCase();//英子文字を大文字にする
+
+	str=hiragana2katakana(kuuhaku_sakujyo(str));
+
+	str = str.replace(/ガ/g, "カ"); 
+	str = str.replace(/ギ/g, "キ");
+	str = str.replace(/グ/g, "ク"); 
+	str = str.replace(/ゲ/g, "ケ");
+	str = str.replace(/ゴ/g, "コ"); 
+
+	str = str.replace(/ザ/g, "サ"); 
+	str = str.replace(/ジ/g, "シ");
+	str = str.replace(/ズ/g, "ス"); 
+	str = str.replace(/ゼ/g, "セ");
+	str = str.replace(/ゾ/g, "ソ"); 
+
+	str = str.replace(/ダ/g, "タ"); 
+	str = str.replace(/ヂ/g, "チ");
+	str = str.replace(/ヅ/g, "ツ"); 
+	str = str.replace(/デ/g, "テ");
+	str = str.replace(/ド/g, "ト");
+
+	str = str.replace(/バ/g, "ハ");
+	str = str.replace(/ビ/g, "ヒ");
+	str = str.replace(/ブ/g, "フ");
+	str = str.replace(/ベ/g, "ヘ");
+	str = str.replace(/ボ/g, "ホ");
+
+	str = str.replace(/パ/g, "ハ");
+	str = str.replace(/ピ/g, "ヒ");
+	str = str.replace(/プ/g, "フ");
+	str = str.replace(/ペ/g, "ヘ");
+	str = str.replace(/ポ/g, "ホ");
+
+	str = str.replace(/ヲ/g, "オ");
+
+	str = str.replace(/ヴ/g, "ウ");
+
+	str = str.replace(/ー/g, "");
+	str = str.replace(/・/g, "");
+
+	str = str.replace(/ァ/g, "ア");
+	str = str.replace(/ィ/g, "イ");
+	str = str.replace(/ゥ/g, "ウ");
+	str = str.replace(/ェ/g, "エ");
+	str = str.replace(/ォ/g, "オ");
+	str = str.replace(/ヵ/g, "カ");
+	str = str.replace(/ヶ/g, "ケ");
+	str = str.replace(/ッ/g, "ツ");
+	str = str.replace(/ャ/g, "ヤ");
+	str = str.replace(/ュ/g, "ユ");
+	str = str.replace(/ョ/g, "ヨ");
+	str = str.replace(/ヮ/g, "ワ");
+
+
+//str = str.replace(//g, "");
+
+
+str_r=str;
+        return str_r;
+    }
+
+
+//textBox#####b.innerText=jisyoAry;
+
+
+
+
+  </script>
+</body>
+</html>
